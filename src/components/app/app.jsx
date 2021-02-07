@@ -4,6 +4,7 @@ import MainPage from '../main-page/main-page';
 import FavoritesScreen from '../favorites/favorites';
 import LoginScreen from '../login/login';
 import OfferPropertyScreen from '../offer-property/offer-property';
+import NotFoundScreen from '../errors/not-found';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 
 const App = ({cardsCount}) => {
@@ -21,6 +22,9 @@ const App = ({cardsCount}) => {
         </Route>
         <Route exact path="/offer/:id">
           <OfferPropertyScreen />
+        </Route>
+        <Route>
+          <NotFoundScreen />
         </Route>
       </Switch>
     </BrowserRouter>
