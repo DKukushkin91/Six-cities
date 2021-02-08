@@ -2,11 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../card/card';
+import {Link} from 'react-router-dom';
 
-const MainPage = (props) => {
-  const {cardsCount} = props;
-  const cardsLength = [1, 2, 3, 4, 5];
-  const renderCards = cardsLength.map((el)=> <Card key={el}/>);
+const MainPage = ({cardsCount}) => {
+  const renderCards = new Array(5).fill(``).map((el, index)=> <Card key={index}/>);
   return (
     <>
       <div style={{display: `none`}}>
@@ -24,11 +23,11 @@ const MainPage = (props) => {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
+                    <Link className="header__nav-link header__nav-link--profile" to="/login">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>

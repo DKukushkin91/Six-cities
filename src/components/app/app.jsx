@@ -1,11 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MainPage from '../main-page/main-page';
+import FavoritesScreen from '../favorites/favorites';
+import LoginScreen from '../login/login';
+import OfferPropertyScreen from '../offer-property/offer-property';
+import NotFoundScreen from '../errors/not-found';
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
 
-const App = (props) => {
-  const {cardsCount} = props;
+const App = ({cardsCount}) => {
   return (
-    <MainPage cardsCount={cardsCount} />
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <MainPage cardsCount={cardsCount} />
+        </Route>
+        <Route exact path="/favorites">
+          <FavoritesScreen />
+        </Route>
+        <Route exact path="/login">
+          <LoginScreen />
+        </Route>
+        <Route exact path="/offer/:id">
+          <OfferPropertyScreen />
+        </Route>
+        <Route>
+          <NotFoundScreen />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
