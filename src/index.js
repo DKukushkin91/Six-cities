@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-
-const Settings = {
-  CARDS_COUNT: 5
-};
+import offers from './mocks/offers';
 
 ReactDOM.render(
-    <App cardsCount={Settings.CARDS_COUNT}/>,
+    <App
+      offersCount={offers.length}
+      offers={offers}
+    />,
     document.querySelector(`#root`)
 );
