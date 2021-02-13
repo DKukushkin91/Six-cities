@@ -8,7 +8,7 @@ import NotFoundScreen from '../errors/not-found';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {Paths} from '../../constants';
 
-const App = ({offersCount, offers}) => {
+const App = ({offersCount, offers, comments}) => {
   return (
     <BrowserRouter>
       <Switch>
@@ -25,7 +25,7 @@ const App = ({offersCount, offers}) => {
           <LoginScreen />
         </Route>
         <Route exact path={Paths.OFFER}>
-          <OfferPropertyScreen />
+          <OfferPropertyScreen comments={comments}/>
         </Route>
         <Route>
           <NotFoundScreen />
@@ -37,7 +37,8 @@ const App = ({offersCount, offers}) => {
 
 App.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired,
+  comments: PropTypes.array.isRequired
 };
 
 export default App;

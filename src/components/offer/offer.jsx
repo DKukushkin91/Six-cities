@@ -52,7 +52,7 @@ Offer.propTypes = {
     type: PropTypes.string,
     images: PropTypes.array,
     isPremium: PropTypes.bool,
-    isFavorite: PropTypes.bool
+    isFavorite: PropTypes.bool,
   }).isRequired
 };
 

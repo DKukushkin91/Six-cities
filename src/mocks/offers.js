@@ -1,5 +1,6 @@
 import {getRandomItem, getBoolian, getRandomNumbers} from '../util';
-const AVATAR_URL = `https://i.pravatar.cc/128`;
+import {AVATAR_URL} from '../constants';
+
 const Price = {
   MIN: 1,
   MAX: 500
@@ -32,7 +33,7 @@ export default [
     goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
     host: {
       avatarUrl: `avatarUrl: ${AVATAR_URL}?rnd=${Math.random()}`,
-      id: `${getRandomItem([1, 2, 3, 4])}`,
+      id: 1,
       isPro: true,
       name: `${getRandomItem([`Angelina`, `Max`, `Sam`, `Daniel`])}`
     },
@@ -67,7 +68,7 @@ export default [
     goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
     host: {
       avatarUrl: `avatarUrl: ${AVATAR_URL}?rnd=${Math.random()}`,
-      id: `${getRandomItem([1, 2, 3, 4])}`,
+      id: 2,
       isPro: true,
       name: `${getRandomItem([`Angelina`, `Max`, `Sam`, `Daniel`])}`
     },
@@ -102,7 +103,7 @@ export default [
     goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
     host: {
       avatarUrl: `avatarUrl: ${AVATAR_URL}?rnd=${Math.random()}`,
-      id: `${getRandomItem([1, 2, 3, 4])}`,
+      id: 3,
       isPro: true,
       name: `${getRandomItem([`Angelina`, `Max`, `Sam`, `Daniel`])}`
     },
@@ -137,7 +138,7 @@ export default [
     goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
     host: {
       avatarUrl: `avatarUrl: ${AVATAR_URL}?rnd=${Math.random()}`,
-      id: `${getRandomItem([1, 2, 3, 4])}`,
+      id: 4,
       isPro: true,
       name: `${getRandomItem([`Angelina`, `Max`, `Sam`, `Daniel`])}`
     },
