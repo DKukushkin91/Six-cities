@@ -1,27 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MainPage from '../main-page/main-page';
-import FavoritesScreen from '../favorites/favorites';
+import FavoritesScreen from '../favorites-screen/favorites-screen';
 import LoginScreen from '../login/login';
-import OfferPropertyScreen from '../offer-property/offer-property';
+import OfferPropertyScreen from '../offer-property/offer-property-screen';
 import NotFoundScreen from '../errors/not-found';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Paths} from '../../constants';
 
-const App = ({cardsCount}) => {
+const App = ({offersCount, offers, comments}) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <MainPage cardsCount={cardsCount} />
+        <Route exact path={Paths.MAIN}>
+          <MainPage
+            offersCount={offersCount}
+            offers={offers}
+          />
         </Route>
-        <Route exact path="/favorites">
-          <FavoritesScreen />
+        <Route exact path={Paths.FAVORITES}>
+          <FavoritesScreen offers={offers}/>
         </Route>
-        <Route exact path="/login">
+        <Route exact path={Paths.LOGIN}>
           <LoginScreen />
         </Route>
-        <Route exact path="/offer/:id">
-          <OfferPropertyScreen />
+        <Route exact path={Paths.OFFER}>
+          <OfferPropertyScreen comments={comments}/>
         </Route>
         <Route>
           <NotFoundScreen />
@@ -32,7 +36,9 @@ const App = ({cardsCount}) => {
 };
 
 App.propTypes = {
-  cardsCount: PropTypes.number.isRequired
+  offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
+  comments: PropTypes.array.isRequired
 };
 
 export default App;

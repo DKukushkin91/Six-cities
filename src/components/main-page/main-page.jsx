@@ -1,11 +1,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '../card/card';
+import OffersList from '../offers-list/offers-list';
 import {Link} from 'react-router-dom';
+import {Paths} from '../../constants';
 
-const MainPage = ({cardsCount}) => {
-  const renderCards = new Array(5).fill(``).map((el, index)=> <Card key={index}/>);
+const MainPage = ({offersCount, offers}) => {
+  const renderOffers = (<OffersList offers={offers}/>);
   return (
     <>
       <div style={{display: `none`}}>
@@ -23,7 +24,7 @@ const MainPage = ({cardsCount}) => {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <Link className="header__nav-link header__nav-link--profile" to="/login">
+                    <Link className="header__nav-link header__nav-link--profile" to={Paths.LOGIN}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
@@ -76,7 +77,7 @@ const MainPage = ({cardsCount}) => {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{cardsCount} places to stay in Amsterdam</b>
+                <b className="places__found">{offersCount} places to stay in Amsterdam</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex={0}>
@@ -93,7 +94,7 @@ const MainPage = ({cardsCount}) => {
                   </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                  {renderCards}
+                  {renderOffers}
                 </div>
               </section>
               <div className="cities__right-section">
@@ -108,7 +109,8 @@ const MainPage = ({cardsCount}) => {
 };
 
 MainPage.propTypes = {
-  cardsCount: PropTypes.number.isRequired
+  offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired
 };
 
 export default MainPage;
