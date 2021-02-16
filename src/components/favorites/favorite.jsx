@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
+import OfferProp from "../offer/offer.prop";
 
-const Favorites = ({offers}) => {
+const Favorite = ({offers}) => {
   const {images, price, title, type} = offers;
   return (
 
@@ -41,13 +41,8 @@ const Favorites = ({offers}) => {
   );
 };
 
-Favorites.propTypes = {
-  offers: PropTypes.shape({
-    price: PropTypes.number,
-    title: PropTypes.string,
-    type: PropTypes.string,
-    images: PropTypes.array,
-  }).isRequired
+Favorite.propTypes = {
+  offers: OfferProp
 };
 
-export default Favorites;
+export default Favorite;

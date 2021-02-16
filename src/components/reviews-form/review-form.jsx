@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const ReviewsForm = () => {
+const ReviewForm = () => {
   const [reviewData, setReviewData] = useState({
     rating: 0,
     review: ``,
@@ -8,8 +8,6 @@ const ReviewsForm = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(`Форма отправилась`);
   };
 
   const handleClickRating = (evt) => {
@@ -80,4 +78,4 @@ const ReviewsForm = () => {
   );
 };
 
-export default ReviewsForm;
+export default ReviewForm;

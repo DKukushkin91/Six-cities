@@ -1,12 +1,17 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import OffersList from '../offers-list/offers-list';
 import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
+import Map from '../map/map';
+import OfferProp from '../offer/offer.prop';
+import CityProp from '../map/coordinate-city.prop';
+import PointsProp from '../map/coordinate-points.prop';
 
-const MainPage = ({offersCount, offers}) => {
+const MainPage = ({offersCount, offers, city, points}) => {
   const renderOffers = (<OffersList offers={offers}/>);
+  const renderMap = (<Map city={city} points={points}/>);
+
   return (
     <>
       <div style={{display: `none`}}>
@@ -98,7 +103,9 @@ const MainPage = ({offersCount, offers}) => {
                 </div>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map" />
+                <section className="cities__map map">
+                  {renderMap}
+                </section>
               </div>
             </div>
           </div>
@@ -110,7 +117,9 @@ const MainPage = ({offersCount, offers}) => {
 
 MainPage.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.arrayOf(OfferProp).isRequired,
+  city: CityProp,
+  points: PointsProp
 };
 
 export default MainPage;

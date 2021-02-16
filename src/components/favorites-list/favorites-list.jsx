@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Favorites from '../favorites/favorites';
+import Favorite from '../favorites/favorite';
 import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
+import OfferProp from "../offer/offer.prop";
 
 const FavoritesList = ({offers}) => {
-  const renderFavorites = offers.map((item) => <Favorites offers={item} key={item.id}/>);
+  const renderFavorites = offers.map((item) => <Favorite offers={item} key={item.id}/>);
   const cities = [...new Set(offers.map((item) => item.city.name))];
   return (
     <ul className="favorites__list">
@@ -28,7 +28,7 @@ const FavoritesList = ({offers}) => {
 };
 
 FavoritesList.propTypes = {
-  offers: PropTypes.array.isRequired
+  offers: OfferProp
 };
 
 export default FavoritesList;

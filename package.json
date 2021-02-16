@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "axios": "0.21.1",
-    "dayjs": "^1.10.4",
+    "dayjs": "1.10.4",
     "history": "4.10.1",
     "leaflet": "1.7.1",
     "prop-types": "15.7.2",
@@ -45,6 +45,6 @@
     "redux-devtools-extension": "2.13.8",
     "redux-thunk": "2.3.0",
     "reselect": "4.0.0",
-    "uniqid": "^5.2.0"
+    "uniqid": "5.2.0"
   }
 }
