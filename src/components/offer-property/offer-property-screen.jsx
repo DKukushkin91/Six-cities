@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import OfferPropertyReviews from '../offer-property-reviews/offer-property-reviews';
+import ReviewsProp from "../reviews/review.prop";
 
 const OfferPropertyScreen = ({comments}) => {
   const renderOfferPropertyReviews = (<OfferPropertyReviews comments={comments}/>);
@@ -262,7 +263,7 @@ const OfferPropertyScreen = ({comments}) => {
 
 
 OfferPropertyScreen.propTypes = {
-  comments: PropTypes.array.isRequired
+  comments: PropTypes.arrayOf(ReviewsProp).isRequired
 };
 
 export default OfferPropertyScreen;

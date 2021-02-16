@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
+import OfferProp from './offer.prop';
 
 const Offer = ({offers}) => {
   const {price, title, type, images, isPremium, isFavorite} = offers;
@@ -46,14 +46,7 @@ const Offer = ({offers}) => {
 };
 
 Offer.propTypes = {
-  offers: PropTypes.shape({
-    price: PropTypes.number,
-    title: PropTypes.string,
-    type: PropTypes.string,
-    images: PropTypes.array,
-    isPremium: PropTypes.bool,
-    isFavorite: PropTypes.bool,
-  }).isRequired
+  offers: OfferProp
 };
 
 export default Offer;

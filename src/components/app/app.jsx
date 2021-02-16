@@ -7,8 +7,13 @@ import OfferPropertyScreen from '../offer-property/offer-property-screen';
 import NotFoundScreen from '../errors/not-found';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {Paths} from '../../constants';
+import OfferProp from '../offer/offer.prop';
+import CityProp from "../map/coordinate-city.prop";
+import PointsProp from "../map/coordinate-points.prop";
+import ReviewsProp from "../reviews/review.prop";
 
-const App = ({offersCount, offers, comments}) => {
+
+const App = ({offersCount, offers, comments, city, points}) => {
   return (
     <BrowserRouter>
       <Switch>
@@ -16,6 +21,8 @@ const App = ({offersCount, offers, comments}) => {
           <MainPage
             offersCount={offersCount}
             offers={offers}
+            city={city}
+            points={points}
           />
         </Route>
         <Route exact path={Paths.FAVORITES}>
@@ -37,8 +44,10 @@ const App = ({offersCount, offers, comments}) => {
 
 App.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired,
-  comments: PropTypes.array.isRequired
+  offers: PropTypes.arrayOf(OfferProp).isRequired,
+  comments: PropTypes.arrayOf(ReviewsProp).isRequired,
+  city: CityProp,
+  points: PointsProp
 };
 
 export default App;

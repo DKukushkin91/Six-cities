@@ -1,13 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import ReviewProp from './review.prop';
 
-const Reviews = ({comments}) => {
+const Review = ({comments}) => {
   const {comment, date, user: {avatarUrl, name}} = comments;
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={avatarUrl} width={54} height={54} alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={avatarUrl} width={54} height={54} alt="Review avatar" />
         </div>
         <span className="reviews__user-name">{name}</span>
       </div>
@@ -25,15 +25,8 @@ const Reviews = ({comments}) => {
   );
 };
 
-Reviews.propTypes = {
-  comments: PropTypes.shape({
-    comment: PropTypes.string,
-    date: PropTypes.string,
-    user: PropTypes.shape({
-      avatarUrl: PropTypes.string,
-      name: PropTypes.string
-    }).isRequired
-  }).isRequired
+Review.propTypes = {
+  comments: ReviewProp
 };
 
-export default Reviews;
+export default Review;
