@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReviewsList from '../reviews-list/reviews-list';
-import ReviewsForm from '../reviews-form/reviews-form';
+import ReviewList from '../reviews-list/review-list';
+import ReviewsForm from '../reviews-form/review-form';
+import ReviewsProp from "../reviews/review.prop";
 
 const OfferPropertyReviews = ({comments}) => {
-  const renderReviewsList = (<ReviewsList comments={comments}/>);
+  const renderReviewsList = (<ReviewList comments={comments}/>);
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews · <span className="reviews__amount">{ReviewsList.length}</span></h2>
+      <h2 className="reviews__title">Reviews · <span className="reviews__amount">{ReviewList.length}</span></h2>
       {renderReviewsList}
       <ReviewsForm/>
     </section>
@@ -15,7 +16,7 @@ const OfferPropertyReviews = ({comments}) => {
 };
 
 OfferPropertyReviews.propTypes = {
-  comments: PropTypes.array.isRequired
+  comments: PropTypes.arrayOf(ReviewsProp).isRequired
 };
 
 export default OfferPropertyReviews;
