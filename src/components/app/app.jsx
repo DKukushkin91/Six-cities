@@ -32,7 +32,12 @@ const App = ({offersCount, offers, comments, city, points}) => {
           <LoginScreen />
         </Route>
         <Route exact path={Paths.OFFER}>
-          <OfferPropertyScreen comments={comments}/>
+          <OfferPropertyScreen
+            comments={comments}
+            city={city}
+            points={points}
+            offers={offers}
+          />
         </Route>
         <Route>
           <NotFoundScreen />
