@@ -2,7 +2,6 @@ import React from 'react';
 import LocationProp from '../location/location.prop';
 import Location from '../location/location';
 import PropTypes from 'prop-types';
-// import OfferProp from "../offer/offer.prop";
 
 const LocationsList = ({cities, onChangeCity, currentCity}) => {
   const renderItem = cities.map((item) => <Location cities={item} onChangeCity={onChangeCity} currentCity={currentCity} key={item.name}/>);

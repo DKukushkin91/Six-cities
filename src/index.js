@@ -4,7 +4,6 @@ import App from './components/app/app';
 import offers from './mocks/offers';
 import comments from './mocks/comments';
 import cities from './mocks/cities';
-// import {city, points} from './mocks/map';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
@@ -20,8 +19,6 @@ ReactDOM.render(
       <App
         offers={offers}
         comments={comments}
-        // city={city}
-        // points={points}
         cities={cities}
       />
     </Provider>,

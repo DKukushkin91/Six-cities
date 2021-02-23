@@ -9,7 +9,7 @@ const PropertyPlace = ({offers}) => {
   return (
     <article className="near-places__card place-card">
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <Link to={offers.id}>
+        <Link to={`/offer/${offers.id}`}>
           <img className="place-card__image" src={`${images[0]}`} width={260} height={200} alt="Place image" />
         </Link>
       </div>
