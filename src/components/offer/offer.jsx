@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Paths} from '../../constants';
 import OfferProp from './offer.prop';
 
 const Offer = ({offers}) => {
@@ -28,7 +27,7 @@ const Offer = ({offers}) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <Link to={Paths.OFFER}>{title}</Link>
+        <Link to={`/offer/${offers.id}`}>{title}</Link>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>

@@ -5,12 +5,16 @@ import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
 import Map from '../map/map';
 import OfferProp from '../offer/offer.prop';
-import CityProp from '../map/coordinate-city.prop';
-import PointsProp from '../map/coordinate-points.prop';
+import CityProp from '../map/current-location.prop';
+import LocationProp from '../location/location.prop';
+import LocationsList from '../locations-list/locations-list';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 
-const MainPage = ({offersCount, offers, city, points}) => {
+const MainPage = ({offers, cities, onChangeCity, currentCity, currentLocation}) => {
   const renderOffers = (<OffersList offers={offers}/>);
-  const renderMap = (<Map city={city} points={points}/>);
+  const renderMap = (<Map offers={offers} currentLocation={currentLocation}/>);
+  const renderLocationsList = (<LocationsList cities={cities} onChangeCity={onChangeCity} currentCity={currentCity}/>);
 
   return (
     <>
@@ -44,45 +48,14 @@ const MainPage = ({offersCount, offers, city, points}) => {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
-              <ul className="locations__list tabs__list">
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Paris</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Cologne</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Brussels</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item tabs__item--active">
-                    <span>Amsterdam</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Hamburg</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Dusseldorf</span>
-                  </a>
-                </li>
-              </ul>
+              {renderLocationsList}
             </section>
           </div>
           <div className="cities">
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+                <b className="places__found">{offers.length} places to stay in {currentCity}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex={0}>
@@ -116,10 +89,25 @@ const MainPage = ({offersCount, offers, city, points}) => {
 };
 
 MainPage.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(OfferProp).isRequired,
-  city: CityProp,
-  points: PointsProp
+  cities: PropTypes.arrayOf(LocationProp).isRequired,
+  onChangeCity: PropTypes.func.isRequired,
+  currentCity: PropTypes.string.isRequired,
+  currentLocation: CityProp
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  offers: state.currentOffers,
+  currentCity: state.currentCity,
+  currentLocation: state.currentLocation,
+  cityList: state.cityList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeCity(cityList) {
+    dispatch(ActionCreator.changeCity(cityList));
+  }
+});
+
+export {MainPage};
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

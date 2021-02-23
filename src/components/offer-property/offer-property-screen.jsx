@@ -5,14 +5,17 @@ import OfferPropertyReviews from '../offer-property-reviews/offer-property-revie
 import PropertyPlaceList from "../offer-property-place-list/offer-property-place-list";
 import Map from '../map/map';
 import ReviewsProp from '../reviews/review.prop';
-import CityProp from '../map/coordinate-city.prop';
-import PointsProp from '../map/coordinate-points.prop';
+import currentLocationProp from '../map/current-location.prop';
 import OfferProp from '../offer/offer.prop';
+import {connect} from 'react-redux';
+import {getNearOffers} from '../../util';
 
-const OfferPropertyScreen = ({comments, city, points, offers}) => {
+const OfferPropertyScreen = ({comments, offers, offer, currentLocation}) => {
+  const {title, rating, type, bedrooms, maxAdults, price} = offer;
+  const nearOffers = getNearOffers(offers, offer);
   const renderOfferPropertyReviews = (<OfferPropertyReviews comments={comments}/>);
-  const renderOfferPropertyPlaceList = (<PropertyPlaceList offers={offers}/>);
-  const renderMap = (<Map city={city} points={points.slice(0, 3)}/>);
+  const renderOfferPropertyPlaceList = (<PropertyPlaceList offers={offers} offer={offer}/>);
+  const renderMap = (<Map offers={nearOffers} currentLocation={currentLocation}/>);
   return (
     <>
       <div style={{display: `none`}}>
@@ -72,7 +75,7 @@ const OfferPropertyScreen = ({comments, city, points, offers}) => {
                 </div>
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
-                Beautiful &amp; luxurious studio at great location
+                    {title}
                   </h1>
                   <button className="property__bookmark-button button" type="button">
                     <svg className="property__bookmark-icon" width={31} height={33}>
@@ -86,21 +89,21 @@ const OfferPropertyScreen = ({comments, city, points, offers}) => {
                     <span style={{width: `80%`}} />
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="property__rating-value rating__value">4.8</span>
+                  <span className="property__rating-value rating__value">{rating}</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                Apartment
+                    {type}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
-                3 Bedrooms
+                    {bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                Max 4 adults
+                Max {maxAdults} adults
                   </li>
                 </ul>
                 <div className="property__price">
-                  <b className="property__price-value">€120</b>
+                  <b className="property__price-value">€{price}</b>
                   <span className="property__price-text">&nbsp;night</span>
                 </div>
                 <div className="property__inside">
@@ -177,8 +180,13 @@ const OfferPropertyScreen = ({comments, city, points, offers}) => {
 OfferPropertyScreen.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired,
   comments: PropTypes.arrayOf(ReviewsProp).isRequired,
-  city: CityProp,
-  points: PointsProp
+  currentLocation: currentLocationProp,
+  offer: PropTypes.object.isRequired
 };
 
-export default OfferPropertyScreen;
+const mapStateToProps = (state) => ({
+  currentLocation: state.currentLocation,
+});
+
+export {OfferPropertyScreen};
+export default connect(mapStateToProps, null)(OfferPropertyScreen);

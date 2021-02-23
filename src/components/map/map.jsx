@@ -1,20 +1,19 @@
 import React, {useEffect, useRef} from 'react';
 import leaflet from 'leaflet';
-import CityProp from './coordinate-city.prop';
-import PointsProp from './coordinate-points.prop';
-
+import PropTypes from 'prop-types';
+import CurrentLocationProp from './current-location.prop';
+import OfferProp from '../offer/offer.prop';
 import "leaflet/dist/leaflet.css";
 
-const Map = ({city, points}) => {
+const Map = ({offers, currentLocation}) => {
   const mapRef = useRef();
-
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
       center: {
-        lat: city.lat,
-        lng: city.lng
+        lat: currentLocation.latitude,
+        lon: currentLocation.longitude
       },
-      zoom: city.zoom,
+      zoom: currentLocation.zoom,
     });
 
     leaflet
@@ -23,27 +22,27 @@ const Map = ({city, points}) => {
       })
       .addTo(mapRef.current);
 
-    points.forEach((point) => {
+    offers.forEach((item) => {
+      const {location, title} = item;
       const customIcon = leaflet.icon({
         iconUrl: `./img/pin.svg`,
         iconSize: [27, 39]
       });
 
       leaflet.marker({
-        lat: point.lat,
-        lng: point.lng
+        lat: location.latitude,
+        lon: location.longitude
       },
       {
         icon: customIcon
       })
         .addTo(mapRef.current)
-        .bindPopup(point.title);
-
-      return () => {
-        mapRef.current.remove();
-      };
+        .bindPopup(title);
     });
-  }, []);
+    return () => {
+      mapRef.current.remove();
+    };
+  }, [currentLocation]);
 
   return (
     <div id="map" style={{height: `100%`}} ref={mapRef}></div>
@@ -51,8 +50,8 @@ const Map = ({city, points}) => {
 };
 
 Map.propTypes = {
-  city: CityProp,
-  points: PointsProp
+  offers: PropTypes.arrayOf(OfferProp).isRequired,
+  currentLocation: CurrentLocationProp
 };
 
 export default Map;
