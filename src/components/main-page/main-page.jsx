@@ -5,16 +5,14 @@ import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
 import Map from '../map/map';
 import OfferProp from '../offer/offer.prop';
-import CityProp from '../map/current-location.prop';
 import LocationProp from '../location/location.prop';
 import LocationsList from '../locations-list/locations-list';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
 
-const MainPage = ({offers, cities, onChangeCity, currentCity, currentLocation}) => {
+const MainPage = ({offers, cities, currentCity}) => {
   const renderOffers = (<OffersList offers={offers}/>);
-  const renderMap = (<Map offers={offers} currentLocation={currentLocation}/>);
-  const renderLocationsList = (<LocationsList cities={cities} onChangeCity={onChangeCity} currentCity={currentCity}/>);
+  const renderMap = (<Map offers={offers}/>);
+  const renderLocationsList = (<LocationsList cities={cities} currentCity={currentCity}/>);
 
   return (
     <>
@@ -91,23 +89,13 @@ const MainPage = ({offers, cities, onChangeCity, currentCity, currentLocation}) 
 MainPage.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired,
   cities: PropTypes.arrayOf(LocationProp).isRequired,
-  onChangeCity: PropTypes.func.isRequired,
   currentCity: PropTypes.string.isRequired,
-  currentLocation: CityProp
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.currentOffers,
-  currentCity: state.currentCity,
-  currentLocation: state.currentLocation,
-  cityList: state.cityList,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onChangeCity(cityList) {
-    dispatch(ActionCreator.changeCity(cityList));
-  }
+const mapStateToProps = ({currentOffers, currentCity}) => ({
+  offers: currentOffers,
+  currentCity,
 });
 
 export {MainPage};
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, ``)(MainPage);

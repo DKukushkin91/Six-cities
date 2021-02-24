@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import OfferPropertyReviews from '../offer-property-reviews/offer-property-reviews';
-import PropertyPlaceList from "../offer-property-place-list/offer-property-place-list";
+import DetailOfferReview from '../detail-offer-review/detail-offer-review';
+import PropertyPlaceList from "../detail-near-offer-list/offer-property-place-list";
 import Map from '../map/map';
 import ReviewsProp from '../reviews/review.prop';
 import currentLocationProp from '../map/current-location.prop';
 import OfferProp from '../offer/offer.prop';
 import {connect} from 'react-redux';
-import {getNearOffers} from '../../util';
+import {getNearestOffers} from '../../util';
 
-const OfferPropertyScreen = ({comments, offers, offer, currentLocation}) => {
+const DetailOfferScreen = ({comments, offers, offer, currentLocation}) => {
   const {title, rating, type, bedrooms, maxAdults, price} = offer;
-  const nearOffers = getNearOffers(offers, offer);
-  const renderOfferPropertyReviews = (<OfferPropertyReviews comments={comments}/>);
+  const nearOffers = getNearestOffers(offers, offer);
+  const renderOfferPropertyReviews = (<DetailOfferReview comments={comments}/>);
   const renderOfferPropertyPlaceList = (<PropertyPlaceList offers={offers} offer={offer}/>);
   const renderMap = (<Map offers={nearOffers} currentLocation={currentLocation}/>);
   return (
@@ -177,7 +177,7 @@ const OfferPropertyScreen = ({comments, offers, offer, currentLocation}) => {
 };
 
 
-OfferPropertyScreen.propTypes = {
+DetailOfferScreen.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired,
   comments: PropTypes.arrayOf(ReviewsProp).isRequired,
   currentLocation: currentLocationProp,
@@ -188,5 +188,5 @@ const mapStateToProps = (state) => ({
   currentLocation: state.currentLocation,
 });
 
-export {OfferPropertyScreen};
-export default connect(mapStateToProps, null)(OfferPropertyScreen);
+export {DetailOfferScreen};
+export default connect(mapStateToProps, null)(DetailOfferScreen);

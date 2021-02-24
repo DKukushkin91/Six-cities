@@ -13,3 +13,4 @@ export const DEFAULT_LOCATION = {
   longitude: 2.352478,
   zoom: 10
 };
+export const MAX_NEAR_OFFERS = 3;

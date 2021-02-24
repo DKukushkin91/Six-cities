@@ -1,4 +1,4 @@
-import {getRandomItem, getBoolian, getRandomNumbers} from '../util';
+import {getRandomItem, getBoolean, getRandomNumbers} from '../util';
 import {AVATAR_URL} from '../constants';
 import uniqid from 'uniqid';
 
@@ -40,8 +40,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 48.856720,
       longitude: 2.354015,
@@ -74,8 +74,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 48.857487,
       longitude: 2.352350,
@@ -108,8 +108,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 48.857355,
       longitude: 2.351070,
@@ -142,8 +142,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 48.856109,
       longitude: 2.351087,
@@ -176,8 +176,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 50.937130,
       longitude: 6.959844,
@@ -210,8 +210,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 50.937536,
       longitude: 6.960329,
@@ -244,8 +244,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 50.937673,
       longitude: 6.958677,
@@ -278,8 +278,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 50.937693,
       longitude: 6.960705,
@@ -312,8 +312,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 53.549085,
       longitude: 9.991634,
@@ -346,8 +346,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 53.548382,
       longitude: 9.990083,
@@ -380,8 +380,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 53.549849,
       longitude: 9.990702,
@@ -414,8 +414,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 53.549565,
       longitude: 9.992728,
@@ -448,8 +448,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 51.228854,
       longitude: 6.772621,
@@ -482,8 +482,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 51.227967,
       longitude: 6.773479,
@@ -516,8 +516,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 51.228653,
       longitude: 6.771784,
@@ -550,8 +550,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 51.227806,
       longitude: 6.771870,
@@ -584,8 +584,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 50.849003,
       longitude: 4.352514,
@@ -618,8 +618,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 50.849134,
       longitude: 4.353803,
@@ -652,8 +652,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 50.849771,
       longitude: 4.350988,
@@ -686,8 +686,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 50.850711,
       longitude: 4.350900,
@@ -720,8 +720,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 52.3909553943508,
       longitude: 4.85309666406198,
@@ -754,8 +754,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 52.369553943508,
       longitude: 4.85309666406198,
@@ -788,8 +788,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 52.3909553943508,
       longitude: 4.929309666406198,
@@ -822,8 +822,8 @@ export default [
     },
     id: uniqid(),
     images: [`img/apartment-0${getRandomNumbers(Images.MIN, Images.MAX)}.jpg`, `img/apartment-small-0${getRandomNumbers(Images.MINI, Images.MAXI)}.jpg`],
-    isFavorite: getBoolian(true),
-    isPremium: getBoolian(true),
+    isFavorite: getBoolean(true),
+    isPremium: getBoolean(true),
     location: {
       latitude: 52.3809553943508,
       longitude: 4.939309666406198,

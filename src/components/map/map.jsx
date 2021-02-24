@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import CurrentLocationProp from './current-location.prop';
 import OfferProp from '../offer/offer.prop';
 import "leaflet/dist/leaflet.css";
+import {connect} from "react-redux";
 
 const Map = ({offers, currentLocation}) => {
   const mapRef = useRef();
@@ -54,4 +55,9 @@ Map.propTypes = {
   currentLocation: CurrentLocationProp
 };
 
-export default Map;
+const mapStateToProps = ({currentLocation}) => ({
+  currentLocation
+});
+
+export {Map};
+export default connect(mapStateToProps, ``)(Map);

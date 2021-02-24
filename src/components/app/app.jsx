@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MainPage from '../main-page/main-page';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import LoginScreen from '../login/login';
-import OfferPropertyScreen from '../offer-property/offer-property-screen';
+import OfferPropertyScreen from '../detail-offer-screen/detail-offer-screen';
 import NotFoundScreen from '../errors/not-found';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {Paths} from '../../constants';

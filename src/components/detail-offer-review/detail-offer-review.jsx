@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewList from '../reviews-list/review-list';
 import ReviewsForm from '../reviews-form/review-form';
-import ReviewsProp from "../reviews/review.prop";
+import ReviewsProp from '../reviews/review.prop';
 
-const OfferPropertyReviews = ({comments}) => {
+const DetailOfferReview = ({comments}) => {
   const renderReviewsList = (<ReviewList comments={comments}/>);
   return (
     <section className="property__reviews reviews">
@@ -15,8 +15,8 @@ const OfferPropertyReviews = ({comments}) => {
   );
 };
 
-OfferPropertyReviews.propTypes = {
+DetailOfferReview.propTypes = {
   comments: PropTypes.arrayOf(ReviewsProp).isRequired
 };
 
-export default OfferPropertyReviews;
+export default DetailOfferReview;

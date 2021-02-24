@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
-export default PropTypes.shape({
+export default PropTypes.exact({
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }
 );
