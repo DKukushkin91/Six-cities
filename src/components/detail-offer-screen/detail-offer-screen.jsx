@@ -181,7 +181,7 @@ DetailOfferScreen.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired,
   comments: PropTypes.arrayOf(ReviewsProp).isRequired,
   currentLocation: currentLocationProp,
-  offer: PropTypes.object.isRequired
+  offer: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({

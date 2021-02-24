@@ -4,7 +4,7 @@ import Location from '../location/location';
 import PropTypes from 'prop-types';
 
 const LocationsList = ({cities, currentCity}) => {
-  const renderItem = cities.map((item) => <Location cities={item} currentCity={currentCity} key={item.id}/>);
+  const renderItem = cities.map((item) => <Location cities={item} currentCity={currentCity} key={item.name}/>);
   return (
     <ul className="locations__list tabs__list">
       {renderItem}

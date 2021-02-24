@@ -3,6 +3,7 @@ import Favorite from '../favorites/favorite';
 import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
 import OfferProp from "../offer/offer.prop";
+import PropTypes from "prop-types";
 
 const FavoritesList = ({offers}) => {
   const renderFavorites = offers.map((item) => <Favorite offers={item} key={item.id}/>);
@@ -28,7 +29,7 @@ const FavoritesList = ({offers}) => {
 };
 
 FavoritesList.propTypes = {
-  offers: OfferProp
+  offers: PropTypes.arrayOf(OfferProp).isRequired
 };
 
 export default FavoritesList;

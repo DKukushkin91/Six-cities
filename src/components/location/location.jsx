@@ -5,17 +5,19 @@ import {ActionCreator} from '../../store/action';
 import {connect} from 'react-redux';
 
 const Location = ({cities, onChangeCity, currentCity}) => {
-  const {name, id} = cities;
+  const {name} = cities;
   const handleClick = (evt) => {
     evt.preventDefault();
-    onChangeCity(evt.target.textContent);
+    if (name !== currentCity) {
+      onChangeCity(name);
+    }
   };
 
   const active = name === currentCity ? `tabs__item--active` : ``;
 
   return (
     <li className="locations__item">
-      <a onClick={handleClick} id={id} className={`locations__item-link tabs__item ${active}`} href="#">
+      <a onClick={handleClick} className={`locations__item-link tabs__item ${active}`} href="#">
         <span>{name}</span>
       </a>
     </li>
@@ -31,8 +33,8 @@ Location.propTypes = {
 const mapStateToProps = ({city}) => ({city});
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeCity(cityList) {
-    dispatch(ActionCreator.changeCity(cityList));
+  onChangeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
   }
 });
 
