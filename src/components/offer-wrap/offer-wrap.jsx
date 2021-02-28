@@ -2,13 +2,14 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import OfferProp from '../offer/offer.prop';
 import Offer from '../offer/offer';
+import PropTypes from 'prop-types';
 
-const OfferWrap = ({offers}) => {
+const OfferWrap = ({offers, onMouseOver}) => {
   const {images, isPremium} = offers;
   const renderOffers = (<Offer offers={offers}/>);
 
   return (
-    <article className="cities__place-card place-card">
+    <article onMouseOver={onMouseOver} className="cities__place-card place-card">
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
@@ -24,7 +25,8 @@ const OfferWrap = ({offers}) => {
 };
 
 OfferWrap.propTypes = {
-  offers: OfferProp
+  offers: OfferProp,
+  onMouseOver: PropTypes.func.isRequired
 };
 
 export default OfferWrap;

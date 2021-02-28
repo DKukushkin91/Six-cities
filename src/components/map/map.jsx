@@ -6,7 +6,7 @@ import OfferProp from '../offer/offer.prop';
 import "leaflet/dist/leaflet.css";
 import {connect} from "react-redux";
 
-const Map = ({offers, currentLocation}) => {
+const Map = ({offers, currentLocation, activeCardId}) => {
   const mapRef = useRef();
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
@@ -18,15 +18,15 @@ const Map = ({offers, currentLocation}) => {
     });
 
     leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+      .tileLayer(`https:{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+        attribution: `&copy; <a href="https:www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https:carto.com/attributions">CARTO</a>`
       })
       .addTo(mapRef.current);
 
     offers.forEach((item) => {
       const {location, title} = item;
       const customIcon = leaflet.icon({
-        iconUrl: `./img/pin.svg`,
+        iconUrl: `./img/pin${item.id === activeCardId ? `-active` : ``}.svg`,
         iconSize: [27, 39]
       });
 
@@ -43,7 +43,7 @@ const Map = ({offers, currentLocation}) => {
     return () => {
       mapRef.current.remove();
     };
-  }, [currentLocation]);
+  }, [currentLocation, activeCardId]);
 
   return (
     <div id="map" style={{height: `100%`}} ref={mapRef}></div>
@@ -52,11 +52,13 @@ const Map = ({offers, currentLocation}) => {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired,
-  currentLocation: CurrentLocationProp
+  currentLocation: CurrentLocationProp,
+  activeCardId: PropTypes.string
 };
 
-const mapStateToProps = ({currentLocation}) => ({
-  currentLocation
+const mapStateToProps = ({currentLocation, activeCardId}) => ({
+  currentLocation,
+  activeCardId
 });
 
 export {Map};

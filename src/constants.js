@@ -14,3 +14,5 @@ export const DEFAULT_LOCATION = {
   zoom: 10
 };
 export const MAX_NEAR_OFFERS = 3;
+export const CURRENT_SORTING = `Popular`;
+export const SORTING_LIST = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];

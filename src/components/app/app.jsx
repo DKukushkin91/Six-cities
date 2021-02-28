@@ -4,15 +4,13 @@ import MainPage from '../main-page/main-page';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import LoginScreen from '../login/login';
 import DetailOfferScreen from '../detail-offer-screen/detail-offer-screen';
-import NotFoundScreen from '../errors/not-found';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {Paths} from '../../constants';
 import OfferProp from '../offer/offer.prop';
 import ReviewsProp from '../reviews/review.prop';
-import LocationProp from '../location/location.prop';
 
-
-const App = ({offers, comments, cities}) => {
+const App = ({offers, comments, cities, options}) => {
   return (
     <BrowserRouter>
       <Switch>
@@ -20,6 +18,7 @@ const App = ({offers, comments, cities}) => {
           <MainPage
             offers={offers}
             cities={cities}
+            options={options}
           />
         </Route>
         <Route exact path={Paths.FAVORITES}>
@@ -46,9 +45,10 @@ const App = ({offers, comments, cities}) => {
 };
 
 App.propTypes = {
-  cities: PropTypes.arrayOf(LocationProp).isRequired,
+  cities: PropTypes.array.isRequired,
   offers: PropTypes.arrayOf(OfferProp).isRequired,
   comments: PropTypes.arrayOf(ReviewsProp).isRequired,
+  options: PropTypes.array.isRequired
 };
 
 export default App;

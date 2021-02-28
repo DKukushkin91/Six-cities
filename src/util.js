@@ -12,8 +12,18 @@ export const getRandomInteger = (a = 0, b = 1) => {
 
 export const getBoolean = () => Boolean(getRandomInteger(0, 1));
 
-export const getFilterArray = (offers, city) => {
-  return offers.filter((item) => item.city.name === city);
+export const getSorting = (offers, city, option) => {
+  const defaultState = offers.filter((item) => item.city.name === city);
+  switch (option) {
+    case `Price: low to high`:
+      return defaultState.sort((a, b) => a.price - b.price);
+    case `Price: high to low`:
+      return defaultState.sort((a, b) => b.price - a.price);
+    case `Top rated first`:
+      return defaultState.sort((a, b) => b.rating - a.rating);
+    default:
+      return defaultState;
+  }
 };
 
 export const getCityLocation = (offers, city) => {

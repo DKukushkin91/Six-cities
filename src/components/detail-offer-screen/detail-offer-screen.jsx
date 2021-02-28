@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
 import {getNearestOffers} from '../../util';
 
 const DetailOfferScreen = ({comments, offers, offer, currentLocation}) => {
-  const {title, rating, type, bedrooms, maxAdults, price} = offer;
+  const {title, rating, type, bedrooms, maxAdults, price, isPremium, goods} = offer;
   const nearOffers = getNearestOffers(offers, offer);
   const renderOfferPropertyReviews = (<DetailOfferReview comments={comments}/>);
   const renderOfferPropertyPlaceList = (<PropertyPlaceList offers={offers} offer={offer}/>);
@@ -70,9 +70,10 @@ const DetailOfferScreen = ({comments, offers, offer, currentLocation}) => {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                <div className="property__mark">
-                  <span>Premium</span>
-                </div>
+                {isPremium ?
+                  <div className="property__mark">
+                    <span>Premium</span>
+                  </div> : ``}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
                     {title}
@@ -109,36 +110,11 @@ const DetailOfferScreen = ({comments, offers, offer, currentLocation}) => {
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    <li className="property__inside-item">
-                  Wi-Fi
-                    </li>
-                    <li className="property__inside-item">
-                  Washing machine
-                    </li>
-                    <li className="property__inside-item">
-                  Towels
-                    </li>
-                    <li className="property__inside-item">
-                  Heating
-                    </li>
-                    <li className="property__inside-item">
-                  Coffee machine
-                    </li>
-                    <li className="property__inside-item">
-                  Baby seat
-                    </li>
-                    <li className="property__inside-item">
-                  Kitchen
-                    </li>
-                    <li className="property__inside-item">
-                  Dishwasher
-                    </li>
-                    <li className="property__inside-item">
-                  Cabel TV
-                    </li>
-                    <li className="property__inside-item">
-                  Fridge
-                    </li>
+                    {goods.map((item)=> (
+                      <li key={item} className="property__inside-item">
+                        {item}
+                      </li>)
+                    )}
                   </ul>
                 </div>
                 <div className="property__host">
