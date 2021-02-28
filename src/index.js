@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import offers from './mocks/offers';
 import comments from './mocks/comments';
-import cities from './mocks/cities';
+import {SORTING_LIST, CITIES_LIST} from './constants';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
@@ -19,7 +19,8 @@ ReactDOM.render(
       <App
         offers={offers}
         comments={comments}
-        cities={cities}
+        cities={CITIES_LIST}
+        options={SORTING_LIST}
       />
     </Provider>,
     document.querySelector(`#root`)

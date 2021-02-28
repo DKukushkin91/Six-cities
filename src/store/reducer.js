@@ -1,14 +1,15 @@
 import {ActionType} from './action';
-import {getCityLocation, getFilterArray} from '../util';
-import {CITIES_LIST, DEFAULT_CITY, DEFAULT_LOCATION} from '../constants';
+import {getCityLocation, getSorting} from '../util';
+import {DEFAULT_CITY, DEFAULT_LOCATION, CURRENT_SORTING} from '../constants';
 import offers from '../mocks/offers';
 
 const initialState = {
   currentCity: DEFAULT_CITY,
   currentLocation: DEFAULT_LOCATION,
   offers,
-  currentOffers: getFilterArray(offers, DEFAULT_CITY),
-  cities: CITIES_LIST
+  currentOffers: getSorting(offers, DEFAULT_CITY),
+  currentOption: CURRENT_SORTING,
+  activeCardId: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,8 +18,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentCity: action.payload,
-        currentOffers: getFilterArray(state.offers, action.payload),
+        currentOffers: getSorting(state.offers, action.payload),
         currentLocation: getCityLocation(state.offers, action.payload),
+        currentOption: CURRENT_SORTING
+      };
+    case ActionType.CHANGE_OPTION:
+      return {
+        ...state,
+        currentOption: action.payload,
+        currentOffers: getSorting(state.offers, state.currentCity, action.payload)
+      };
+    case ActionType.HOVER_OFFER:
+      return {
+        ...state,
+        activeCardId: action.payload
       };
   }
   return state;
