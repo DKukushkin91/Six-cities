@@ -1,21 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import DetailOfferReview from '../detail-offer-review/detail-offer-review';
-import PropertyPlaceList from "../detail-near-offer-list/offer-property-place-list";
+import PropertyPlaceList from '../detail-near-offer-list/offer-property-place-list';
 import Map from '../map/map';
-import ReviewsProp from '../reviews/review.prop';
 import currentLocationProp from '../map/current-location.prop';
 import OfferProp from '../offer/offer.prop';
 import {connect} from 'react-redux';
 import {getNearestOffers} from '../../util';
+import comments from '../../mocks/comments';
+import DetailOfferGoods from '../detail-offer-goods/detail-offer-goods';
+import DetailOfferGallery from '../detail-offer-gallery/detail-offer-gallery';
+import {Rating} from '../../constants';
 
-const DetailOfferScreen = ({comments, offers, offer, currentLocation}) => {
-  const {title, rating, type, bedrooms, maxAdults, price, isPremium, goods} = offer;
+const DetailOfferScreen = ({offers, currentLocation, match}) => {
+  const matchParam = Number(match.params.id);
+  const offer = offers.find((item)=>item.id === matchParam);
+  const {title, rating, type, bedrooms, maxAdults, price, isPremium} = offer;
   const nearOffers = getNearestOffers(offers, offer);
   const renderOfferPropertyReviews = (<DetailOfferReview comments={comments}/>);
   const renderOfferPropertyPlaceList = (<PropertyPlaceList offers={offers} offer={offer}/>);
   const renderMap = (<Map offers={nearOffers} currentLocation={currentLocation}/>);
+  const renderGoods = (<DetailOfferGoods offer={offer}/>);
+  const renderGallery = (<DetailOfferGallery offer={offer}/>);
   return (
     <>
       <div style={{display: `none`}}>
@@ -48,24 +55,7 @@ const DetailOfferScreen = ({comments, offers, offer, currentLocation}) => {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/room.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/studio-01.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-                </div>
+                {renderGallery}
               </div>
             </div>
             <div className="property__container container">
@@ -87,7 +77,7 @@ const DetailOfferScreen = ({comments, offers, offer, currentLocation}) => {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `80%`}} />
+                    <span style={{width: `${Number(rating / Rating.MAX) * Rating.PERCENT}%`}} />
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{rating}</span>
@@ -108,14 +98,7 @@ const DetailOfferScreen = ({comments, offers, offer, currentLocation}) => {
                   <span className="property__price-text">&nbsp;night</span>
                 </div>
                 <div className="property__inside">
-                  <h2 className="property__inside-title">What&apos;s inside</h2>
-                  <ul className="property__inside-list">
-                    {goods.map((item)=> (
-                      <li key={item} className="property__inside-item">
-                        {item}
-                      </li>)
-                    )}
-                  </ul>
+                  {renderGoods}
                 </div>
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
@@ -155,14 +138,18 @@ const DetailOfferScreen = ({comments, offers, offer, currentLocation}) => {
 
 DetailOfferScreen.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired,
-  comments: PropTypes.arrayOf(ReviewsProp).isRequired,
   currentLocation: currentLocationProp,
-  offer: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 };
 
-const mapStateToProps = (state) => ({
-  currentLocation: state.currentLocation,
+const mapStateToProps = ({currentLocation, offers}) => ({
+  currentLocation,
+  offers
 });
 
 export {DetailOfferScreen};
-export default connect(mapStateToProps, null)(DetailOfferScreen);
+export default connect(mapStateToProps, null)(withRouter(DetailOfferScreen));

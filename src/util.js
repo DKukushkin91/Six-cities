@@ -1,4 +1,4 @@
-import {MAX_NEAR_OFFERS} from './constants';
+import {MAX_NEAR_OFFERS, Sorting} from './constants';
 
 export const getRandomItem = (items) => items[Math.round(Math.floor(Math.random() * items.length))];
 
@@ -15,11 +15,11 @@ export const getBoolean = () => Boolean(getRandomInteger(0, 1));
 export const getSorting = (offers, city, option) => {
   const defaultState = offers.filter((item) => item.city.name === city);
   switch (option) {
-    case `Price: low to high`:
+    case Sorting.LOW_PRICE:
       return defaultState.sort((a, b) => a.price - b.price);
-    case `Price: high to low`:
+    case Sorting.HIGH_PRICE:
       return defaultState.sort((a, b) => b.price - a.price);
-    case `Top rated first`:
+    case Sorting.TOP_RATE:
       return defaultState.sort((a, b) => b.rating - a.rating);
     default:
       return defaultState;

@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import OfferProp from './offer.prop';
+import {Rating} from '../../constants';
 
 const Offer = ({offers}) => {
-  const {price, title, type, isFavorite} = offers;
+  const {price, title, type, isFavorite, rating} = offers;
   const classButton = `place-card__bookmark-button`;
   const onFavorite = isFavorite ? {classButton} : `${classButton}--active`;
   return (
@@ -22,7 +23,7 @@ const Offer = ({offers}) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `80%`}} />
+          <span style={{width: `${Number(rating / Rating.MAX) * Rating.PERCENT}%`}} />
           <span className="visually-hidden">Rating</span>
         </div>
       </div>

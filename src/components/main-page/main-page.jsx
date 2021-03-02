@@ -1,19 +1,34 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import OffersList from '../offers-list/offers-list';
 import {Link} from 'react-router-dom';
-import {Paths} from '../../constants';
+import {Paths, SORTING_LIST, CITIES_LIST} from '../../constants';
 import Map from '../map/map';
 import OfferProp from '../offer/offer.prop';
 import LocationsList from '../locations-list/locations-list';
 import {connect} from 'react-redux';
 import OfferSorting from '../offer-sorting/offer-sorting';
+import LoadingScreen from '../loading-screen/loading-screen';
+import {fetchOfferList} from '../../store/api-actions';
 
-const MainPage = ({offers, cities, currentCity, options}) => {
+const MainPage = ({offers, currentCity, isDataLoaded, onLoadData}) => {
   const renderOffers = (<OffersList offers={offers}/>);
   const renderMap = (<Map offers={offers}/>);
-  const renderLocationsList = (<LocationsList cities={cities} currentCity={currentCity}/>);
-  const renderOfferSorting = (<OfferSorting options={options}/>);
+  const renderLocationsList = (<LocationsList cities={CITIES_LIST} currentCity={currentCity}/>);
+  const renderOfferSorting = (<OfferSorting options={SORTING_LIST}/>);
+
+  useEffect(() => {
+    if (!isDataLoaded) {
+      onLoadData();
+    }
+  }, [isDataLoaded]);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <>
       <div style={{display: `none`}}>
@@ -74,15 +89,22 @@ const MainPage = ({offers, cities, currentCity, options}) => {
 
 MainPage.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired,
-  cities: PropTypes.array.isRequired,
   currentCity: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired
+  isDataLoaded: PropTypes.bool.isRequired,
+  onLoadData: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({currentOffers, currentCity}) => ({
+const mapStateToProps = ({currentOffers, currentCity, isDataLoaded}) => ({
   offers: currentOffers,
   currentCity,
+  isDataLoaded
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadData() {
+    dispatch(fetchOfferList());
+  },
 });
 
 export {MainPage};
-export default connect(mapStateToProps, ``)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

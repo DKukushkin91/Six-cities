@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 const OfferSorting = ({options, currentOption, onChangeOption}) => {
   const [isOpenedSorting, setIsOpenedSorting] = useState(false);
-  const handleClick = (evt, option) => {
+  const changeSorting = (evt, option) => {
     evt.preventDefault();
     if (option !== currentOption) {
       onChangeOption(option);
@@ -24,7 +24,7 @@ const OfferSorting = ({options, currentOption, onChangeOption}) => {
       </span>
       <ul onMouseLeave={()=>setIsOpenedSorting(!isOpenedSorting)} className={`places__options places__options--custom ${isOpenedSorting ? `places__options--opened` : ``}`}>
         {options.map((option) => (
-          <li onClick={(evt)=> handleClick(evt, option)} className={`places__option ${active(option)}`} key={option} tabIndex={0}>
+          <li onClick={(evt)=> changeSorting(evt, option)} className={`places__option ${active(option)}`} key={option} tabIndex={0}>
             {option}
           </li>)
         )}
@@ -34,14 +34,12 @@ const OfferSorting = ({options, currentOption, onChangeOption}) => {
 };
 
 OfferSorting.propTypes = {
-  options: PropTypes.array.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   onChangeOption: PropTypes.func.isRequired,
   currentOption: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({currentOption}) => ({
-  currentOption
-});
+const mapStateToProps = ({currentOption}) => ({currentOption});
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeOption(option) {

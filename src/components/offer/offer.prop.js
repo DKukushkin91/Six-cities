@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export default PropTypes.exact({
-  bedrooms: PropTypes.string.isRequired,
+  bedrooms: PropTypes.number.isRequired,
   city: PropTypes.exact({
     location: PropTypes.exact({
       latitude: PropTypes.number.isRequired,
@@ -14,11 +14,11 @@ export default PropTypes.exact({
   goods: PropTypes.array.isRequired,
   host: PropTypes.exact({
     avatarUrl: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     isPro: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   images: PropTypes.array.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   isPremium: PropTypes.bool.isRequired,
@@ -27,7 +27,7 @@ export default PropTypes.exact({
     longitude: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired
   }).isRequired,
-  maxAdults: PropTypes.string.isRequired,
+  maxAdults: PropTypes.number.isRequired,
   previewImage: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,

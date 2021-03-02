@@ -1,15 +1,16 @@
 import {ActionType} from './action';
 import {getCityLocation, getSorting} from '../util';
-import {DEFAULT_CITY, DEFAULT_LOCATION, CURRENT_SORTING} from '../constants';
-import offers from '../mocks/offers';
+import {DEFAULT_CITY, DEFAULT_LOCATION, CURRENT_SORTING, AuthorizationStatus} from '../constants';
 
 const initialState = {
   currentCity: DEFAULT_CITY,
   currentLocation: DEFAULT_LOCATION,
-  offers,
-  currentOffers: getSorting(offers, DEFAULT_CITY),
+  offers: [],
+  currentOffers: [],
   currentOption: CURRENT_SORTING,
-  activeCardId: null
+  activeCardId: null,
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  isDataLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +33,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         activeCardId: action.payload
+      };
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.payload,
+        currentOffers: getSorting(action.payload, state.currentCity, action.currentOption),
+        currentLocation: getCityLocation(action.payload, state.currentCity),
+        isDataLoaded: true,
+      };
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
       };
   }
   return state;
