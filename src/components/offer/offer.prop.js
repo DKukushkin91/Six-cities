@@ -11,7 +11,9 @@ export default PropTypes.exact({
     name: PropTypes.string.isRequired
   }).isRequired,
   description: PropTypes.string.isRequired,
-  goods: PropTypes.array.isRequired,
+  goods: PropTypes.arrayOf(
+      PropTypes.string.isRequired
+  ).isRequired,
   host: PropTypes.exact({
     avatarUrl: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
@@ -19,7 +21,9 @@ export default PropTypes.exact({
     name: PropTypes.string.isRequired
   }).isRequired,
   id: PropTypes.number.isRequired,
-  images: PropTypes.array.isRequired,
+  images: PropTypes.arrayOf(
+      PropTypes.string.isRequired
+  ).isRequired,
   isFavorite: PropTypes.bool.isRequired,
   isPremium: PropTypes.bool.isRequired,
   location: PropTypes.exact({

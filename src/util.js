@@ -1,4 +1,4 @@
-import {MAX_NEAR_OFFERS, Sorting} from './constants';
+import {MAX_NEAR_OFFERS, Rating, Sorting} from './constants';
 
 export const getRandomItem = (items) => items[Math.round(Math.floor(Math.random() * items.length))];
 
@@ -35,4 +35,13 @@ export const getNearestOffers = (offers, offer) => {
     item.city.name === offer.city.name && item.id !== offer.id
   )
     .slice(0, MAX_NEAR_OFFERS);
+};
+
+export const getRatingPercent = (rating) => Number(rating / Rating.MAX) * Rating.PERCENT;
+
+export const getUpperCase = (str) => {
+  if (!str) {
+    return str;
+  }
+  return str[0].toUpperCase() + str.slice(1);
 };

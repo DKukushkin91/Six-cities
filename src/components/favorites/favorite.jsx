@@ -2,15 +2,17 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
 import OfferProp from "../offer/offer.prop";
+import {getRatingPercent} from "../../util";
 
 const Favorite = ({offers}) => {
-  const {images, price, title, type} = offers;
+  const {previewImage, price, title, type, rating, isFavorite} = offers;
+  const onFavorite = isFavorite ? `--active` : ``;
   return (
 
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to={Paths.OFFER}>
-          <img className="place-card__image" src={`${images[1]}`} width={150} height={110} alt="Place image" />
+          <img className="place-card__image" src={previewImage} width={150} height={110} alt="Place image" />
         </Link>
       </div>
       <div className="favorites__card-info place-card__info">
@@ -19,7 +21,7 @@ const Favorite = ({offers}) => {
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button className={`place-card__bookmark-button place-card__bookmark-button${onFavorite} button`} type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
@@ -28,7 +30,7 @@ const Favorite = ({offers}) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `100%`}} />
+            <span style={{width: `${getRatingPercent(rating)}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

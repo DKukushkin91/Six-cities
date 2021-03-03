@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {MAX_GALLERY_IMG} from "../../constants";
 
-const DetailOfferGallery = ({offer}) => {
-  const {images} = offer;
+const DetailOfferGallery = ({images}) => {
   return (
     <>
       {images.slice(0, MAX_GALLERY_IMG).map((item)=> (
@@ -17,7 +16,7 @@ const DetailOfferGallery = ({offer}) => {
 
 
 DetailOfferGallery.propTypes = {
-  offer: PropTypes.object.isRequired
+  images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
 export default DetailOfferGallery;

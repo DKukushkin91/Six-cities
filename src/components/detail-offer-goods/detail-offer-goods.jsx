@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DetailOfferGoods = ({offer}) => {
-  const {goods} = offer;
+const DetailOfferGoods = ({goods}) => {
   return (
     <>
       <h2 className="property__inside-title">What&apos;s inside</h2>
@@ -18,7 +17,7 @@ const DetailOfferGoods = ({offer}) => {
 };
 
 DetailOfferGoods.propTypes = {
-  offer: PropTypes.object.isRequired
+  goods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
 export default DetailOfferGoods;

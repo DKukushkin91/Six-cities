@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
 import OfferProp from "../offer/offer.prop";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 const FavoritesList = ({offers}) => {
   const renderFavorites = offers.map((item) => <Favorite offers={item} key={item.id}/>);
@@ -23,13 +24,18 @@ const FavoritesList = ({offers}) => {
             {renderFavorites}
           </div>
         </li>
-      ))};
+      ))}
     </ul>
   );
 };
+
+const mapStateToProps = ({currentOffers}) => ({
+  offers: currentOffers,
+});
 
 FavoritesList.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired
 };
 
-export default FavoritesList;
+export {FavoritesList};
+export default connect(mapStateToProps, ``)(FavoritesList);

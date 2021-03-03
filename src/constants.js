@@ -16,6 +16,12 @@ export const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
+export const Inquiry = {
+  HOTELS: `/hotels`,
+  LOGIN: `/login`,
+  LOGOUT: `/logout`
+};
+
 export const Rating = {
   MAX: 5,
   PERCENT: 100

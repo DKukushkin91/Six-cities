@@ -1,19 +1,19 @@
 import {ActionCreator} from './action';
-import {AuthorizationStatus} from '../constants';
-import {offersAdapter} from '../services/adapter';
+import {AuthorizationStatus, Inquiry} from '../constants';
+import {adaptOffers} from '../services/adapter';
 
 export const fetchOfferList = () => (dispatch, _getState, api) => (
-  api.get(`/hotels`)
-    .then(({data}) => dispatch(ActionCreator.loadOffers(offersAdapter(data))))
+  api.get(Inquiry.HOTELS)
+    .then(({data}) => dispatch(ActionCreator.loadOffers(adaptOffers(data))))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
-  api.get(`/login`)
+  api.get(Inquiry.LOGIN)
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.post(`/login`, {email, password})
+  api.post(Inquiry.LOGIN, {email, password})
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
 );
