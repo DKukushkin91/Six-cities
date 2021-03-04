@@ -43,7 +43,7 @@ const Map = ({offers, currentLocation, activeCardId}) => {
     return () => {
       mapRef.current.remove();
     };
-  }, [currentLocation, activeCardId]);
+  }, [currentLocation, activeCardId, offers]);
 
   return (
     <div id="map" style={{height: `100%`}} ref={mapRef}></div>
@@ -53,12 +53,13 @@ const Map = ({offers, currentLocation, activeCardId}) => {
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired,
   currentLocation: CurrentLocationProp,
-  activeCardId: PropTypes.string
+  activeCardId: PropTypes.number
 };
 
-const mapStateToProps = ({currentLocation, activeCardId}) => ({
+const mapStateToProps = ({currentOffers, currentLocation, activeCardId}) => ({
   currentLocation,
-  activeCardId
+  activeCardId,
+  offers: currentOffers
 });
 
 export {Map};

@@ -25,7 +25,7 @@ const OffersList = ({offers, onHoverOffer, activeCardId}) => {
 OffersList.propTypes = {
   onHoverOffer: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(OfferProp).isRequired,
-  activeCardId: PropTypes.string
+  activeCardId: PropTypes.number
 };
 
 const mapStateToProps = ({activeCardId}) => ({activeCardId});
