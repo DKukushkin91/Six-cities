@@ -12,8 +12,8 @@ export const Sorting = {
 };
 
 export const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
+  AUTH: true,
+  NO_AUTH: false,
 };
 
 export const Inquiry = {

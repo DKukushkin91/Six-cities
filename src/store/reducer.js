@@ -10,7 +10,8 @@ const initialState = {
   currentOption: CURRENT_SORTING,
   activeCardId: null,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  isDataLoaded: false
+  isDataLoaded: false,
+  userValue: ``,
 };
 
 const reducer = (state = initialState, action) => {
@@ -46,6 +47,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+    case ActionType.USER_VALUE:
+      return {
+        ...state,
+        userValue: action.payload,
       };
   }
   return state;

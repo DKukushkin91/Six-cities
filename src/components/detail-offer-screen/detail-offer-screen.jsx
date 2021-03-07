@@ -12,8 +12,9 @@ import comments from '../../mocks/comments';
 import DetailOfferGoods from '../detail-offer-goods/detail-offer-goods';
 import DetailOfferGallery from '../detail-offer-gallery/detail-offer-gallery';
 import Header from '../header/header';
+import DetailOfferHost from "../detail-offer-host/detail-offer-host";
 
-const DetailOfferScreen = ({offers, currentLocation, match}) => {
+const DetailOfferScreen = ({offers, currentLocation, match, userValue}) => {
   const offerId = Number(match.params.id);
   const offer = offers.find((item)=>item.id === offerId);
   const {title, rating, type, bedrooms, maxAdults, price, isPremium, images, goods} = offer;
@@ -23,7 +24,8 @@ const DetailOfferScreen = ({offers, currentLocation, match}) => {
   const renderMap = (<Map offers={nearOffers} currentLocation={currentLocation}/>);
   const renderGoods = (<DetailOfferGoods goods={goods}/>);
   const renderGallery = (<DetailOfferGallery images={images}/>);
-  const renderHeader = (<Header/>);
+  const renderHeader = (<Header userValue={userValue}/>);
+  const renderHost = (<DetailOfferHost offer={offer}/>);
   return (
     <>
       <div style={{display: `none`}}>
@@ -80,25 +82,7 @@ const DetailOfferScreen = ({offers, currentLocation, match}) => {
                 <div className="property__inside">
                   {renderGoods}
                 </div>
-                <div className="property__host">
-                  <h2 className="property__host-title">Meet the host</h2>
-                  <div className="property__host-user user">
-                    <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width={74} height={74} alt="Host avatar" />
-                    </div>
-                    <span className="property__user-name">
-                  Angelina
-                    </span>
-                  </div>
-                  <div className="property__description">
-                    <p className="property__text">
-                  A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                    </p>
-                    <p className="property__text">
-                  An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
-                    </p>
-                  </div>
-                </div>
+                {renderHost}
                 {renderOfferPropertyReviews}
               </div>
             </div>
@@ -118,6 +102,7 @@ const DetailOfferScreen = ({offers, currentLocation, match}) => {
 
 DetailOfferScreen.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired,
+  userValue: PropTypes.string.isRequired,
   currentLocation: currentLocationProp,
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -126,9 +111,10 @@ DetailOfferScreen.propTypes = {
   }).isRequired
 };
 
-const mapStateToProps = ({currentLocation, offers}) => ({
+const mapStateToProps = ({currentLocation, offers, userValue}) => ({
   currentLocation,
-  offers
+  offers,
+  userValue
 });
 
 export {DetailOfferScreen};

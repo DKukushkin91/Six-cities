@@ -3,10 +3,12 @@ import {Link} from 'react-router-dom';
 import FavoritesList from '../favorites-list/favorites-list';
 import {Paths} from '../../constants';
 import Header from '../header/header';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-const FavoritesScreen = () => {
+const FavoritesScreen = ({userValue}) => {
   const renderFavoritesList = (<FavoritesList/>);
-  const renderHeader = (<Header/>);
+  const renderHeader = (<Header userValue={userValue}/>);
   return (
     <>
       <div style={{display: `none`}}>
@@ -31,4 +33,13 @@ const FavoritesScreen = () => {
     </>);
 };
 
-export default FavoritesScreen;
+FavoritesScreen.propTypes = {
+  userValue: PropTypes.string.isRequired
+};
+
+const mapStateToProps = ({userValue}) => ({
+  userValue
+});
+
+export {FavoritesScreen};
+export default connect(mapStateToProps, ``)(FavoritesScreen);
