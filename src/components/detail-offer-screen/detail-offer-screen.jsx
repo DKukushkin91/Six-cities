@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import DetailOfferReview from '../detail-offer-review/detail-offer-review';
@@ -7,25 +7,33 @@ import Map from '../map/map';
 import currentLocationProp from '../map/current-location.prop';
 import OfferProp from '../offer/offer.prop';
 import {connect} from 'react-redux';
-import {getNearestOffers, getRatingPercent, getUpperCase} from '../../util';
-import comments from '../../mocks/comments';
+import {getRatingPercent, getUpperCase} from '../../util';
 import DetailOfferGoods from '../detail-offer-goods/detail-offer-goods';
 import DetailOfferGallery from '../detail-offer-gallery/detail-offer-gallery';
 import Header from '../header/header';
-import DetailOfferHost from "../detail-offer-host/detail-offer-host";
+import DetailOfferHost from '../detail-offer-host/detail-offer-host';
+import {fetchCommentList, fetchNearbyList} from '../../store/api-actions';
+import ReviewProp from '../reviews/review.prop';
 
-const DetailOfferScreen = ({offers, currentLocation, match, userValue}) => {
-  const offerId = Number(match.params.id);
-  const offer = offers.find((item)=>item.id === offerId);
+const DetailOfferScreen = ({offers, comments, currentLocation, match, userValue, onOfferOpen, onLoadNearby, onLoadComments, nearby}) => {
+  const offerId = (Number(match.params.id));
+  const offer = offers.find((item) => item.id === offerId);
   const {title, rating, type, bedrooms, maxAdults, price, isPremium, images, goods} = offer;
-  const nearOffers = getNearestOffers(offers, offer);
-  const renderOfferPropertyReviews = (<DetailOfferReview comments={comments}/>);
-  const renderOfferPropertyPlaceList = (<DetailNearOfferList offers={offers} offer={offer}/>);
-  const renderMap = (<Map offers={nearOffers} currentLocation={currentLocation}/>);
+  const renderOfferPropertyReviews = (<DetailOfferReview offerId={offerId} comments={comments}/>);
+  const renderOfferPropertyPlaceList = (<DetailNearOfferList offer={nearby}/>);
+  const renderMap = (<Map nearby={nearby} currentLocation={currentLocation}/>);
   const renderGoods = (<DetailOfferGoods goods={goods}/>);
   const renderGallery = (<DetailOfferGallery images={images}/>);
   const renderHeader = (<Header userValue={userValue}/>);
   const renderHost = (<DetailOfferHost offer={offer}/>);
+
+  useEffect(() => {
+    if (!onOfferOpen) {
+      onLoadNearby(offerId);
+      onLoadComments(offerId);
+    }
+  }, [onOfferOpen]);
+
   return (
     <>
       <div style={{display: `none`}}>
@@ -101,21 +109,38 @@ const DetailOfferScreen = ({offers, currentLocation, match, userValue}) => {
 
 
 DetailOfferScreen.propTypes = {
+  comments: PropTypes.arrayOf(ReviewProp).isRequired,
   offers: PropTypes.arrayOf(OfferProp).isRequired,
+  nearby: PropTypes.arrayOf(OfferProp).isRequired,
   userValue: PropTypes.string.isRequired,
   currentLocation: currentLocationProp,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired
     }).isRequired
-  }).isRequired
+  }).isRequired,
+  onLoadNearby: PropTypes.func.isRequired,
+  onOfferOpen: PropTypes.bool.isRequired,
+  onLoadComments: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({currentLocation, offers, userValue}) => ({
+const mapStateToProps = ({currentLocation, offers, comments, nearby, userValue, onOfferOpen}) => ({
   currentLocation,
   offers,
-  userValue
+  userValue,
+  onOfferOpen,
+  comments,
+  nearby
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadNearby(offerId) {
+    dispatch(fetchNearbyList(offerId));
+  },
+  onLoadComments(offerId) {
+    dispatch(fetchCommentList(offerId));
+  }
 });
 
 export {DetailOfferScreen};
-export default connect(mapStateToProps, null)(withRouter(DetailOfferScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DetailOfferScreen));

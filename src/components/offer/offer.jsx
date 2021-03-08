@@ -27,7 +27,7 @@ const Offer = ({offers}) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <Link to={`/offer/${offers.id}`}>{title}</Link>
+        <Link to={`/hotels/${offers.id}`}>{title}</Link>
       </h2>
       <p className="place-card__type">{getUpperCase(type)}</p>
     </div>

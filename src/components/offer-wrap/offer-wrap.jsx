@@ -15,7 +15,7 @@ const OfferWrap = ({offers, onMouseOver}) => {
           <span>Premium</span>
         </div> : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${offers.id}`}>
+        <Link to={`/hotels/${offers.id}`}>
           <img className="place-card__image" src={`${previewImage}`} width={260} height={200} alt="Place image" />
         </Link>
       </div>

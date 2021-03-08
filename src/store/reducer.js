@@ -12,6 +12,10 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   isDataLoaded: false,
   userValue: ``,
+  nearby: [],
+  comments: [],
+  onOfferOpen: false,
+  onSendComments: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,9 +43,15 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
-        currentOffers: getSorting(action.payload, state.currentCity, action.currentOption),
+        currentOffers: getSorting(action.payload, state.currentCity, state.currentOption),
         currentLocation: getCityLocation(action.payload, state.currentCity),
         isDataLoaded: true,
+      };
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload,
+        onOfferOpen: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
@@ -52,6 +62,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userValue: action.payload,
+      };
+    case ActionType.LOAD_NEARBY:
+      return {
+        ...state,
+        nearby: action.payload,
+        onOfferOpen: true,
+      };
+    case ActionType.ADDED_COMMENT:
+      return {
+        ...state,
+        comments: action.payload,
+        onSendComments: true,
       };
   }
   return state;

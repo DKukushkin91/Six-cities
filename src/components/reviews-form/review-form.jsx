@@ -1,76 +1,58 @@
 import React, {useState} from 'react';
+import {RatingStar, Condition} from '../../constants';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {commentsPost} from '../../store/api-actions';
 
-const ReviewForm = () => {
-  const [reviewData, setReviewData] = useState({
-    rating: 0,
-    review: ``,
+const ReviewForm = ({onAddComment, offerId}) => {
+  const [data, changeData] = useState({
+    rating: ``,
+    review: ``
   });
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-  };
-
-  const handleClickRating = (evt) => {
-    const {name, value} = evt.target;
-
-    setReviewData({
-      ...reviewData,
-      [name]: value,
-    });
+    const {target: form} = evt;
+    onAddComment(
+        offerId,
+        {
+          comment: data.review,
+          rating: data.rating
+        }
+    );
+    form.reset();
   };
 
   const handleFieldChange = (evt) => {
     const {name, value} = evt.target;
-
-    setReviewData({
-      ...reviewData,
-      [name]: value,
-    });
+    changeData({...data, [name]: value});
   };
 
-  const {review, rating} = reviewData;
-  const disabled = !(rating > 1 && review.length > 50);
-
+  const disabled = !(data.rating > Condition.MIN_RATING && data.review.length > Condition.MIN_DESCRIPTION && data.review.length < Condition.MAX_DESCRIPTION);
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div onClick = {handleClickRating} className="reviews__rating-form form__rating">
-        <input className="form__rating-input visually-hidden" name="rating" defaultValue={5} id="5-stars" type="radio" />
-        <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input className="form__rating-input visually-hidden" name="rating" defaultValue={4} id="4-stars" type="radio" />
-        <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input className="form__rating-input visually-hidden" name="rating" defaultValue={3} id="3-stars" type="radio" />
-        <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input className="form__rating-input visually-hidden" name="rating" defaultValue={2} id="2-stars" type="radio" />
-        <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input className="form__rating-input visually-hidden" name="rating" defaultValue={1} id="1-star" type="radio" />
-        <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
+      <div className="reviews__rating-form form__rating">
+        {RatingStar.map((item) =>
+          <React.Fragment key={item.stars}>
+            <input onClick={handleFieldChange} className="form__rating-input visually-hidden" name="rating" id={`${item.stars}-stars`}
+              defaultValue={`${item.stars}`} type="radio"/>
+            <label htmlFor={`${item.stars}-stars`} className="reviews__rating-label form__rating-label" title={`${item.title}`}>
+              <svg className="form__star-image" width={37} height={33}>
+                <use xlinkHref="#icon-star"/>
+              </svg>
+            </label>
+          </React.Fragment>
+        )}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={``} onChange={handleFieldChange}/>
+      <textarea onChange={handleFieldChange} className="reviews__textarea form__textarea" id="review" name="review"
+        placeholder="Tell how was your stay, what you like and what can be improved"
+        defaultValue={``}/>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-        To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+            To submit review please make sure to set <span className="reviews__star">rating</span>
+            and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={disabled}>Submit</button>
       </div>
@@ -78,4 +60,16 @@ const ReviewForm = () => {
   );
 };
 
-export default ReviewForm;
+ReviewForm.propTypes = {
+  onAddComment: PropTypes.func.isRequired,
+  offerId: PropTypes.number.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onAddComment(data, {comment, rating}) {
+    dispatch(commentsPost(data, {comment, rating}));
+  },
+});
+
+export {ReviewForm};
+export default connect(``, mapDispatchToProps)(ReviewForm);

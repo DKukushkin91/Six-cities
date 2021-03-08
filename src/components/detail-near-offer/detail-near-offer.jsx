@@ -9,7 +9,7 @@ const DetailNearOffer = ({offer}) => {
   return (
     <article className="near-places__card place-card">
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${offer.id}`}>
+        <Link to={`/hotels/${offer.id}`}>
           <img className="place-card__image" src={`${previewImage}`} width={260} height={200} alt="Place image" />
         </Link>
       </div>

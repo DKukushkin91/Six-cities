@@ -30,9 +30,8 @@ export const getCityLocation = (offers, city) => {
   return offers.find((item) => item.city.name === city).city.location;
 };
 
-export const getNearestOffers = (offers, offer) => {
-  return offers.filter((item) =>
-    item.city.name === offer.city.name && item.id !== offer.id
+export const getNearestOffers = (nearby) => {
+  return nearby.filter((item) => item.id !== nearby.id
   )
     .slice(0, MAX_NEAR_OFFERS);
 };
