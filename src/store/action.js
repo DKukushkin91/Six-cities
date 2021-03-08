@@ -3,7 +3,9 @@ export const ActionType = {
   CHANGE_OPTION: `option/changeOption`,
   HOVER_OFFER: `offer/hoverOffer`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
-  LOAD_OFFERS: `data/loadOffers`
+  LOAD_OFFERS: `data/loadOffers`,
+  USER_VALUE: `user/userValue`,
+  REDIRECT_TO_ROUTE: `main/redirectToRoute`
 };
 
 export const ActionCreator = {
@@ -26,6 +28,14 @@ export const ActionCreator = {
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
+  }),
+  changeValue: (value) => ({
+    type: ActionType.USER_VALUE,
+    payload: value,
+  }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
   })
 };
 

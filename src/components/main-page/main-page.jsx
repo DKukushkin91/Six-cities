@@ -11,12 +11,12 @@ import OfferSorting from '../offer-sorting/offer-sorting';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchOfferList} from '../../store/api-actions';
 
-const MainPage = ({offers, currentCity, isDataLoaded, onLoadData}) => {
+const MainPage = ({offers, currentCity, isDataLoaded, onLoadData, userValue}) => {
   const renderOffers = (<OffersList offers={offers}/>);
   const renderMap = (<Map offers={offers}/>);
   const renderLocationsList = (<LocationsList cities={CITIES_LIST} currentCity={currentCity}/>);
   const renderOfferSorting = (<OfferSorting options={SORTING_LIST}/>);
-  const renderHeader = (<Header/>);
+  const renderHeader = (<Header userValue={userValue}/>);
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -72,12 +72,16 @@ MainPage.propTypes = {
   currentCity: PropTypes.string.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired,
+  userValue: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({currentOffers, currentCity, isDataLoaded}) => ({
+const mapStateToProps = ({currentOffers, currentCity, isDataLoaded, userValue, authorizationStatus}) => ({
   offers: currentOffers,
   currentCity,
-  isDataLoaded
+  isDataLoaded,
+  userValue,
+  authorizationStatus
 });
 
 const mapDispatchToProps = (dispatch) => ({
