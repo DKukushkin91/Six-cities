@@ -16,7 +16,7 @@ const DetailNearOfferList = ({offer}) => {
 };
 
 DetailNearOfferList.propTypes = {
-  offer: PropTypes.arrayOf(OfferProp).isRequired
+  offer: PropTypes.arrayOf(OfferProp.isRequired).isRequired
 };
 
 export default DetailNearOfferList;

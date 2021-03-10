@@ -9,7 +9,8 @@ export const ActionType = {
   LOAD_NEARBY: `nearby/loadNearby`,
   LOAD_COMMENTS: `comments/loadComments`,
   ADDED_COMMENT: `comment/addedComment`,
-  OPEN_PROPERTY: `property/openProperty`
+  OPEN_PROPERTY: `property/openProperty`,
+  LOAD_DETAILS: `offer/loadDetails`
 };
 
 export const ActionCreator = {
@@ -28,6 +29,10 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers
+  }),
+  loadDetailOffer: (offer) => ({
+    type: ActionType.LOAD_DETAILS,
+    payload: offer
   }),
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,

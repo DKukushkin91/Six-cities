@@ -28,17 +28,17 @@ const ReviewForm = ({onAddComment, offerId}) => {
     changeData({...data, [name]: value});
   };
 
-  const disabled = !(data.rating > Condition.MIN_RATING && data.review.length > Condition.MIN_DESCRIPTION && data.review.length < Condition.MAX_DESCRIPTION);
+  const disabled = !(data.rating >= Condition.MIN_RATING && data.review.length >= Condition.MIN_DESCRIPTION && data.review.length < Condition.MAX_DESCRIPTION);
 
   return (
     <form onSubmit={handleSubmit} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {RatingStar.map((item) =>
-          <React.Fragment key={item.stars}>
-            <input onClick={handleFieldChange} className="form__rating-input visually-hidden" name="rating" id={`${item.stars}-stars`}
-              defaultValue={`${item.stars}`} type="radio"/>
-            <label htmlFor={`${item.stars}-stars`} className="reviews__rating-label form__rating-label" title={`${item.title}`}>
+        {RatingStar.map(({stars, title}) =>
+          <React.Fragment key={stars}>
+            <input onClick={handleFieldChange} className="form__rating-input visually-hidden" name="rating" id={`${stars}-stars`}
+              defaultValue={`${stars}`} type="radio"/>
+            <label htmlFor={`${stars}-stars`} className="reviews__rating-label form__rating-label" title={`${title}`}>
               <svg className="form__star-image" width={37} height={33}>
                 <use xlinkHref="#icon-star"/>
               </svg>
@@ -66,8 +66,8 @@ ReviewForm.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onAddComment(data, {comment, rating}) {
-    dispatch(commentsPost(data, {comment, rating}));
+  onAddComment(id, review) {
+    dispatch(commentsPost(id, review));
   },
 });
 

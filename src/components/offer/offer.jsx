@@ -4,7 +4,7 @@ import OfferProp from './offer.prop';
 import {getRatingPercent, getUpperCase} from '../../util';
 
 const Offer = ({offers}) => {
-  const {price, title, type, isFavorite, rating} = offers;
+  const {price, title, type, isFavorite, rating, id} = offers;
   const onFavorite = isFavorite ? `--active` : ``;
   return (
     <div className="place-card__info">
@@ -27,7 +27,7 @@ const Offer = ({offers}) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <Link to={`/hotels/${offers.id}`}>{title}</Link>
+        <Link to={`/offer/${id}`}>{title}</Link>
       </h2>
       <p className="place-card__type">{getUpperCase(type)}</p>
     </div>
@@ -35,7 +35,7 @@ const Offer = ({offers}) => {
 };
 
 Offer.propTypes = {
-  offers: OfferProp
+  offers: OfferProp.isRequired
 };
 
 export default Offer;

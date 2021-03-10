@@ -7,15 +7,18 @@ const initialState = {
   currentLocation: DEFAULT_LOCATION,
   offers: [],
   currentOffers: [],
+  nearbyOffers: [],
+  comments: [],
+  offerDetails: null,
   currentOption: CURRENT_SORTING,
   activeCardId: null,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   isDataLoaded: false,
   userValue: ``,
-  nearby: [],
-  comments: [],
   onOfferOpen: false,
-  onSendComments: false
+  onSendComments: false,
+  isLoaded: false,
+  id: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,11 +50,16 @@ const reducer = (state = initialState, action) => {
         currentLocation: getCityLocation(action.payload, state.currentCity),
         isDataLoaded: true,
       };
+    case ActionType.LOAD_DETAILS:
+      return {
+        ...state,
+        offerDetails: action.payload,
+        isLoaded: true,
+      };
     case ActionType.LOAD_COMMENTS:
       return {
         ...state,
         comments: action.payload,
-        onOfferOpen: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
@@ -66,8 +74,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_NEARBY:
       return {
         ...state,
-        nearby: action.payload,
-        onOfferOpen: true,
+        nearbyOffers: action.payload,
       };
     case ActionType.ADDED_COMMENT:
       return {

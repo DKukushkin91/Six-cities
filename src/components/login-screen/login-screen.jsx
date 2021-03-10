@@ -7,10 +7,10 @@ import {Paths} from '../../constants';
 import Header from '../header/header';
 import {ActionCreator} from '../../store/action';
 
-const LoginScreen = ({onSend, currentCity, onChangeValue, userValue}) => {
+const LoginScreen = ({onSend, currentCity, onChangeValue}) => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const renderHeader = (<Header userValue={userValue}/>);
+  const renderHeader = (<Header/>);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -62,12 +62,10 @@ LoginScreen.propTypes = {
   onSend: PropTypes.func.isRequired,
   currentCity: PropTypes.string.isRequired,
   onChangeValue: PropTypes.func.isRequired,
-  userValue: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({currentCity, userValue}) => ({
-  currentCity,
-  userValue
+const mapStateToProps = ({currentCity}) => ({
+  currentCity
 });
 
 const mapDispatchToProps = (dispatch) => ({

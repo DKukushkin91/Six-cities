@@ -1,10 +1,15 @@
 import {ActionCreator} from './action';
 import {AuthorizationStatus, Inquiry, Paths} from '../constants';
-import {adaptComments, adaptOffers} from '../services/adapter';
+import {adaptComments, adaptOffers, offerAdapter} from '../services/adapter';
 
 export const fetchOfferList = () => (dispatch, _getState, api) => (
   api.get(Inquiry.HOTELS)
     .then(({data}) => dispatch(ActionCreator.loadOffers(adaptOffers(data))))
+);
+
+export const fetchDetailOffer = (id) => (dispatch, _getState, api) => (
+  api.get(`${Inquiry.HOTELS}/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadDetailOffer(offerAdapter(data))))
 );
 
 export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
@@ -19,7 +24,10 @@ export const fetchCommentList = (id) => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(Inquiry.LOGIN)
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(({data}) => {
+      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(ActionCreator.changeValue(data.email));
+    })
     .catch(() => {})
 );
 

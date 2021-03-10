@@ -2,7 +2,7 @@ export const Paths = {
   MAIN: `/`,
   FAVORITES: `/favorites`,
   LOGIN: `/login`,
-  OFFER: `/hotels/:id`,
+  OFFER: `/offer/:id`,
   NOT_FOUND: `/not-found`
 };
 
@@ -66,7 +66,7 @@ export const DEFAULT_LOCATION = {
   longitude: 2.352478,
   zoom: 10
 };
-export const MAX_NEAR_OFFERS = 3;
+
 export const MAX_GALLERY_IMG = 6;
 export const CURRENT_SORTING = `Popular`;
 export const SORTING_LIST = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];

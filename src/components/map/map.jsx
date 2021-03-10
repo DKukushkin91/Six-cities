@@ -6,7 +6,7 @@ import OfferProp from '../offer/offer.prop';
 import "leaflet/dist/leaflet.css";
 import {connect} from "react-redux";
 
-const Map = ({offers, nearby, currentLocation, activeCardId}) => {
+const Map = ({offers, currentLocation, activeCardId, isLoaded}) => {
   const mapRef = useRef();
   const getItems = (items) => {
     items.forEach((item) => {
@@ -45,7 +45,7 @@ const Map = ({offers, nearby, currentLocation, activeCardId}) => {
     return () => {
       mapRef.current.remove();
     };
-  }, [currentLocation, activeCardId, offers, nearby]);
+  }, [currentLocation, activeCardId, offers, isLoaded]);
 
   return (
     <div id="map" style={{height: `100%`}} ref={mapRef}></div>
@@ -53,17 +53,16 @@ const Map = ({offers, nearby, currentLocation, activeCardId}) => {
 };
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(OfferProp).isRequired,
+  offers: PropTypes.arrayOf(OfferProp.isRequired).isRequired,
   currentLocation: CurrentLocationProp,
   activeCardId: PropTypes.number,
-  nearby: PropTypes.arrayOf(OfferProp).isRequired
+  isLoaded: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({offers, nearby, currentLocation, activeCardId}) => ({
+const mapStateToProps = ({currentLocation, activeCardId, isLoaded}) => ({
   currentLocation,
   activeCardId,
-  offers,
-  nearby
+  isLoaded
 });
 
 export {Map};

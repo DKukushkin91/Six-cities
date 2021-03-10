@@ -5,7 +5,7 @@ import Offer from '../offer/offer';
 import PropTypes from 'prop-types';
 
 const OfferWrap = ({offers, onMouseOver}) => {
-  const {previewImage, isPremium} = offers;
+  const {previewImage, isPremium, id} = offers;
   const renderOffers = (<Offer offers={offers}/>);
 
   return (
@@ -15,7 +15,7 @@ const OfferWrap = ({offers, onMouseOver}) => {
           <span>Premium</span>
         </div> : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/hotels/${offers.id}`}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={`${previewImage}`} width={260} height={200} alt="Place image" />
         </Link>
       </div>
@@ -25,7 +25,7 @@ const OfferWrap = ({offers, onMouseOver}) => {
 };
 
 OfferWrap.propTypes = {
-  offers: OfferProp,
+  offers: OfferProp.isRequired,
   onMouseOver: PropTypes.func.isRequired
 };
 
