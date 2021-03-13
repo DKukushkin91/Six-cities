@@ -6,14 +6,14 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {favoriteStatus} from "../../store/api-actions";
 
-const Offer = ({offers, onChangeStatus, favorite}) => {
+const Offer = ({offers, onChangeStatus}) => {
   const {price, title, type, isFavorite, rating, id} = offers;
   const onFavorite = isFavorite ? `--active` : ``;
   const handleClick = (evt) => {
     evt.preventDefault();
     onChangeStatus({
       id,
-      favorite
+      favorite: isFavorite ? 0 : 1,
     });
   };
 
@@ -48,12 +48,7 @@ const Offer = ({offers, onChangeStatus, favorite}) => {
 Offer.propTypes = {
   offers: OfferProp.isRequired,
   onChangeStatus: PropTypes.func.isRequired,
-  favorite: PropTypes.number.isRequired
 };
-
-const mapStateToProp = ({favorite}) => ({
-  favorite
-});
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeStatus(data) {
@@ -62,4 +57,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {Offer};
-export default connect(mapStateToProp, mapDispatchToProps)(Offer);
+export default connect(``, mapDispatchToProps)(Offer);
