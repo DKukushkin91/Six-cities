@@ -45,7 +45,8 @@ export const Inquiry = {
   LOGIN: `/login`,
   LOGOUT: `/logout`,
   NEARBY: `/nearby`,
-  COMMENTS: `/comments`
+  COMMENTS: `/comments`,
+  FAVORITES: `/favorite`
 };
 
 export const Rating = {

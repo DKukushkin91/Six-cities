@@ -18,7 +18,8 @@ const initialState = {
   onOfferOpen: false,
   onSendComments: false,
   isLoaded: false,
-  id: null
+  id: null,
+  favorite: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -81,6 +82,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         comments: action.payload,
         onSendComments: true,
+      };
+    case ActionType.CHANGE_STATUS:
+      return {
+        ...state,
+        favorite: action.payload,
       };
   }
   return state;

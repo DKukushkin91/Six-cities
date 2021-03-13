@@ -2,10 +2,21 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import OfferProp from './offer.prop';
 import {getRatingPercent, getUpperCase} from '../../util';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {favoriteStatus} from "../../store/api-actions";
 
-const Offer = ({offers}) => {
+const Offer = ({offers, onChangeStatus, favorite}) => {
   const {price, title, type, isFavorite, rating, id} = offers;
   const onFavorite = isFavorite ? `--active` : ``;
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    onChangeStatus({
+      id,
+      favorite
+    });
+  };
+
   return (
     <div className="place-card__info">
       <div className="place-card__price-wrapper">
@@ -13,7 +24,7 @@ const Offer = ({offers}) => {
           <b className="place-card__price-value">€ {price}</b>
           <span className="place-card__price-text">/&nbsp;night</span>
         </div>
-        <button className={`place-card__bookmark-button${onFavorite} button`} type="button">
+        <button onClick={handleClick} className={`place-card__bookmark-button${onFavorite} button`} type="button">
           <svg className="place-card__bookmark-icon" width={18} height={19}>
             <use xlinkHref="#icon-bookmark" />
           </svg>
@@ -35,7 +46,20 @@ const Offer = ({offers}) => {
 };
 
 Offer.propTypes = {
-  offers: OfferProp.isRequired
+  offers: OfferProp.isRequired,
+  onChangeStatus: PropTypes.func.isRequired,
+  favorite: PropTypes.number.isRequired
 };
 
-export default Offer;
+const mapStateToProp = ({favorite}) => ({
+  favorite
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeStatus(data) {
+    dispatch(favoriteStatus(data));
+  }
+});
+
+export {Offer};
+export default connect(mapStateToProp, mapDispatchToProps)(Offer);

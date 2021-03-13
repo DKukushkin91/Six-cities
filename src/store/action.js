@@ -10,7 +10,8 @@ export const ActionType = {
   LOAD_COMMENTS: `comments/loadComments`,
   ADDED_COMMENT: `comment/addedComment`,
   OPEN_PROPERTY: `property/openProperty`,
-  LOAD_DETAILS: `offer/loadDetails`
+  LOAD_DETAILS: `offer/loadDetails`,
+  CHANGE_STATUS: `favorite/changeStatus`
 };
 
 export const ActionCreator = {
@@ -57,6 +58,10 @@ export const ActionCreator = {
   addedComment: (comment) => ({
     type: ActionType.ADDED_COMMENT,
     payload: comment
+  }),
+  changeStatus: (favorite) => ({
+    type: ActionType.CHANGE_STATUS,
+    payload: favorite
   })
 };
 
