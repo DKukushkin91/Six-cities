@@ -1,11 +1,10 @@
 import React from 'react';
 import DetailNearOffer from '../detail-near-offer/detail-near-offer';
-import PropTypes from "prop-types";
-import OfferProp from "../offer/offer.prop";
-import {getNearestOffers} from '../../util';
+import PropTypes from 'prop-types';
+import OfferProp from '../offer/offer.prop';
 
-const DetailNearOfferList = ({offers, offer}) => {
-  const renderOffers = getNearestOffers(offers, offer).map((item) => <DetailNearOffer offer={item} key={item.id}/>);
+const DetailNearOfferList = ({offer}) => {
+  const renderOffers = offer.map((item) => <DetailNearOffer offer={item} key={item.id}/>);
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -17,8 +16,7 @@ const DetailNearOfferList = ({offers, offer}) => {
 };
 
 DetailNearOfferList.propTypes = {
-  offers: PropTypes.arrayOf(OfferProp).isRequired,
-  offer: OfferProp
+  offer: PropTypes.arrayOf(OfferProp.isRequired).isRequired
 };
 
 export default DetailNearOfferList;

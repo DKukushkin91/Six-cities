@@ -25,7 +25,7 @@ const DetailOfferHost = ({offer}) => {
 };
 
 DetailOfferHost.propTypes = {
-  offer: OfferProp,
+  offer: OfferProp.isRequired
 };
 
 export default DetailOfferHost;

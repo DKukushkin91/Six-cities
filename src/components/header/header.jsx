@@ -56,8 +56,9 @@ Header.propTypes = {
   userValue: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({authorizationStatus}) => ({
+const mapStateToProps = ({authorizationStatus, userValue}) => ({
   authorizationStatus,
+  userValue
 });
 
 const mapDispatchToProps = (dispatch) => ({

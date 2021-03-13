@@ -37,4 +37,4 @@ export default PropTypes.exact({
   rating: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-}).isRequired;
+});

@@ -7,11 +7,19 @@ const initialState = {
   currentLocation: DEFAULT_LOCATION,
   offers: [],
   currentOffers: [],
+  nearbyOffers: [],
+  comments: [],
+  offerDetails: null,
   currentOption: CURRENT_SORTING,
   activeCardId: null,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   isDataLoaded: false,
   userValue: ``,
+  onOfferOpen: false,
+  onSendComments: false,
+  isLoaded: false,
+  id: null,
+  favorite: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,9 +47,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
-        currentOffers: getSorting(action.payload, state.currentCity, action.currentOption),
+        currentOffers: getSorting(action.payload, state.currentCity, state.currentOption),
         currentLocation: getCityLocation(action.payload, state.currentCity),
         isDataLoaded: true,
+      };
+    case ActionType.LOAD_DETAILS:
+      return {
+        ...state,
+        offerDetails: action.payload,
+        isLoaded: true,
+      };
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
@@ -52,6 +71,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userValue: action.payload,
+      };
+    case ActionType.LOAD_NEARBY:
+      return {
+        ...state,
+        nearbyOffers: action.payload,
+      };
+    case ActionType.ADDED_COMMENT:
+      return {
+        ...state,
+        comments: action.payload,
+        onSendComments: true,
+      };
+    case ActionType.CHANGE_STATUS:
+      return {
+        ...state,
+        favorite: action.payload,
       };
   }
   return state;

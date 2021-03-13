@@ -5,7 +5,13 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   LOAD_OFFERS: `data/loadOffers`,
   USER_VALUE: `user/userValue`,
-  REDIRECT_TO_ROUTE: `main/redirectToRoute`
+  REDIRECT_TO_ROUTE: `main/redirectToRoute`,
+  LOAD_NEARBY: `nearby/loadNearby`,
+  LOAD_COMMENTS: `comments/loadComments`,
+  ADDED_COMMENT: `comment/addedComment`,
+  OPEN_PROPERTY: `property/openProperty`,
+  LOAD_DETAILS: `offer/loadDetails`,
+  CHANGE_STATUS: `favorite/changeStatus`
 };
 
 export const ActionCreator = {
@@ -25,6 +31,14 @@ export const ActionCreator = {
     type: ActionType.LOAD_OFFERS,
     payload: offers
   }),
+  loadDetailOffer: (offer) => ({
+    type: ActionType.LOAD_DETAILS,
+    payload: offer
+  }),
+  loadComments: (comments) => ({
+    type: ActionType.LOAD_COMMENTS,
+    payload: comments
+  }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
@@ -36,6 +50,18 @@ export const ActionCreator = {
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
+  }),
+  loadNearby: (nearby) => ({
+    type: ActionType.LOAD_NEARBY,
+    payload: nearby
+  }),
+  addedComment: (comment) => ({
+    type: ActionType.ADDED_COMMENT,
+    payload: comment
+  }),
+  changeStatus: (favorite) => ({
+    type: ActionType.CHANGE_STATUS,
+    payload: favorite
   })
 };
 

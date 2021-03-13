@@ -29,12 +29,12 @@ const FavoritesList = ({offers}) => {
   );
 };
 
-const mapStateToProps = ({currentOffers}) => ({
-  offers: currentOffers,
+const mapStateToProps = ({offers}) => ({
+  offers
 });
 
 FavoritesList.propTypes = {
-  offers: PropTypes.arrayOf(OfferProp).isRequired
+  offers: PropTypes.arrayOf(OfferProp.isRequired).isRequired
 };
 
 export {FavoritesList};

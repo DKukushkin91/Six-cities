@@ -3,7 +3,7 @@ import OfferProp from '../offer/offer.prop';
 import PropTypes from 'prop-types';
 import OfferWrap from '../offer-wrap/offer-wrap';
 import {connect} from 'react-redux';
-import {ActionCreator} from "../../store/action";
+import {ActionCreator} from '../../store/action';
 
 const OffersList = ({offers, onHoverOffer, activeCardId}) => {
   const changeOffer = (evt, id) => {

@@ -27,6 +27,26 @@ export const offerAdapter = (offer) => {
   };
 };
 
-export const adaptOffers = (offers) => (
-  offers.map((offer) => offerAdapter(offer))
-);
+export const adaptOffers = (offers) => offers.map(offerAdapter);
+
+export const commentAdapter = (comment) => {
+  const {
+    user: {
+      avatar_url: avatarUrl,
+      is_pro: isPro,
+      ...restUser
+    },
+    ...restComment
+  } = comment;
+
+  return {
+    user: {
+      isPro,
+      avatarUrl,
+      ...restUser
+    },
+    ...restComment
+  };
+};
+
+export const adaptComments = (comments) => comments.map(commentAdapter);
