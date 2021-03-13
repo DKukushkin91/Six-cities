@@ -8,7 +8,6 @@ import {favoriteStatus} from "../../store/api-actions";
 
 const Offer = ({offers, onChangeStatus}) => {
   const {price, title, type, isFavorite, rating, id} = offers;
-  const onFavorite = isFavorite ? `--active` : ``;
   const handleClick = (evt) => {
     evt.preventDefault();
     onChangeStatus({
@@ -16,6 +15,7 @@ const Offer = ({offers, onChangeStatus}) => {
       favorite: isFavorite ? 0 : 1,
     });
   };
+  const onFavorite = isFavorite ? `--active` : ``;
 
   return (
     <div className="place-card__info">
