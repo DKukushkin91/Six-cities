@@ -48,7 +48,7 @@ const Map = ({offers, currentLocation, activeCardId, isLoaded}) => {
   }, [currentLocation, activeCardId, offers, isLoaded]);
 
   return (
-    <div id="map" style={{height: `100%`}} ref={mapRef}></div>
+    <div id="map" style={{height: `100%`}}></div>
   );
 };
 

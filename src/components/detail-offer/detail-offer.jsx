@@ -11,34 +11,23 @@ import ReviewProp from '../reviews/review.prop';
 import OfferProp from '../offer/offer.prop';
 import currentLocationProp from '../map/current-location.prop';
 import {connect} from 'react-redux';
+import PremiumMark from '../premium-mark/premium-mark';
 
 const DetailOffer = ({offerDetails, comments, currentLocation, nearbyOffers}) => {
-  const {id, title, rating, type, bedrooms, maxAdults, price, isPremium, images, goods} = offerDetails;
-  const renderOfferPropertyReviews = (<DetailOfferReview offerId={id} comments={comments}/>);
-  const renderOfferPropertyPlaceList = (<DetailNearOfferList offer={nearbyOffers}/>);
-  const renderMap = (<Map offers={nearbyOffers} currentLocation={currentLocation}/>);
-  const renderGoods = (<DetailOfferGoods goods={goods}/>);
-  const renderGallery = (<DetailOfferGallery images={images}/>);
-  const renderHost = (<DetailOfferHost offer={offerDetails}/>);
+  const {id, title, rating, type, bedrooms, maxAdults, price, images, goods, isFavorite} = offerDetails;
+
   return (
     <>
       <section className="property">
-        <div className="property__gallery-container container">
-          <div className="property__gallery">
-            {renderGallery}
-          </div>
-        </div>
+        {<DetailOfferGallery images={images}/>}
         <div className="property__container container">
           <div className="property__wrapper">
-            {isPremium ?
-              <div className="property__mark">
-                <span>Premium</span>
-              </div> : ``}
+            <PremiumMark offers={offerDetails}/>
             <div className="property__name-wrapper">
               <h1 className="property__name">
                 {title}
               </h1>
-              <button className="property__bookmark-button button" type="button">
+              <button className={`property__bookmark-button${isFavorite ? `--active` : ``} button`} type="button">
                 <svg className="property__bookmark-icon" width={31} height={33}>
                   <use xlinkHref="#icon-bookmark" />
                 </svg>
@@ -68,18 +57,18 @@ const DetailOffer = ({offerDetails, comments, currentLocation, nearbyOffers}) =>
               <span className="property__price-text">&nbsp;night</span>
             </div>
             <div className="property__inside">
-              {renderGoods}
+              {<DetailOfferGoods goods={goods}/>}
             </div>
-            {renderHost}
-            {renderOfferPropertyReviews}
+            {<DetailOfferHost offer={offerDetails}/>}
+            {<DetailOfferReview offerId={id} comments={comments}/>}
           </div>
         </div>
         <section className="property__map map">
-          {renderMap}
+          {<Map offers={nearbyOffers} currentLocation={currentLocation}/>}
         </section>
       </section>
       <div className="container">
-        {renderOfferPropertyPlaceList}
+        {<DetailNearOfferList offer={nearbyOffers}/>}
       </div>
     </>
   );

@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import ReviewProp from '../reviews/review.prop';
 
 const ReviewList = ({comments}) => {
-  const renderReviews = comments.map((item) => <Review comments={item} key={item.id}/>);
+
   return (
     <ul className="reviews__list">
-      {renderReviews}
+      {comments.map((item) => <Review comments={item} key={item.id}/>)}
     </ul>
   );
 };

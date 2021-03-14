@@ -6,12 +6,13 @@ export const ActionType = {
   LOAD_OFFERS: `data/loadOffers`,
   USER_VALUE: `user/userValue`,
   REDIRECT_TO_ROUTE: `main/redirectToRoute`,
-  LOAD_NEARBY: `nearby/loadNearby`,
-  LOAD_COMMENTS: `comments/loadComments`,
-  ADDED_COMMENT: `comment/addedComment`,
-  OPEN_PROPERTY: `property/openProperty`,
-  LOAD_DETAILS: `offer/loadDetails`,
-  CHANGE_STATUS: `favorite/changeStatus`
+  LOAD_NEARBY: `data/loadNearby`,
+  LOAD_COMMENTS: `data/loadComments`,
+  ADDED_COMMENT: `offerDetails/addedComment`,
+  OPEN_PROPERTY: `offerDetails/openProperty`,
+  LOAD_DETAILS: `data/loadDetails`,
+  CHANGE_STATUS: `offer/changeStatus`,
+  LOAD_FAVORITES: `data/loadFavorites`
 };
 
 export const ActionCreator = {
@@ -62,6 +63,10 @@ export const ActionCreator = {
   changeStatus: (favorite) => ({
     type: ActionType.CHANGE_STATUS,
     payload: favorite
+  }),
+  loadFavorites: (favorites) => ({
+    type: ActionType.LOAD_FAVORITES,
+    payload: favorites
   })
 };
 

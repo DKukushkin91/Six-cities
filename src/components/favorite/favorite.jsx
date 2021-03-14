@@ -1,17 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Paths} from '../../constants';
 import OfferProp from "../offer/offer.prop";
-import {getRatingPercent} from "../../util";
+import {getRatingPercent, getUpperCase} from "../../util";
+import FavoriteButton from "../favorite-button/favorite-button";
 
 const Favorite = ({offers}) => {
-  const {previewImage, price, title, type, rating, isFavorite} = offers;
-  const onFavorite = isFavorite ? `--active` : ``;
-  return (
+  const {previewImage, price, title, type, rating, id} = offers;
 
+  return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={Paths.OFFER}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width={150} height={110} alt="Place image" />
         </Link>
       </div>
@@ -21,12 +20,7 @@ const Favorite = ({offers}) => {
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button place-card__bookmark-button${onFavorite} button`} type="button">
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <FavoriteButton offers={offers}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -35,16 +29,16 @@ const Favorite = ({offers}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={Paths.OFFER}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{getUpperCase(type)}</p>
       </div>
     </article>
   );
 };
 
 Favorite.propTypes = {
-  offers: OfferProp
+  offers: OfferProp.isRequired
 };
 
 export default Favorite;

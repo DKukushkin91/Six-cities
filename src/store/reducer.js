@@ -19,7 +19,9 @@ const initialState = {
   onSendComments: false,
   isLoaded: false,
   id: null,
-  favorite: 0
+  favoriteStatus: 0,
+  favorites: [],
+  isFavoritesLoad: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -86,7 +88,13 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_STATUS:
       return {
         ...state,
-        favorite: action.payload,
+        favoriteStatus: action.payload,
+      };
+    case ActionType.LOAD_FAVORITES:
+      return {
+        ...state,
+        favorites: action.payload,
+        isFavoritesLoad: true
       };
   }
   return state;

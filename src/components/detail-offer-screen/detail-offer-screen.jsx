@@ -10,7 +10,6 @@ import LoadingScreen from '../loading-screen/loading-screen';
 
 const DetailOfferScreen = ({offerDetails, match, onLoadDetails, isLoaded}) => {
   const offerId = Number(match.params.id);
-  const renderHeader = (<Header/>);
 
   useEffect(() => {
     onLoadDetails(offerId);
@@ -37,7 +36,7 @@ const DetailOfferScreen = ({offerDetails, match, onLoadDetails, isLoaded}) => {
         </svg>
       </div>
       <div className="page">
-        {renderHeader}
+        {<Header/>}
         <main className="page__main page__main--property">
           <DetailOffer offerDetails={offerDetails}/>
         </main>

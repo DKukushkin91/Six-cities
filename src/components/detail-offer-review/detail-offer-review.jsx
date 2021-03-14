@@ -6,11 +6,11 @@ import ReviewsProp from '../reviews/review.prop';
 import {connect} from 'react-redux';
 
 const DetailOfferReview = ({comments, offerId, authorizationStatus}) => {
-  const renderReviewsList = (<ReviewList comments={comments}/>);
+
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{comments.length}</span></h2>
-      {renderReviewsList}
+      {<ReviewList comments={comments}/>}
       {authorizationStatus && <ReviewsForm offerId={offerId}/>}
     </section>
   );

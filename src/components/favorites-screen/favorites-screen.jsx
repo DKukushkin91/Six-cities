@@ -1,25 +1,43 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import FavoritesList from '../favorites-list/favorites-list';
 import {Paths} from '../../constants';
 import Header from '../header/header';
+import LoadingScreen from "../loading-screen/loading-screen";
+import PropTypes from "prop-types";
+import OfferProp from "../offer/offer.prop";
+import {favoriteList} from "../../store/api-actions";
+import {connect} from "react-redux";
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
-const FavoritesScreen = () => {
-  const renderFavoritesList = (<FavoritesList/>);
-  const renderHeader = (<Header/>);
+const FavoritesScreen = ({favorites, onLoadFavorites, isFavoritesLoad}) => {
+
+  useEffect(() => {
+    if (!isFavoritesLoad) {
+      onLoadFavorites({favorites});
+    }
+  }, [isFavoritesLoad]);
+
+  if (!isFavoritesLoad) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <>
-      <div style={{display: `none`}}>
-        <svg xmlns="http://www.w3.org/2000/svg"><symbol id="icon-arrow-select" viewBox="0 0 7 4"><path fillRule="evenodd" clipRule="evenodd" d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z" /></symbol><symbol id="icon-bookmark" viewBox="0 0 17 18"><path d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z" /></symbol><symbol id="icon-star" viewBox="0 0 13 12"><path fillRule="evenodd" clipRule="evenodd" d="M6.5 9.644L10.517 12 9.451 7.56 13 4.573l-4.674-.386L6.5 0 4.673 4.187 0 4.573 3.549 7.56 2.483 12 6.5 9.644z" /></symbol></svg>
-      </div>
       <div className="page">
-        {renderHeader}
-        <main className="page__main page__main--favorites">
+        {<Header/>}
+        <main className={`page__main page__main--favorites${favorites.length > 0 ? `` : `-empty`}`}>
           <div className="page__favorites-container container">
-            <section className="favorites">
-              <h1 className="favorites__title">Saved listing</h1>
-              {renderFavoritesList}
-            </section>
+            {favorites.length > 0 ?
+              <section className="favorites">
+                <h1 className="favorites__title">Saved listing</h1>
+                {<FavoritesList favorites={favorites}/>}
+              </section>
+              :
+              <FavoritesEmpty/>
+            }
           </div>
         </main>
         <footer className="footer container">
@@ -28,7 +46,26 @@ const FavoritesScreen = () => {
           </Link>
         </footer>
       </div>
-    </>);
+    </>
+  );
 };
 
-export default FavoritesScreen;
+FavoritesScreen.propTypes = {
+  favorites: PropTypes.arrayOf(OfferProp.isRequired).isRequired,
+  onLoadFavorites: PropTypes.func.isRequired,
+  isFavoritesLoad: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = ({favorites, isFavoritesLoad}) => ({
+  favorites,
+  isFavoritesLoad
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadFavorites(data) {
+    dispatch(favoriteList(data));
+  }
+});
+
+export {FavoritesScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesScreen);

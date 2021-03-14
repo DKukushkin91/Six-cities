@@ -12,11 +12,15 @@ const OffersList = ({offers, onHoverOffer, activeCardId}) => {
       onHoverOffer(id);
     }
   };
-  const renderOffers = offers.map((item) => <OfferWrap onMouseOver={((evt)=> changeOffer(evt, item.id))} offers={item} key={item.id}/>);
+
   return (
     <>
       <div className="cities__places-list places__list tabs__content">
-        {renderOffers}
+        {
+          offers.map((item) =>
+            <OfferWrap onMouseOver={((evt)=>
+              changeOffer(evt, item.id))} offers={item} key={item.id}/>
+          )}
       </div>
     </>
   );
