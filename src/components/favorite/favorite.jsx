@@ -7,7 +7,7 @@ import {ComponentName, FavoriteButtonSize} from '../../constants';
 import Rating from '../rating/rating';
 
 const Favorite = ({offers}) => {
-  const {previewImage, price, title, type, id} = offers;
+  const {previewImage, price, title, type, id, rating} = offers;
 
   return (
     <article className="favorites__card place-card">
@@ -29,7 +29,7 @@ const Favorite = ({offers}) => {
           />
         </div>
         <Rating
-          offers={offers}
+          rating={rating}
           componentName={ComponentName.PLACE_CARD}
         />
         <h2 className="place-card__name">

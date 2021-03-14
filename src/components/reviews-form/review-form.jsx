@@ -64,7 +64,6 @@ const ReviewForm = ({offerId}) => {
 };
 
 ReviewForm.propTypes = {
-  onAddComment: PropTypes.func.isRequired,
   offerId: PropTypes.number.isRequired,
 };
 

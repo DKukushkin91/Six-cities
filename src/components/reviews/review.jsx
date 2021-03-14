@@ -5,7 +5,7 @@ import Rating from '../rating/rating';
 import {ComponentName} from '../../constants';
 
 const Review = ({comments}) => {
-  const {comment, date, user: {avatarUrl, name}} = comments;
+  const {comment, date, user: {avatarUrl, name}, rating} = comments;
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -16,7 +16,7 @@ const Review = ({comments}) => {
       </div>
       <div className="reviews__info">
         <Rating
-          offers={comments}
+          rating={rating}
           componentName={ComponentName.REVIEWS}
         />
         <p className="reviews__text">{comment}</p>

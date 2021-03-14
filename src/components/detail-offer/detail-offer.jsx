@@ -15,7 +15,7 @@ import Rating from '../rating/rating';
 
 const DetailOffer = ({offerDetails}) => {
   const {comments, currentLocation, nearbyOffers} = useSelector((state) => state.DATA);
-  const {id, title, price, images, goods} = offerDetails;
+  const {id, title, price, images, goods, rating} = offerDetails;
 
   return (
     <>
@@ -35,7 +35,7 @@ const DetailOffer = ({offerDetails}) => {
               />
             </div>
             <Rating
-              offers={offerDetails}
+              rating={rating}
               componentName={ComponentName.PROPERTY}
             />
             <DetailFeatures offers={offerDetails}/>

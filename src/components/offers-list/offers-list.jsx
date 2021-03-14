@@ -8,6 +8,7 @@ import {hoverOffer} from '../../store/action';
 const OffersList = ({offers}) => {
   const {activeCardId} = useSelector((state) => state.PROCESS);
   const dispatch = useDispatch();
+
   const changeOffer = (evt, id) => {
     evt.preventDefault();
     if (id !== activeCardId) {

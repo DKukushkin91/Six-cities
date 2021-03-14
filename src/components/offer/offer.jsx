@@ -7,7 +7,7 @@ import {ComponentName, FavoriteButtonSize} from '../../constants';
 import Rating from "../rating/rating";
 
 const Offer = ({offers}) => {
-  const {price, title, type, id} = offers;
+  const {price, title, type, id, rating} = offers;
 
   return (
     <div className="place-card__info">
@@ -23,7 +23,7 @@ const Offer = ({offers}) => {
         />
       </div>
       <Rating
-        offers={offers}
+        rating={rating}
         componentName={ComponentName.PLACE_CARD}
       />
       <h2 className="place-card__name">

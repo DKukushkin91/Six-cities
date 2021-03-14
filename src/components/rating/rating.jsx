@@ -1,11 +1,10 @@
 import React from 'react';
 import {getRatingPercent} from "../../util";
 import {componentNameProp} from "../component-name/component-name";
-import offerProp from '../offer/offer.prop';
+import PropTypes from 'prop-types';
 import {ComponentName} from '../../constants';
 
-const Rating = ({offers, componentName}) => {
-  const {rating} = offers;
+const Rating = ({rating, componentName}) => {
   return (
     <div className={`${componentName}__rating rating`}>
       <div className={`${componentName}__stars rating__stars`}>
@@ -22,7 +21,7 @@ const Rating = ({offers, componentName}) => {
 };
 
 Rating.propTypes = {
-  offers: offerProp.isRequired,
+  rating: PropTypes.number.isRequired,
   componentName: componentNameProp
 };
 

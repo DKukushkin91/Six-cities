@@ -6,10 +6,10 @@ import "leaflet/dist/leaflet.css";
 import {useSelector} from "react-redux";
 
 const Map = ({offers}) => {
-  const {currentLocation, isLoaded} = useSelector((state) => state.DATA);
+  const {currentLocation} = useSelector((state) => state.DATA);
   const {activeCardId} = useSelector((state) => state.PROCESS);
-
   const mapRef = useRef();
+
   const getItems = (items) => {
     items.forEach((item) => {
       const {location, title} = item;
@@ -29,6 +29,7 @@ const Map = ({offers}) => {
         .bindPopup(title);
     });
   };
+
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
       center: {
@@ -47,7 +48,7 @@ const Map = ({offers}) => {
     return () => {
       mapRef.current.remove();
     };
-  }, [currentLocation, activeCardId, offers, isLoaded]);
+  }, [currentLocation, activeCardId, offers]);
 
   return (
     <div id="map" style={{height: `100%`}}></div>

@@ -21,3 +21,7 @@ export const getCityLocation = (offers, city) => {
 export const getRatingPercent = (rating) => Number(rating / Rating.MAX) * Rating.PERCENT;
 
 export const getUpperCase = (str) => !str ? str : `${str[0].toUpperCase()}${str.slice(1)}`;
+
+export const sortReviews = (a, b) => {
+  return new Date(b.date) - new Date(a.date);
+};
