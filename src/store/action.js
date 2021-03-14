@@ -1,3 +1,5 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
   CHANGE_CURRENT_CITY: `city/currentCity`,
   CHANGE_OPTION: `option/changeOption`,
@@ -15,58 +17,82 @@ export const ActionType = {
   LOAD_FAVORITES: `data/loadFavorites`
 };
 
-export const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CURRENT_CITY,
+export const changeCity = createAction(ActionType.CHANGE_CURRENT_CITY, (city) => {
+  return {
     payload: city
-  }),
-  changeOption: (option) => ({
-    type: ActionType.CHANGE_OPTION,
-    payload: option
-  }),
-  hoverOffer: (id) => ({
-    type: ActionType.HOVER_OFFER,
+  };
+});
+
+export const changeOption = createAction(ActionType.CHANGE_OPTION, (options) => {
+  return {
+    payload: options
+  };
+});
+
+export const hoverOffer = createAction(ActionType.HOVER_OFFER, (id) => {
+  return {
     payload: id
-  }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
+  };
+});
+
+export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => {
+  return {
     payload: offers
-  }),
-  loadDetailOffer: (offer) => ({
-    type: ActionType.LOAD_DETAILS,
+  };
+});
+
+export const loadDetailOffer = createAction(ActionType.LOAD_DETAILS, (offer) => {
+  return {
     payload: offer
-  }),
-  loadComments: (comments) => ({
-    type: ActionType.LOAD_COMMENTS,
+  };
+});
+
+export const loadComments = createAction(ActionType.LOAD_COMMENTS, (comments) => {
+  return {
     payload: comments
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
-  changeValue: (value) => ({
-    type: ActionType.USER_VALUE,
-    payload: value,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-  loadNearby: (nearby) => ({
-    type: ActionType.LOAD_NEARBY,
+  };
+});
+
+export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => {
+  return {
+    payload: status
+  };
+});
+
+export const changeValue = createAction(ActionType.USER_VALUE, (value) => {
+  return {
+    payload: value
+  };
+});
+
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => {
+  return {
+    payload: url
+  };
+});
+
+export const loadNearby = createAction(ActionType.LOAD_NEARBY, (nearby) => {
+  return {
     payload: nearby
-  }),
-  addedComment: (comment) => ({
-    type: ActionType.ADDED_COMMENT,
+  };
+});
+
+export const addedComment = createAction(ActionType.ADDED_COMMENT, (comment) => {
+  return {
     payload: comment
-  }),
-  changeStatus: (favorite) => ({
-    type: ActionType.CHANGE_STATUS,
+  };
+});
+
+export const changeStatus = createAction(ActionType.CHANGE_STATUS, (favorite) => {
+  return {
     payload: favorite
-  }),
-  loadFavorites: (favorites) => ({
-    type: ActionType.LOAD_FAVORITES,
+  };
+});
+
+export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (favorites) => {
+  return {
     payload: favorites
-  })
-};
+  };
+});
+
 

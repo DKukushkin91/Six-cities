@@ -4,13 +4,14 @@ import OfferProp from '../offer/offer.prop';
 import Offer from '../offer/offer';
 import PropTypes from 'prop-types';
 import PremiumMark from '../premium-mark/premium-mark';
+import {ComponentName} from '../../constants';
 
-const OfferWrap = ({offers, onMouseOver}) => {
+const OfferCard = ({offers, onMouseOver}) => {
   const {previewImage, id} = offers;
 
   return (
     <article onMouseOver={onMouseOver} className="cities__place-card place-card">
-      <PremiumMark offers={offers}/>
+      <PremiumMark offers={offers} componentName={ComponentName.PLACE_CARD}/>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={`${previewImage}`} width={260} height={200} alt="Place image" />
@@ -21,9 +22,9 @@ const OfferWrap = ({offers, onMouseOver}) => {
   );
 };
 
-OfferWrap.propTypes = {
+OfferCard.propTypes = {
   offers: OfferProp.isRequired,
   onMouseOver: PropTypes.func.isRequired
 };
 
-export default OfferWrap;
+export default OfferCard;

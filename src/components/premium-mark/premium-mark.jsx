@@ -1,16 +1,14 @@
 import React from 'react';
 import OfferProp from '../offer/offer.prop';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import {componentNameProp} from "../component-name/component-name";
 
-
-const PremiumMark = ({offers, isLoaded}) => {
+const PremiumMark = ({offers, componentName}) => {
   const {isPremium} = offers;
 
   return (
     <>
       {isPremium ?
-        <div className={`${isLoaded ? `property` : `place-card`}__mark`}>
+        <div className={`${componentName}__mark`}>
           <span>Premium</span>
         </div>
         :
@@ -21,12 +19,7 @@ const PremiumMark = ({offers, isLoaded}) => {
 
 PremiumMark.propTypes = {
   offers: OfferProp.isRequired,
-  isLoaded: PropTypes.bool.isRequired,
+  componentName: componentNameProp,
 };
 
-const mapStateToProps = ({isLoaded}) => ({
-  isLoaded
-});
-
-export {PremiumMark};
-export default connect(mapStateToProps, ``)(PremiumMark);
+export default PremiumMark;

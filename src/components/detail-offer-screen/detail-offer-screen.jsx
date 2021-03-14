@@ -1,18 +1,21 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
-import OfferProp from '../offer/offer.prop';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Header from '../header/header';
 import {fetchCommentList, fetchNearbyList, fetchDetailOffer} from '../../store/api-actions';
-import DetailOffer from "../detail-offer/detail-offer";
+import DetailOffer from '../detail-offer/detail-offer';
 import LoadingScreen from '../loading-screen/loading-screen';
 
-const DetailOfferScreen = ({offerDetails, match, onLoadDetails, isLoaded}) => {
+const DetailOfferScreen = ({match}) => {
+  const {offerDetails, isLoaded} = useSelector((state) => state.DATA);
   const offerId = Number(match.params.id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    onLoadDetails(offerId);
+    dispatch(fetchCommentList(offerId));
+    dispatch(fetchNearbyList(offerId));
+    dispatch(fetchDetailOffer(offerId));
   }, [offerId]);
 
   if (!isLoaded) {
@@ -46,29 +49,11 @@ const DetailOfferScreen = ({offerDetails, match, onLoadDetails, isLoaded}) => {
 };
 
 DetailOfferScreen.propTypes = {
-  offerDetails: OfferProp,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
-  isLoaded: PropTypes.bool.isRequired,
-  onLoadDetails: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({offerDetails, isLoaded, offerId}) => ({
-  offerDetails,
-  offerId,
-  isLoaded,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadDetails(offerId) {
-    dispatch(fetchDetailOffer(offerId));
-    dispatch(fetchCommentList(offerId));
-    dispatch(fetchNearbyList(offerId));
-  }
-});
-
-export {DetailOfferScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DetailOfferScreen));
+export default withRouter(DetailOfferScreen);

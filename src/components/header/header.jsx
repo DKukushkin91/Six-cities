@@ -1,8 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../store/api-actions';
 
 const styles = {
@@ -12,7 +11,9 @@ const styles = {
   cursor: `pointer`
 };
 
-const Header = ({authorizationStatus, onLogout, userValue}) => {
+const Header = () => {
+  const {authorizationStatus, userValue} = useSelector((state) => state.USER);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -42,7 +43,11 @@ const Header = ({authorizationStatus, onLogout, userValue}) => {
                 </li>
                 {authorizationStatus ?
                   <li className="header__nav-item user">
-                    <button className="header__nav-link header__nav-link--profile" style={styles} onClick={() => onLogout()}>
+                    <button
+                      className="header__nav-link header__nav-link--profile"
+                      style={styles}
+                      onClick={() => dispatch(logout())}
+                    >
                       <span className="header__login">Logout</span>
                     </button>
                   </li>
@@ -56,22 +61,4 @@ const Header = ({authorizationStatus, onLogout, userValue}) => {
   );
 };
 
-Header.propTypes = {
-  authorizationStatus: PropTypes.bool.isRequired,
-  onLogout: PropTypes.func.isRequired,
-  userValue: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = ({authorizationStatus, userValue}) => ({
-  authorizationStatus,
-  userValue,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLogout(data) {
-    dispatch(logout(data));
-  },
-});
-
-export {Header};
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

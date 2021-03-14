@@ -1,32 +1,35 @@
 import React, {useEffect, useRef} from 'react';
 import OfferProp from "../offer/offer.prop";
-import PropTypes from "prop-types";
 import {favoriteStatus} from "../../store/api-actions";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
+import {componentNameProp} from "../component-name/component-name";
+import {favoriteNameProp} from './favorite-button.prop';
 
-const FavoriteButton = ({offers, onChangeStatus}) => {
+const FavoriteButton = ({offers, componentName, buttonSize}) => {
   const {isFavorite, id} = offers;
   const favoriteRef = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     favoriteRef.current.className = isFavorite
-      ? `place-card__bookmark-button--active button`
-      : `place-card__bookmark-button button`;
+      ? `${componentName}__bookmark-button--active button`
+      : `${componentName}__bookmark-button button`;
 
   }, [isFavorite]);
 
   const handleClick = (evt) => {
     evt.preventDefault();
-    onChangeStatus({
+    dispatch(favoriteStatus({
       id,
       favorite: Number(!isFavorite)
-    });
+    })
+    );
   };
 
   return (
     <>
       <button ref={favoriteRef} onClick={handleClick} type="button">
-        <svg className="place-card__bookmark-icon" width={18} height={19}>
+        <svg className={`${componentName}__bookmark-icon`} width={buttonSize.WIDTH} height={buttonSize.HEIGHT}>
           <use xlinkHref="#icon-bookmark" />
         </svg>
         <span className="visually-hidden">To bookmarks</span>
@@ -37,14 +40,8 @@ const FavoriteButton = ({offers, onChangeStatus}) => {
 
 FavoriteButton.propTypes = {
   offers: OfferProp.isRequired,
-  onChangeStatus: PropTypes.func.isRequired,
+  componentName: componentNameProp,
+  buttonSize: favoriteNameProp
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onChangeStatus(data) {
-    dispatch(favoriteStatus(data));
-  }
-});
-
-export {FavoriteButton};
-export default connect(``, mapDispatchToProps)(FavoriteButton);
+export default FavoriteButton;

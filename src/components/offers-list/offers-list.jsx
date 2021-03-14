@@ -1,15 +1,17 @@
 import React from 'react';
 import OfferProp from '../offer/offer.prop';
 import PropTypes from 'prop-types';
-import OfferWrap from '../offer-wrap/offer-wrap';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import OfferCard from '../offer-card/offer-card';
+import {useDispatch, useSelector} from 'react-redux';
+import {hoverOffer} from '../../store/action';
 
-const OffersList = ({offers, onHoverOffer, activeCardId}) => {
+const OffersList = ({offers}) => {
+  const {activeCardId} = useSelector((state) => state.PROCESS);
+  const dispatch = useDispatch();
   const changeOffer = (evt, id) => {
     evt.preventDefault();
     if (id !== activeCardId) {
-      onHoverOffer(id);
+      dispatch(hoverOffer(id));
     }
   };
 
@@ -18,7 +20,7 @@ const OffersList = ({offers, onHoverOffer, activeCardId}) => {
       <div className="cities__places-list places__list tabs__content">
         {
           offers.map((item) =>
-            <OfferWrap onMouseOver={((evt)=>
+            <OfferCard onMouseOver={((evt)=>
               changeOffer(evt, item.id))} offers={item} key={item.id}/>
           )}
       </div>
@@ -27,18 +29,7 @@ const OffersList = ({offers, onHoverOffer, activeCardId}) => {
 };
 
 OffersList.propTypes = {
-  onHoverOffer: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(OfferProp).isRequired,
-  activeCardId: PropTypes.number
 };
 
-const mapStateToProps = ({activeCardId}) => ({activeCardId});
-
-const mapDispatchToProps = (dispatch) => ({
-  onHoverOffer(id) {
-    dispatch(ActionCreator.hoverOffer(id));
-  }
-});
-
-export {OffersList};
-export default connect(mapStateToProps, mapDispatchToProps)(OffersList);
+export default OffersList;

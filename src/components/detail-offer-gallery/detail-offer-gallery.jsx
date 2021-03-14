@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import {MAX_GALLERY_IMG} from "../../constants";
+import {MAX_GALLERY_IMG} from '../../constants';
 
 const DetailOfferGallery = ({images}) => {
   return (

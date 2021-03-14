@@ -1,12 +1,14 @@
 import React, {useEffect, useRef} from 'react';
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
-import CurrentLocationProp from './current-location.prop';
 import OfferProp from '../offer/offer.prop';
 import "leaflet/dist/leaflet.css";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 
-const Map = ({offers, currentLocation, activeCardId, isLoaded}) => {
+const Map = ({offers}) => {
+  const {currentLocation, isLoaded} = useSelector((state) => state.DATA);
+  const {activeCardId} = useSelector((state) => state.PROCESS);
+
   const mapRef = useRef();
   const getItems = (items) => {
     items.forEach((item) => {
@@ -54,16 +56,6 @@ const Map = ({offers, currentLocation, activeCardId, isLoaded}) => {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferProp.isRequired).isRequired,
-  currentLocation: CurrentLocationProp,
-  activeCardId: PropTypes.number,
-  isLoaded: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({currentLocation, activeCardId, isLoaded}) => ({
-  currentLocation,
-  activeCardId,
-  isLoaded
-});
-
-export {Map};
-export default connect(mapStateToProps, ``)(Map);
+export default Map;

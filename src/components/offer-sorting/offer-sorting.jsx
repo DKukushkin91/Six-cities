@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {ActionCreator} from '../../store/action';
-import {connect} from 'react-redux';
+import {changeOption} from '../../store/action';
+import {useDispatch, useSelector} from 'react-redux';
 
-const OfferSorting = ({options, currentOption, onChangeOption}) => {
+const OfferSorting = ({options}) => {
+  const {currentOption} = useSelector((state) => state.DATA);
+  const dispatch = useDispatch();
   const [isOpenedSorting, setIsOpenedSorting] = useState(false);
+
   const changeSorting = (evt, option) => {
     evt.preventDefault();
     if (option !== currentOption) {
-      onChangeOption(option);
+      dispatch(changeOption(option));
     }
   };
   const active = (option) => option === currentOption ? `places__option--active` : ``;
@@ -35,17 +38,6 @@ const OfferSorting = ({options, currentOption, onChangeOption}) => {
 
 OfferSorting.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  onChangeOption: PropTypes.func.isRequired,
-  currentOption: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({currentOption}) => ({currentOption});
-
-const mapDispatchToProps = (dispatch) => ({
-  onChangeOption(option) {
-    dispatch(ActionCreator.changeOption(option));
-  }
-});
-
-export {OfferSorting};
-export default connect(mapStateToProps, mapDispatchToProps)(OfferSorting);
+export default OfferSorting;

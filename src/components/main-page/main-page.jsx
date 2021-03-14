@@ -1,21 +1,21 @@
 import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
 import OffersList from '../offers-list/offers-list';
 import {SORTING_LIST, CITIES_LIST} from '../../constants';
 import Header from '../header/header';
 import Map from '../map/map';
-import OfferProp from '../offer/offer.prop';
 import LocationsList from '../locations-list/locations-list';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import OfferSorting from '../offer-sorting/offer-sorting';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchOfferList} from '../../store/api-actions';
 
-const MainPage = ({offers, currentCity, isDataLoaded, onLoadData}) => {
+const MainPage = () => {
+  const {currentOffers, currentCity, isDataLoaded} = useSelector((state) => state.DATA);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!isDataLoaded) {
-      onLoadData();
+      dispatch(fetchOfferList());
     }
   }, [isDataLoaded]);
 
@@ -40,15 +40,15 @@ const MainPage = ({offers, currentCity, isDataLoaded, onLoadData}) => {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{offers.length} places to stay in {currentCity}</b>
+                <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
                 {<OfferSorting options={SORTING_LIST}/>}
                 <div className="cities__places-list places__list tabs__content">
-                  {<OffersList offers={offers}/>}
+                  {<OffersList offers={currentOffers}/>}
                 </div>
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  {<Map offers={offers}/>}
+                  {<Map offers={currentOffers}/>}
                 </section>
               </div>
             </div>
@@ -59,28 +59,4 @@ const MainPage = ({offers, currentCity, isDataLoaded, onLoadData}) => {
   );
 };
 
-MainPage.propTypes = {
-  offers: PropTypes.arrayOf(OfferProp.isRequired).isRequired,
-  currentCity: PropTypes.string.isRequired,
-  isDataLoaded: PropTypes.bool.isRequired,
-  onLoadData: PropTypes.func.isRequired,
-  userValue: PropTypes.string.isRequired,
-  authorizationStatus: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = ({currentOffers, currentCity, isDataLoaded, userValue, authorizationStatus}) => ({
-  offers: currentOffers,
-  currentCity,
-  isDataLoaded,
-  userValue,
-  authorizationStatus,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadData() {
-    dispatch(fetchOfferList());
-  },
-});
-
-export {MainPage};
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default MainPage;

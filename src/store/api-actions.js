@@ -1,61 +1,62 @@
-import {ActionCreator} from './action';
+import {loadOffers, loadDetailOffer, loadNearby, loadComments, requireAuthorization, changeValue,
+  redirectToRoute, loadFavorites, addedComment, changeStatus} from './action';
 import {AuthorizationStatus, Inquiry, Paths} from '../constants';
 import {adaptComments, adaptOffers, offerAdapter} from '../services/adapter';
 
 export const fetchOfferList = () => (dispatch, _getState, api) => (
   api.get(Inquiry.HOTELS)
-    .then(({data}) => dispatch(ActionCreator.loadOffers(adaptOffers(data))))
+    .then(({data}) => dispatch(loadOffers(adaptOffers(data))))
 );
 
 export const fetchDetailOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${Inquiry.HOTELS}/${id}`)
-    .then(({data}) => dispatch(ActionCreator.loadDetailOffer(offerAdapter(data))))
+    .then(({data}) => dispatch(loadDetailOffer(offerAdapter(data))))
 );
 
 export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
   api.get(`${Inquiry.HOTELS}/${id}${Inquiry.NEARBY}`)
-    .then(({data}) => dispatch(ActionCreator.loadNearby(adaptOffers(data))))
+    .then(({data}) => dispatch(loadNearby(adaptOffers(data))))
 );
 
 export const fetchCommentList = (id) => (dispatch, _getState, api) => (
   api.get(`${Inquiry.COMMENTS}/${id}`)
-    .then(({data}) => dispatch(ActionCreator.loadComments(adaptComments(data))))
+    .then(({data}) => dispatch(loadComments(adaptComments(data))))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(Inquiry.LOGIN)
     .then(({data}) => {
-      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(ActionCreator.changeValue(data.email));
+      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(changeValue(data.email));
     })
     .catch(() => {})
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.get(Inquiry.LOGOUT)
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)))
-    .then(() => dispatch(ActionCreator.redirectToRoute(Paths.MAIN)))
+    .then(() => dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)))
+    .then(() => dispatch(redirectToRoute(Paths.MAIN)))
 );
 
 export const favoriteList = () => (dispatch, _getState, api) => (
   api.get(Inquiry.FAVORITE)
-    .then(({data}) => dispatch(ActionCreator.loadFavorites(adaptOffers(data))))
+    .then(({data}) => dispatch(loadFavorites(adaptOffers(data))))
 );
 
 export const login = ({email, password}) => (dispatch, _getState, api) => (
   api.post(Inquiry.LOGIN, {email, password})
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(ActionCreator.redirectToRoute(Paths.MAIN)))
+    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(redirectToRoute(Paths.MAIN)))
 );
 
 export const commentsPost = (id, {comment, rating}) => (dispatch, _getState, api) => (
   api.post(`${Inquiry.COMMENTS}/${id}`, {comment, rating})
-    .then(({data}) => dispatch(ActionCreator.addedComment(adaptComments(data))))
+    .then(({data}) => dispatch(addedComment(adaptComments(data))))
 );
 
 export const favoriteStatus = ({id, favorite}) => (dispatch, _getState, api) => (
   api.post(`${Inquiry.FAVORITE}/${id}/${favorite}`)
     .then(({data}) => {
-      dispatch(ActionCreator.changeStatus(data));
+      dispatch(changeStatus(data));
     })
 );

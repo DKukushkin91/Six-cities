@@ -4,17 +4,17 @@ import FavoritesList from '../favorites-list/favorites-list';
 import {Paths} from '../../constants';
 import Header from '../header/header';
 import LoadingScreen from "../loading-screen/loading-screen";
-import PropTypes from "prop-types";
-import OfferProp from "../offer/offer.prop";
-import {favoriteList} from "../../store/api-actions";
-import {connect} from "react-redux";
+import {favoriteList} from '../../store/api-actions';
+import {useDispatch, useSelector} from 'react-redux';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
-const FavoritesScreen = ({favorites, onLoadFavorites, isFavoritesLoad}) => {
+const FavoritesScreen = () => {
+  const {favorites, isFavoritesLoad} = useSelector((state) => state.DATA);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!isFavoritesLoad) {
-      onLoadFavorites({favorites});
+      dispatch(favoriteList({favorites}));
     }
   }, [isFavoritesLoad]);
 
@@ -50,22 +50,4 @@ const FavoritesScreen = ({favorites, onLoadFavorites, isFavoritesLoad}) => {
   );
 };
 
-FavoritesScreen.propTypes = {
-  favorites: PropTypes.arrayOf(OfferProp.isRequired).isRequired,
-  onLoadFavorites: PropTypes.func.isRequired,
-  isFavoritesLoad: PropTypes.bool.isRequired
-};
-
-const mapStateToProps = ({favorites, isFavoritesLoad}) => ({
-  favorites,
-  isFavoritesLoad
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadFavorites(data) {
-    dispatch(favoriteList(data));
-  }
-});
-
-export {FavoritesScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(FavoritesScreen);
+export default FavoritesScreen;
