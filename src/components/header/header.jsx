@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
 import {useDispatch, useSelector} from 'react-redux';
@@ -61,4 +61,7 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header,
+    (prevProps, nextProps) =>
+      prevProps.userValue === nextProps.userValue);
+

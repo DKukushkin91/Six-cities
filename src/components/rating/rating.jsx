@@ -1,6 +1,6 @@
 import React from 'react';
 import {getRatingPercent} from "../../util";
-import {componentNameProp} from "../component-name/component-name";
+import {componentNameProp} from "../component-name/component-name.prop";
 import PropTypes from 'prop-types';
 import {ComponentName} from '../../constants';
 

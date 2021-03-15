@@ -1,6 +1,6 @@
 import React from 'react';
 import OfferProp from '../offer/offer.prop';
-import {componentNameProp} from "../component-name/component-name";
+import {componentNameProp} from "../component-name/component-name.prop";
 
 const PremiumMark = ({offers, componentName}) => {
   const {isPremium} = offers;

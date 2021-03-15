@@ -1,4 +1,4 @@
-import {Rating, Sorting} from './constants';
+import {Condition, Rating, Sorting} from './constants';
 
 export const getSorting = (offers, city, option) => {
   const defaultState = offers.filter((item) => item.city.name === city);
@@ -24,4 +24,25 @@ export const getUpperCase = (str) => !str ? str : `${str[0].toUpperCase()}${str.
 
 export const sortReviews = (a, b) => {
   return new Date(b.date) - new Date(a.date);
+};
+
+export const changeFavoriteOffer = (offers, changedOffer) => {
+  const index = offers.findIndex((item) => item.id === changedOffer.id);
+
+  return [
+    ...offers.slice(0, index),
+    changedOffer,
+    ...offers.slice(index + 1),
+  ];
+};
+
+export const isSubmitDisabled = (reviewData, fieldDisabled) => {
+  const {rating, review} = reviewData;
+
+  return !(
+    rating >= Condition.MIN_RATING &&
+    review.length > Condition.MIN_DESCRIPTION &&
+    review.length < Condition.MAX_DESCRIPTION &&
+    !fieldDisabled
+  );
 };

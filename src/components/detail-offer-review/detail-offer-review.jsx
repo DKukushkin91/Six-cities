@@ -16,7 +16,7 @@ const DetailOfferReview = ({comments, offerId}) => {
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{currentReviews.length}</span></h2>
       {<ReviewList comments={currentReviews}/>}
-      {authorizationStatus && <ReviewsForm offerId={offerId}/>}
+      {authorizationStatus && <ReviewsForm comments={comments} offerId={offerId}/>}
     </section>
   );
 };

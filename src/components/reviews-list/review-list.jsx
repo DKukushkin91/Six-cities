@@ -5,7 +5,6 @@ import ReviewProp from '../reviews/review.prop';
 
 const ReviewList = ({comments}) => {
 
-
   return (
     <ul className="reviews__list">
       {comments.map((item) => <Review comments={item} key={item.id}/>)}

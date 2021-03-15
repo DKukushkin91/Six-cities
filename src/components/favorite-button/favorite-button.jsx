@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import OfferProp from "../offer/offer.prop";
 import {favoriteStatus} from "../../store/api-actions";
 import {useDispatch} from "react-redux";
-import {componentNameProp} from "../component-name/component-name";
+import {componentNameProp} from "../component-name/component-name.prop";
 import {favoriteNameProp} from './favorite-button.prop';
 
 const FavoriteButton = ({offers, componentName, buttonSize}) => {
@@ -22,8 +22,7 @@ const FavoriteButton = ({offers, componentName, buttonSize}) => {
     dispatch(favoriteStatus({
       id,
       favorite: Number(!isFavorite)
-    })
-    );
+    }));
   };
 
   return (
