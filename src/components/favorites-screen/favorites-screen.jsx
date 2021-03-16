@@ -14,7 +14,7 @@ const FavoritesScreen = () => {
 
   useEffect(() => {
     if (!isFavoritesLoad) {
-      dispatch(favoriteList({favorites}));
+      dispatch(favoriteList(favorites));
     }
   }, [isFavoritesLoad]);
 

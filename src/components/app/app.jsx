@@ -7,7 +7,9 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {Paths} from '../../constants';
 import PrivateRoute from '../private-route/private-route';
+import AuthRoute from '../auth-route/auth-route';
 import browserHistory from '../../browser-history';
+
 
 const App = () => {
   return (
@@ -20,9 +22,10 @@ const App = () => {
           render={()=> <FavoritesScreen/>}
         >
         </PrivateRoute>
-        <Route exact path={Paths.LOGIN}>
-          <LoginScreen/>
-        </Route>
+        <AuthRoute exact path={Paths.LOGIN}
+          render={() => <LoginScreen/>}
+        >
+        </AuthRoute>
         <Route exact path={Paths.OFFER}>
           <DetailOfferScreen/>;
         </Route>
