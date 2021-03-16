@@ -57,6 +57,6 @@ export const commentsPost = (id, {comment, rating}) => (dispatch, _getState, api
 export const favoriteStatus = ({id, favorite}) => (dispatch, _getState, api) => (
   api.post(`${Inquiry.FAVORITE}/${id}/${favorite}`)
     .then(({data}) => {
-      dispatch(changeStatus(data));
+      dispatch(changeStatus(offerAdapter(data)));
     })
 );

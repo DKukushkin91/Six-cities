@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useCallback} from 'react';
 import OfferProp from "../offer/offer.prop";
 import {favoriteStatus} from "../../store/api-actions";
 import {useDispatch} from "react-redux";
@@ -11,19 +11,18 @@ const FavoriteButton = ({offers, componentName, buttonSize}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    favoriteRef.current.className = isFavorite
-      ? `${componentName}__bookmark-button--active button`
-      : `${componentName}__bookmark-button button`;
-
+    favoriteRef.current.className = isFavorite ?
+      `${componentName}__bookmark-button--active button`
+      :
+      `${componentName}__bookmark-button button`;
   }, [isFavorite]);
 
-  const handleClick = (evt) => {
-    evt.preventDefault();
+  const handleClick = useCallback(() => {
     dispatch(favoriteStatus({
       id,
       favorite: Number(!isFavorite)
     }));
-  };
+  }, [isFavorite]);
 
   return (
     <>

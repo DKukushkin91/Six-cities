@@ -1,6 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {CURRENT_SORTING, DEFAULT_CITY, DEFAULT_LOCATION} from '../../constants';
-import {getCityLocation, getSorting, changeFavoriteOffer} from '../../util';
+import {getCityLocation, getSorting, changeFavorites, changeCurrentOffer, changeNearbyOffers, changeFavoriteOffer} from '../../util';
 import {
   changeCity, changeOption, loadOffers, loadDetailOffer,
   loadComments, loadFavorites, loadNearby, addedComment, changeStatus,
@@ -30,7 +30,10 @@ const offerData = createReducer(initialState, (builder) => {
   });
 
   builder.addCase(changeStatus, (state, action) => {
-    state.offers = changeFavoriteOffer(state.offers, action.payload);
+    state.currentOffers = changeFavoriteOffer(state.currentOffers, action.payload);
+    state.favorites = changeFavorites(state.favorites, action.payload);
+    state.nearbyOffers = changeNearbyOffers(state.nearbyOffers, action.payload);
+    state.offerDetails = changeCurrentOffer(state.offerDetails, action.payload);
   });
 
   builder.addCase(changeOption, (state, action) => {
