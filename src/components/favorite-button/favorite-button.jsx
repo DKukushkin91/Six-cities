@@ -1,12 +1,15 @@
 import React, {useEffect, useRef, useCallback} from 'react';
 import OfferProp from "../offer/offer.prop";
 import {favoriteStatus} from "../../store/api-actions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {componentNameProp} from "../component-name/component-name.prop";
 import {favoriteNameProp} from './favorite-button.prop';
+import {redirectToRoute} from "../../store/action";
+import {Paths} from "../../constants";
 
 const FavoriteButton = ({offers, componentName, buttonSize}) => {
   const {isFavorite, id} = offers;
+  const {authorizationStatus} = useSelector((state) => state.USER);
   const favoriteRef = useRef();
   const dispatch = useDispatch();
 
@@ -18,11 +21,15 @@ const FavoriteButton = ({offers, componentName, buttonSize}) => {
   }, [isFavorite]);
 
   const handleClick = useCallback(() => {
-    dispatch(favoriteStatus({
-      id,
-      favorite: Number(!isFavorite)
-    }));
-  }, [isFavorite]);
+    if (!authorizationStatus) {
+      dispatch(redirectToRoute(Paths.LOGIN));
+    } else {
+      dispatch(favoriteStatus({
+        id,
+        favorite: Number(!isFavorite)
+      }));
+    }
+  }, [isFavorite, authorizationStatus]);
 
   return (
     <>
