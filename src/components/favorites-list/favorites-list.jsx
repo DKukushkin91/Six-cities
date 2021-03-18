@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import FavoritesPlaces from '../favorite-places/favorite-places';
 import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
@@ -33,4 +33,6 @@ FavoritesList.propTypes = {
   favorites: PropTypes.arrayOf(OfferProp.isRequired).isRequired,
 };
 
-export default FavoritesList;
+export default memo(FavoritesList, (prevProps, nextProps) =>
+  prevProps.favorites === nextProps.favorites
+);

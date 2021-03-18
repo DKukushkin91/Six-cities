@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import DetailNearOffer from '../detail-near-offer/detail-near-offer';
 import PropTypes from 'prop-types';
 import OfferProp from '../offer/offer.prop';
@@ -20,4 +20,6 @@ DetailNearOfferList.propTypes = {
   offer: PropTypes.arrayOf(OfferProp.isRequired).isRequired
 };
 
-export default DetailNearOfferList;
+export default memo(DetailNearOfferList, (prevProps, nextProps) =>
+  prevProps.offer === nextProps.offer
+);

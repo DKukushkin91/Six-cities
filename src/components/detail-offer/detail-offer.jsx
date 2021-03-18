@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useSelector} from 'react-redux';
 import DetailOfferReview from '../detail-offer-review/detail-offer-review';
 import DetailNearOfferList from '../detail-near-offer-list/detail-near-offer-list';
@@ -14,8 +14,10 @@ import FavoriteButton from '../favorite-button/favorite-button';
 import Rating from '../rating/rating';
 
 const DetailOffer = ({offerDetails}) => {
-  const {comments, currentLocation, nearbyOffers} = useSelector((state) => state.DATA);
-  const {id, title, price, images, goods, rating} = offerDetails;
+  const comments = useSelector((state) => state.DATA.comments);
+  const currentLocation = useSelector((state) => state.DATA.currentLocation);
+  const nearbyOffers = useSelector((state) => state.DATA.nearbyOffers);
+  const {id, title, price, images, goods, rating, isFavorite, isPremium} = offerDetails;
 
   return (
     <>
@@ -23,13 +25,14 @@ const DetailOffer = ({offerDetails}) => {
         {<DetailOfferGallery images={images}/>}
         <div className="property__container container">
           <div className="property__wrapper">
-            <PremiumMark offers={offerDetails} componentName={ComponentName.PROPERTY}/>
+            <PremiumMark isPremium={isPremium} componentName={ComponentName.PROPERTY}/>
             <div className="property__name-wrapper">
               <h1 className="property__name">
                 {title}
               </h1>
               <FavoriteButton
-                offers={offerDetails}
+                isFavorite={isFavorite}
+                id={id}
                 componentName={ComponentName.PROPERTY}
                 buttonSize={FavoriteButtonSize.Property}
               />
@@ -65,4 +68,6 @@ DetailOffer.propTypes = {
   offerDetails: OfferProp,
 };
 
-export default DetailOffer;
+export default memo(DetailOffer, (prevProps, nextProps) =>
+  prevProps.offerDetails === nextProps.offerDetails
+);

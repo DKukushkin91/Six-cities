@@ -7,7 +7,7 @@ import Header from '../header/header';
 import {changeValue} from '../../store/action';
 
 const LoginScreen = () => {
-  const {currentCity} = useSelector((state) => state.DATA);
+  const currentCity = useSelector((state) => state.DATA.currentCity);
   const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();

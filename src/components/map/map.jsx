@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, memo, useCallback} from 'react';
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import OfferProp from '../offer/offer.prop';
@@ -6,11 +6,11 @@ import "leaflet/dist/leaflet.css";
 import {useSelector} from "react-redux";
 
 const Map = ({offers}) => {
-  const {currentLocation} = useSelector((state) => state.DATA);
-  const {activeCardId} = useSelector((state) => state.PROCESS);
+  const currentLocation = useSelector((state) => state.DATA.currentLocation);
+  const activeCardId = useSelector((state) => state.PROCESS.activeCardId);
   const mapRef = useRef();
 
-  const getItems = (items) => {
+  const getItems = useCallback((items) => {
     items.forEach((item) => {
       const {location, title} = item;
       const customIcon = leaflet.icon({
@@ -28,7 +28,7 @@ const Map = ({offers}) => {
         .addTo(mapRef.current)
         .bindPopup(title);
     });
-  };
+  }, [activeCardId]);
 
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
@@ -45,9 +45,11 @@ const Map = ({offers}) => {
       })
       .addTo(mapRef.current);
     getItems(offers);
+
     return () => {
       mapRef.current.remove();
     };
+
   }, [currentLocation, activeCardId, offers]);
 
   return (
@@ -59,4 +61,6 @@ Map.propTypes = {
   offers: PropTypes.arrayOf(OfferProp.isRequired).isRequired,
 };
 
-export default Map;
+export default memo(Map, (prevProps, nextProps) =>
+  prevProps.offers === nextProps.offers
+);

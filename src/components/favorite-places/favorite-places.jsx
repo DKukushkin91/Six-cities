@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import Favorite from "../favorite/favorite";
 import PropTypes from 'prop-types';
 import OfferProp from '../offer/offer.prop';
@@ -16,4 +16,6 @@ FavoritePlaces.propTypes = {
   favorites: PropTypes.arrayOf(OfferProp.isRequired).isRequired
 };
 
-export default FavoritePlaces;
+export default memo(FavoritePlaces, (prevProps, nextProps) =>
+  prevProps.favorites === nextProps.favorites
+);

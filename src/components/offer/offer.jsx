@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 import OfferProp from './offer.prop';
 import {getUpperCase} from '../../util';
@@ -7,7 +7,7 @@ import {ComponentName, FavoriteButtonSize} from '../../constants';
 import Rating from "../rating/rating";
 
 const Offer = ({offers}) => {
-  const {price, title, type, id, rating} = offers;
+  const {price, title, type, id, rating, isFavorite} = offers;
 
   return (
     <div className="place-card__info">
@@ -17,7 +17,8 @@ const Offer = ({offers}) => {
           <span className="place-card__price-text">/&nbsp;night</span>
         </div>
         <FavoriteButton
-          offers={offers}
+          isFavorite={isFavorite}
+          id={id}
           componentName={ComponentName.PLACE_CARD}
           buttonSize={FavoriteButtonSize.Place}
         />
@@ -38,4 +39,6 @@ Offer.propTypes = {
   offers: OfferProp.isRequired,
 };
 
-export default Offer;
+export default memo(Offer, (prevProps, nextProps) =>
+  prevProps.offers === nextProps.offers
+);

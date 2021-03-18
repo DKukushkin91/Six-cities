@@ -10,7 +10,9 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchOfferList} from '../../store/api-actions';
 
 const MainPage = () => {
-  const {currentOffers, currentCity, isDataLoaded} = useSelector((state) => state.DATA);
+  const currentOffers = useSelector((state) => state.DATA.currentOffers);
+  const currentCity = useSelector((state) => state.DATA.currentCity);
+  const isDataLoaded = useSelector((state) => state.DATA.isDataLoaded);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,36 +28,34 @@ const MainPage = () => {
   }
 
   return (
-    <>
-      <div className="page page--gray page--main">
-        {<Header/>}
-        <main className="page__main page__main--index">
-          <h1 className="visually-hidden">Cities</h1>
-          <div className="tabs">
-            <section className="locations container">
-              {<LocationsList cities={CITIES_LIST} currentCity={currentCity}/>}
-            </section>
-          </div>
-          <div className="cities">
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
-                {<OfferSorting options={SORTING_LIST}/>}
-                <div className="cities__places-list places__list tabs__content">
-                  {<OffersList offers={currentOffers}/>}
-                </div>
-              </section>
-              <div className="cities__right-section">
-                <section className="cities__map map">
-                  {<Map offers={currentOffers}/>}
-                </section>
+    <div className="page page--gray page--main">
+      {<Header/>}
+      <main className="page__main page__main--index">
+        <h1 className="visually-hidden">Cities</h1>
+        <div className="tabs">
+          <section className="locations container">
+            {<LocationsList cities={CITIES_LIST} currentCity={currentCity}/>}
+          </section>
+        </div>
+        <div className="cities">
+          <div className="cities__places-container container">
+            <section className="cities__places places">
+              <h2 className="visually-hidden">Places</h2>
+              <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
+              {<OfferSorting options={SORTING_LIST}/>}
+              <div className="cities__places-list places__list tabs__content">
+                {<OffersList offers={currentOffers}/>}
               </div>
+            </section>
+            <div className="cities__right-section">
+              <section className="cities__map map">
+                {<Map offers={currentOffers}/>}
+              </section>
             </div>
           </div>
-        </main>
-      </div>
-    </>
+        </div>
+      </main>
+    </div>
   );
 };
 

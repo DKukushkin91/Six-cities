@@ -9,7 +9,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 const FavoritesScreen = () => {
-  const {favorites, isFavoritesLoad} = useSelector((state) => state.DATA);
+  const isFavoritesLoad = useSelector((state) => state.DATA.isFavoritesLoad);
+  const favorites = useSelector((state) => state.DATA.favorites);
   const dispatch = useDispatch();
 
   useEffect(() => {

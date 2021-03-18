@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import ReviewList from '../reviews-list/review-list';
@@ -8,7 +8,7 @@ import {sortReviews} from "../../util";
 import {MAX_REVIEWS} from "../../constants";
 
 const DetailOfferReview = ({comments, offerId}) => {
-  const {authorizationStatus} = useSelector((state) => state.USER);
+  const authorizationStatus = useSelector((state) => state.USER.authorizationStatus);
   const currentReviews = [...comments].sort(sortReviews)
     .slice(0, MAX_REVIEWS.LENGTH);
 
@@ -26,4 +26,6 @@ DetailOfferReview.propTypes = {
   comments: PropTypes.arrayOf(ReviewsProp).isRequired,
 };
 
-export default DetailOfferReview;
+export default memo(DetailOfferReview, (prevProps, nextProps) =>
+  prevProps.comments === nextProps.comments
+);

@@ -1,24 +1,24 @@
-import React, {useEffect, useRef, useCallback} from 'react';
-import OfferProp from "../offer/offer.prop";
-import {favoriteStatus} from "../../store/api-actions";
+import React, {useCallback} from 'react';
+import PropTypes from 'prop-types';
+import {favoriteStatus} from '../../store/api-actions';
 import {useDispatch, useSelector} from "react-redux";
-import {componentNameProp} from "../component-name/component-name.prop";
+import {componentNameProp} from '../component-name/component-name.prop';
 import {favoriteNameProp} from './favorite-button.prop';
-import {redirectToRoute} from "../../store/action";
-import {Paths} from "../../constants";
+import {redirectToRoute} from '../../store/action';
+import {ComponentName, Paths} from "../../constants";
 
-const FavoriteButton = ({offers, componentName, buttonSize}) => {
-  const {isFavorite, id} = offers;
-  const {authorizationStatus} = useSelector((state) => state.USER);
-  const favoriteRef = useRef();
+const FavoriteButton = ({isFavorite, id, componentName, buttonSize}) => {
+  const authorizationStatus = useSelector((state) => state.USER.authorizationStatus);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    favoriteRef.current.className = isFavorite ?
-      `${componentName}__bookmark-button--active button`
-      :
-      `${componentName}__bookmark-button button`;
-  }, [isFavorite]);
+  const activeStyle = {
+    position: `absolute`,
+    top: 41,
+    right: 93,
+    width: 31,
+    height: 33,
+    marginTop: 2
+  };
+  const changeStyle = componentName === ComponentName.PROPERTY ? activeStyle : null;
 
   const handleClick = useCallback(() => {
     if (!authorizationStatus) {
@@ -29,22 +29,25 @@ const FavoriteButton = ({offers, componentName, buttonSize}) => {
         favorite: Number(!isFavorite)
       }));
     }
-  }, [isFavorite, authorizationStatus]);
+  }, [isFavorite]);
 
   return (
-    <>
-      <button ref={favoriteRef} onClick={handleClick} type="button">
-        <svg className={`${componentName}__bookmark-icon`} width={buttonSize.WIDTH} height={buttonSize.HEIGHT}>
-          <use xlinkHref="#icon-bookmark" />
-        </svg>
-        <span className="visually-hidden">To bookmarks</span>
-      </button>
-    </>
+    <button
+      style={changeStyle}
+      className={`${componentName}__bookmark-button${isFavorite ? `--active` : ``} button`}
+      onClick={handleClick}
+      type="button">
+      <svg className={`${componentName}__bookmark-icon`} width={buttonSize.WIDTH} height={buttonSize.HEIGHT}>
+        <use xlinkHref="#icon-bookmark"/>
+      </svg>
+      <span className="visually-hidden">{isFavorite ? `In bookmarks` : `To bookmarks`}</span>
+    </button>
   );
 };
 
 FavoriteButton.propTypes = {
-  offers: OfferProp.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
   componentName: componentNameProp,
   buttonSize: favoriteNameProp
 };

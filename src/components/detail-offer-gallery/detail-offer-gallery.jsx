@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {MAX_GALLERY_IMG} from '../../constants';
 
 const DetailOfferGallery = ({images}) => {
   return (
-
     <div className="property__gallery-container container">
       <div className="property__gallery">
         {images.slice(0, MAX_GALLERY_IMG).map((item)=> (
@@ -22,4 +21,6 @@ DetailOfferGallery.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
-export default DetailOfferGallery;
+export default memo(DetailOfferGallery, (prevProps, nextProps) =>
+  prevProps.images === nextProps.images
+);

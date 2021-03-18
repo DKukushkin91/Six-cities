@@ -7,7 +7,7 @@ import {ComponentName, FavoriteButtonSize} from '../../constants';
 import Rating from '../rating/rating';
 
 const Favorite = ({offers}) => {
-  const {previewImage, price, title, type, id, rating} = offers;
+  const {previewImage, price, title, type, id, rating, isFavorite} = offers;
 
   return (
     <article className="favorites__card place-card">
@@ -23,7 +23,8 @@ const Favorite = ({offers}) => {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <FavoriteButton
-            offers={offers}
+            isFavorite={isFavorite}
+            id={id}
             componentName={ComponentName.PLACE_CARD}
             buttonSize={FavoriteButtonSize.Place}
           />

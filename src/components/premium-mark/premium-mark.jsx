@@ -1,9 +1,8 @@
-import React from 'react';
-import OfferProp from '../offer/offer.prop';
-import {componentNameProp} from "../component-name/component-name.prop";
+import React, {memo} from 'react';
+import PropTypes from 'prop-types';
+import {componentNameProp} from '../component-name/component-name.prop';
 
-const PremiumMark = ({offers, componentName}) => {
-  const {isPremium} = offers;
+const PremiumMark = ({isPremium, componentName}) => {
 
   return (
     <>
@@ -18,8 +17,10 @@ const PremiumMark = ({offers, componentName}) => {
 };
 
 PremiumMark.propTypes = {
-  offers: OfferProp.isRequired,
+  isPremium: PropTypes.bool.isRequired,
   componentName: componentNameProp,
 };
 
-export default PremiumMark;
+export default memo(PremiumMark, (prevProps, nextProps) =>
+  prevProps.componentName === nextProps.componentName
+);

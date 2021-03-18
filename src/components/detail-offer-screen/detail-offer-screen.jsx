@@ -8,7 +8,8 @@ import DetailOffer from '../detail-offer/detail-offer';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 const DetailOfferScreen = ({match}) => {
-  const {offerDetails, isLoaded} = useSelector((state) => state.DATA);
+  const offerDetails = useSelector((state) => state.DATA.offerDetails);
+  const isLoaded = useSelector((state) => state.DATA.isLoaded);
   const offerId = Number(match.params.id);
   const dispatch = useDispatch();
 

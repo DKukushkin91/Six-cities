@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {changeCity} from '../../store/action';
 import {useDispatch} from 'react-redux';
 
 const LocationsList = ({cities, currentCity}) => {
   const dispatch = useDispatch();
-  const changeLocation = (evt, item) => {
-    evt.preventDefault();
+
+  const changeLocation = (item) => {
     if (item !== currentCity) {
       dispatch(changeCity(item));
     }
@@ -17,7 +17,7 @@ const LocationsList = ({cities, currentCity}) => {
     <ul className="locations__list tabs__list">
       {cities.map((item) => (
         <li key={item} className="locations__item">
-          <a onClick={(evt)=> changeLocation(evt, item)}
+          <a onClick={()=> changeLocation(item)}
             className={`locations__item-link tabs__item ${activeLocation(item)}`} href="#">
             <span>{item}</span>
           </a>
@@ -33,4 +33,6 @@ LocationsList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
-export default LocationsList;
+export default memo(LocationsList, (prevProps, nextProps) =>
+  prevProps.currentCity === nextProps.currentCity
+);

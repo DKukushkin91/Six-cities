@@ -61,7 +61,7 @@ const Header = () => {
   );
 };
 
-export default memo(Header,
-    (prevProps, nextProps) =>
-      prevProps.userValue === nextProps.userValue);
+export default memo(Header, (prevProps, nextProps) =>
+  prevProps.userValue === nextProps.userValue
+);
 

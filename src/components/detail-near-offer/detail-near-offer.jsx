@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 import Offer from '../offer/offer';
 import OfferProp from '../offer/offer.prop';
@@ -22,4 +22,6 @@ DetailNearOffer.propTypes = {
   offer: OfferProp.isRequired
 };
 
-export default DetailNearOffer;
+export default memo(DetailNearOffer, (prevProps, nextProps) =>
+  prevProps.offer === nextProps.offer
+);

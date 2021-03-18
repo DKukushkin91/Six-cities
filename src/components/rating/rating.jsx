@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {getRatingPercent} from "../../util";
 import {componentNameProp} from "../component-name/component-name.prop";
 import PropTypes from 'prop-types';
@@ -25,4 +25,6 @@ Rating.propTypes = {
   componentName: componentNameProp
 };
 
-export default Rating;
+export default memo(Rating, (prevProps, nextProps) =>
+  prevProps.rating === nextProps.rating
+);

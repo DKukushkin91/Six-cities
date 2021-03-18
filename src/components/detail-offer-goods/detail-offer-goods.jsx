@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 const DetailOfferGoods = ({goods}) => {
@@ -20,4 +20,6 @@ DetailOfferGoods.propTypes = {
   goods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
-export default DetailOfferGoods;
+export default memo(DetailOfferGoods, (prevProps, nextProps) =>
+  prevProps.goods === nextProps.goods
+);

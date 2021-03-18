@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {getUpperCase} from "../../util";
 import OfferProp from '../offer/offer.prop';
 
@@ -23,4 +23,6 @@ DetailFeatures.propTypes = {
   offers: OfferProp.isRequired
 };
 
-export default DetailFeatures;
+export default memo(DetailFeatures, (prevProps, nextProps) =>
+  prevProps.offers === nextProps.offers
+);
