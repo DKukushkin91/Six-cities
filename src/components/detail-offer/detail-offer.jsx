@@ -1,104 +1,73 @@
-import React from 'react';
-import {getRatingPercent, getUpperCase} from '../../util';
+import React, {memo} from 'react';
+import {useSelector} from 'react-redux';
 import DetailOfferReview from '../detail-offer-review/detail-offer-review';
 import DetailNearOfferList from '../detail-near-offer-list/detail-near-offer-list';
 import Map from '../map/map';
 import DetailOfferGoods from '../detail-offer-goods/detail-offer-goods';
 import DetailOfferGallery from '../detail-offer-gallery/detail-offer-gallery';
 import DetailOfferHost from '../detail-offer-host/detail-offer-host';
-import PropTypes from 'prop-types';
-import ReviewProp from '../reviews/review.prop';
 import OfferProp from '../offer/offer.prop';
-import currentLocationProp from '../map/current-location.prop';
-import {connect} from 'react-redux';
+import PremiumMark from '../premium-mark/premium-mark';
+import DetailFeatures from '../detail-offer-features/detail-features';
+import {ComponentName, FavoriteButtonSize} from '../../constants';
+import FavoriteButton from '../favorite-button/favorite-button';
+import Rating from '../rating/rating';
 
-const DetailOffer = ({offerDetails, comments, currentLocation, nearbyOffers}) => {
-  const {id, title, rating, type, bedrooms, maxAdults, price, isPremium, images, goods} = offerDetails;
-  const renderOfferPropertyReviews = (<DetailOfferReview offerId={id} comments={comments}/>);
-  const renderOfferPropertyPlaceList = (<DetailNearOfferList offer={nearbyOffers}/>);
-  const renderMap = (<Map offers={nearbyOffers} currentLocation={currentLocation}/>);
-  const renderGoods = (<DetailOfferGoods goods={goods}/>);
-  const renderGallery = (<DetailOfferGallery images={images}/>);
-  const renderHost = (<DetailOfferHost offer={offerDetails}/>);
+const DetailOffer = ({offerDetails}) => {
+  const comments = useSelector((state) => state.DATA.comments);
+  const currentLocation = useSelector((state) => state.DATA.currentLocation);
+  const nearbyOffers = useSelector((state) => state.DATA.nearbyOffers);
+  const {id, title, price, images, goods, rating, isFavorite, isPremium} = offerDetails;
+
   return (
     <>
       <section className="property">
-        <div className="property__gallery-container container">
-          <div className="property__gallery">
-            {renderGallery}
-          </div>
-        </div>
+        {<DetailOfferGallery images={images}/>}
         <div className="property__container container">
           <div className="property__wrapper">
-            {isPremium ?
-              <div className="property__mark">
-                <span>Premium</span>
-              </div> : ``}
+            <PremiumMark isPremium={isPremium} componentName={ComponentName.PROPERTY}/>
             <div className="property__name-wrapper">
               <h1 className="property__name">
                 {title}
               </h1>
-              <button className="property__bookmark-button button" type="button">
-                <svg className="property__bookmark-icon" width={31} height={33}>
-                  <use xlinkHref="#icon-bookmark" />
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <FavoriteButton
+                isFavorite={isFavorite}
+                id={id}
+                componentName={ComponentName.PROPERTY}
+                buttonSize={FavoriteButtonSize.Property}
+              />
             </div>
-            <div className="property__rating rating">
-              <div className="property__stars rating__stars">
-                <span style={{width: `${getRatingPercent(rating)}%`}} />
-                <span className="visually-hidden">Rating</span>
-              </div>
-              <span className="property__rating-value rating__value">{rating}</span>
-            </div>
-            <ul className="property__features">
-              <li className="property__feature property__feature--entire">
-                {getUpperCase(type)}
-              </li>
-              <li className="property__feature property__feature--bedrooms">
-                {bedrooms} Bedrooms
-              </li>
-              <li className="property__feature property__feature--adults">
-              Max {maxAdults} adults
-              </li>
-            </ul>
+            <Rating
+              rating={rating}
+              componentName={ComponentName.PROPERTY}
+            />
+            <DetailFeatures offers={offerDetails}/>
             <div className="property__price">
               <b className="property__price-value">€{price}</b>
               <span className="property__price-text">&nbsp;night</span>
             </div>
             <div className="property__inside">
-              {renderGoods}
+              {<DetailOfferGoods goods={goods}/>}
             </div>
-            {renderHost}
-            {renderOfferPropertyReviews}
+            {<DetailOfferHost offer={offerDetails}/>}
+            {<DetailOfferReview offerId={id} comments={comments}/>}
           </div>
         </div>
         <section className="property__map map">
-          {renderMap}
+          {<Map offers={nearbyOffers} currentLocation={currentLocation}/>}
         </section>
       </section>
       <div className="container">
-        {renderOfferPropertyPlaceList}
+        {<DetailNearOfferList offer={nearbyOffers}/>}
       </div>
     </>
   );
 };
 
 DetailOffer.propTypes = {
-  comments: PropTypes.arrayOf(ReviewProp).isRequired,
   offerDetails: OfferProp,
-  nearbyOffers: PropTypes.arrayOf(OfferProp).isRequired,
-  currentLocation: currentLocationProp,
-  isLoaded: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({currentLocation, isLoaded, comments, nearbyOffers}) => ({
-  currentLocation,
-  isLoaded,
-  comments,
-  nearbyOffers
-});
-
-export {DetailOffer};
-export default connect(mapStateToProps, ``)(DetailOffer);
+export default memo(DetailOffer, (prevProps, nextProps) =>
+  prevProps.offerDetails === nextProps.offerDetails
+);

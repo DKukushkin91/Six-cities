@@ -1,10 +1,11 @@
 import React from 'react';
 import ReviewProp from './review.prop';
-import dayjs from "dayjs";
-import {getRatingPercent} from "../../util";
+import dayjs from 'dayjs';
+import Rating from '../rating/rating';
+import {ComponentName} from '../../constants';
 
 const Review = ({comments}) => {
-  const {comment, date, rating, user: {avatarUrl, name}} = comments;
+  const {comment, date, user: {avatarUrl, name}, rating} = comments;
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -14,12 +15,10 @@ const Review = ({comments}) => {
         <span className="reviews__user-name">{name}</span>
       </div>
       <div className="reviews__info">
-        <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <span style={{width: `${getRatingPercent(rating)}%`}} />
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating
+          rating={rating}
+          componentName={ComponentName.REVIEWS}
+        />
         <p className="reviews__text">{comment}</p>
         <time className="reviews__time" dateTime="2019-04-24">{`${dayjs(date).format(`MMMM YYYY`)}`}</time>
       </div>

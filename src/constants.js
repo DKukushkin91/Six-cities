@@ -46,7 +46,7 @@ export const Inquiry = {
   LOGOUT: `/logout`,
   NEARBY: `/nearby`,
   COMMENTS: `/comments`,
-  FAVORITES: `/favorite`
+  FAVORITE: `/favorite`
 };
 
 export const Rating = {
@@ -71,3 +71,24 @@ export const DEFAULT_LOCATION = {
 export const MAX_GALLERY_IMG = 6;
 export const CURRENT_SORTING = `Popular`;
 export const SORTING_LIST = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
+
+export const ComponentName = {
+  REVIEWS: `reviews`,
+  PLACE_CARD: `place-card`,
+  PROPERTY: `property`,
+};
+
+export const FavoriteButtonSize = {
+  Property: {
+    WIDTH: 31,
+    HEIGHT: 33
+  },
+  Place: {
+    WIDTH: 18,
+    HEIGHT: 19
+  }
+};
+
+export const MAX_REVIEWS = {
+  LENGTH: 10
+};

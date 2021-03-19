@@ -1,14 +1,16 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, memo, useCallback} from 'react';
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
-import CurrentLocationProp from './current-location.prop';
 import OfferProp from '../offer/offer.prop';
 import "leaflet/dist/leaflet.css";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 
-const Map = ({offers, currentLocation, activeCardId, isLoaded}) => {
+const Map = ({offers}) => {
+  const currentLocation = useSelector((state) => state.DATA.currentLocation);
+  const activeCardId = useSelector((state) => state.PROCESS.activeCardId);
   const mapRef = useRef();
-  const getItems = (items) => {
+
+  const getItems = useCallback((items) => {
     items.forEach((item) => {
       const {location, title} = item;
       const customIcon = leaflet.icon({
@@ -26,7 +28,8 @@ const Map = ({offers, currentLocation, activeCardId, isLoaded}) => {
         .addTo(mapRef.current)
         .bindPopup(title);
     });
-  };
+  }, [activeCardId]);
+
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
       center: {
@@ -42,28 +45,22 @@ const Map = ({offers, currentLocation, activeCardId, isLoaded}) => {
       })
       .addTo(mapRef.current);
     getItems(offers);
+
     return () => {
       mapRef.current.remove();
     };
-  }, [currentLocation, activeCardId, offers, isLoaded]);
+
+  }, [currentLocation, activeCardId, offers]);
 
   return (
-    <div id="map" style={{height: `100%`}} ref={mapRef}></div>
+    <div id="map" style={{height: `100%`}}></div>
   );
 };
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferProp.isRequired).isRequired,
-  currentLocation: CurrentLocationProp,
-  activeCardId: PropTypes.number,
-  isLoaded: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({currentLocation, activeCardId, isLoaded}) => ({
-  currentLocation,
-  activeCardId,
-  isLoaded
-});
-
-export {Map};
-export default connect(mapStateToProps, ``)(Map);
+export default memo(Map, (prevProps, nextProps) =>
+  prevProps.offers === nextProps.offers
+);

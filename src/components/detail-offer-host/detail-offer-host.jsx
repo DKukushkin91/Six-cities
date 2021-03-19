@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import OfferProp from '../offer/offer.prop';
 
 const DetailOfferHost = ({offer}) => {
@@ -28,4 +28,6 @@ DetailOfferHost.propTypes = {
   offer: OfferProp.isRequired
 };
 
-export default DetailOfferHost;
+export default memo(DetailOfferHost, (prevProps, nextProps) =>
+  prevProps.offer === nextProps.offer
+);
