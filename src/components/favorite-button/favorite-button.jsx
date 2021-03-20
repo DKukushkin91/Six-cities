@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {favoriteStatus} from '../../store/api-actions';
 import {useDispatch, useSelector} from "react-redux";
