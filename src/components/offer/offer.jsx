@@ -4,10 +4,10 @@ import OfferProp from './offer.prop';
 import {getUpperCase} from '../../util';
 import FavoriteButton from '../favorite-button/favorite-button';
 import {ComponentName, FavoriteButtonSize} from '../../constants';
-import Rating from "../rating/rating";
+import Rating from '../rating/rating';
 
-const Offer = ({offers}) => {
-  const {price, title, type, id, rating, isFavorite} = offers;
+const Offer = ({offer}) => {
+  const {price, title, type, id, rating, isFavorite} = offer;
 
   return (
     <div className="place-card__info">
@@ -36,9 +36,9 @@ const Offer = ({offers}) => {
 };
 
 Offer.propTypes = {
-  offers: OfferProp.isRequired,
+  offer: OfferProp.isRequired,
 };
 
 export default memo(Offer, (prevProps, nextProps) =>
-  prevProps.offers === nextProps.offers
+  prevProps.offer === nextProps.offer
 );

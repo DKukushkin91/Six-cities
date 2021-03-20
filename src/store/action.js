@@ -3,7 +3,7 @@ import {createAction} from '@reduxjs/toolkit';
 export const ActionType = {
   CHANGE_CURRENT_CITY: `city/currentCity`,
   CHANGE_OPTION: `option/changeOption`,
-  HOVER_OFFER: `offer/hoverOffer`,
+  CHANGE_ACTIVE_OFFER: `offer/changeActiveOffer`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   LOAD_OFFERS: `data/loadOffers`,
   USER_VALUE: `user/userValue`,
@@ -29,7 +29,7 @@ export const changeOption = createAction(ActionType.CHANGE_OPTION, (options) => 
   };
 });
 
-export const hoverOffer = createAction(ActionType.HOVER_OFFER, (id) => {
+export const changeActiveOffer = createAction(ActionType.CHANGE_ACTIVE_OFFER, (id) => {
   return {
     payload: id
   };

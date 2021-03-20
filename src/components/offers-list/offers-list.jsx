@@ -9,7 +9,7 @@ const OffersList = ({offers}) => {
     <div className="cities__places-list places__list tabs__content">
       {
         offers.map((item) =>
-          <OfferCard offers={item} key={item.id}/>
+          <OfferCard offer={item} key={item.id}/>
         )}
     </div>
   );

@@ -5,16 +5,16 @@ import Offer from '../offer/offer';
 import PremiumMark from '../premium-mark/premium-mark';
 import {ComponentName} from '../../constants';
 import {useDispatch, useSelector} from "react-redux";
-import {hoverOffer} from "../../store/action";
+import {changeActiveOffer} from "../../store/action";
 
-const OfferCard = ({offers}) => {
-  const {previewImage, id, isPremium} = offers;
+const OfferCard = ({offer}) => {
+  const {previewImage, id, isPremium} = offer;
   const activeCardId = useSelector((state) => state.PROCESS.activeCardId);
   const dispatch = useDispatch();
 
   const changeOffer = useCallback(() => {
     if (id !== activeCardId) {
-      dispatch(hoverOffer(id));
+      dispatch(changeActiveOffer(id));
     }
   }, [activeCardId]);
 
@@ -26,15 +26,15 @@ const OfferCard = ({offers}) => {
           <img className="place-card__image" src={`${previewImage}`} width={260} height={200} alt="Place image" />
         </Link>
       </div>
-      {<Offer offers={offers}/>}
+      {<Offer offer={offer}/>}
     </article>
   );
 };
 
 OfferCard.propTypes = {
-  offers: OfferProp.isRequired,
+  offer: OfferProp.isRequired,
 };
 
 export default memo(OfferCard, (prevProps, nextProps) =>
-  prevProps.offers === nextProps.offers
+  prevProps.offer === nextProps.offer
 );

@@ -1,12 +1,12 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {hoverOffer} from '../action';
+import {changeActiveOffer} from '../action';
 
 const initialState = {
   activeCardId: null
 };
 
 const process = createReducer(initialState, (builder) => {
-  builder.addCase(hoverOffer, (state, action) => {
+  builder.addCase(changeActiveOffer, (state, action) => {
     state.activeCardId = action.payload;
   });
 
