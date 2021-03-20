@@ -8,6 +8,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import OfferSorting from '../offer-sorting/offer-sorting';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchOfferList} from '../../store/api-actions';
+import OffersListEmpty from '../offers-list-empty/offers-list-empty';
 
 const MainPage = () => {
   const currentOffers = useSelector((state) => state.DATA.currentOffers);
@@ -38,21 +39,24 @@ const MainPage = () => {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
-              {<OfferSorting options={SORTING_LIST}/>}
-              <div className="cities__places-list places__list tabs__content">
-                {<OffersList offers={currentOffers}/>}
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                {<Map offers={currentOffers}/>}
+          {currentOffers.length !== 0 ?
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
+                {<OfferSorting options={SORTING_LIST}/>}
+                <div className="cities__places-list places__list tabs__content">
+                  {<OffersList offers={currentOffers}/>}
+                </div>
               </section>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  {<Map offers={currentOffers}/>}
+                </section>
+              </div>
             </div>
-          </div>
+            : <OffersListEmpty currentCity={currentCity}/>
+          };
         </div>
       </main>
     </div>

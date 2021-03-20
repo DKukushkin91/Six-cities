@@ -5,7 +5,7 @@ import Offer from '../offer/offer';
 import PremiumMark from '../premium-mark/premium-mark';
 import {ComponentName} from '../../constants';
 import {useDispatch, useSelector} from "react-redux";
-import {hoverOffer} from "../../store/action";
+import {changeActiveOffer} from "../../store/action";
 
 const OfferCard = ({offers}) => {
   const {previewImage, id, isPremium} = offers;
@@ -14,7 +14,7 @@ const OfferCard = ({offers}) => {
 
   const changeOffer = useCallback(() => {
     if (id !== activeCardId) {
-      dispatch(hoverOffer(id));
+      dispatch(changeActiveOffer(id));
     }
   }, [activeCardId]);
 

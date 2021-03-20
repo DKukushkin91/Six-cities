@@ -5,22 +5,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {componentNameProp} from '../component-name/component-name.prop';
 import {favoriteNameProp} from './favorite-button.prop';
 import {redirectToRoute} from '../../store/action';
-import {ComponentName, Paths} from "../../constants";
+import {Paths} from '../../constants';
 
 const FavoriteButton = ({isFavorite, id, componentName, buttonSize}) => {
   const authorizationStatus = useSelector((state) => state.USER.authorizationStatus);
   const dispatch = useDispatch();
-  const activeStyle = {
-    position: `absolute`,
-    top: 41,
-    right: 93,
-    width: 31,
-    height: 33,
-    marginTop: 2
-  };
-  const changeStyle = componentName === ComponentName.PROPERTY ? activeStyle : null;
 
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     if (!authorizationStatus) {
       dispatch(redirectToRoute(Paths.LOGIN));
     } else {
@@ -29,12 +20,11 @@ const FavoriteButton = ({isFavorite, id, componentName, buttonSize}) => {
         favorite: Number(!isFavorite)
       }));
     }
-  }, [isFavorite]);
+  };
 
   return (
     <button
-      style={changeStyle}
-      className={`${componentName}__bookmark-button${isFavorite ? `--active` : ``} button`}
+      className={`${componentName}__bookmark-button ${isFavorite ? `${componentName}__bookmark-button--active` : ``} button`}
       onClick={handleClick}
       type="button">
       <svg className={`${componentName}__bookmark-icon`} width={buttonSize.WIDTH} height={buttonSize.HEIGHT}>

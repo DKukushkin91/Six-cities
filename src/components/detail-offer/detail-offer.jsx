@@ -15,9 +15,9 @@ import Rating from '../rating/rating';
 
 const DetailOffer = ({offerDetails}) => {
   const comments = useSelector((state) => state.DATA.comments);
-  const currentLocation = useSelector((state) => state.DATA.currentLocation);
   const nearbyOffers = useSelector((state) => state.DATA.nearbyOffers);
   const {id, title, price, images, goods, rating, isFavorite, isPremium} = offerDetails;
+  const detailsNearbyOffers = [...nearbyOffers, offerDetails];
 
   return (
     <>
@@ -54,7 +54,7 @@ const DetailOffer = ({offerDetails}) => {
           </div>
         </div>
         <section className="property__map map">
-          {<Map offers={nearbyOffers} currentLocation={currentLocation}/>}
+          {<Map offers={detailsNearbyOffers} offerDetails={offerDetails}/>}
         </section>
       </section>
       <div className="container">

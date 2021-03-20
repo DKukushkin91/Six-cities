@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, memo, useCallback} from 'react';
+import React, {useEffect, useRef, memo} from 'react';
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import OfferProp from '../offer/offer.prop';
@@ -9,26 +9,6 @@ const Map = ({offers}) => {
   const currentLocation = useSelector((state) => state.DATA.currentLocation);
   const activeCardId = useSelector((state) => state.PROCESS.activeCardId);
   const mapRef = useRef();
-
-  const getItems = useCallback((items) => {
-    items.forEach((item) => {
-      const {location, title} = item;
-      const customIcon = leaflet.icon({
-        iconUrl: `./img/pin${item.id === activeCardId ? `-active` : ``}.svg`,
-        iconSize: [27, 39]
-      });
-
-      leaflet.marker({
-        lat: location.latitude,
-        lon: location.longitude
-      },
-      {
-        icon: customIcon
-      })
-        .addTo(mapRef.current)
-        .bindPopup(title);
-    });
-  }, [activeCardId]);
 
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
@@ -44,13 +24,42 @@ const Map = ({offers}) => {
         attribution: `&copy; <a href="https:www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https:carto.com/attributions">CARTO</a>`
       })
       .addTo(mapRef.current);
-    getItems(offers);
 
     return () => {
       mapRef.current.remove();
     };
 
-  }, [currentLocation, activeCardId, offers]);
+  }, [currentLocation]);
+
+
+  useEffect(() => {
+    const markers = [];
+    offers.forEach((item) => {
+      const {title} = item;
+      const customIcon = leaflet.icon({
+        iconUrl: item.id === activeCardId ? `./img/pin-active.svg` : `./img/pin.svg`,
+        iconSize: [27, 39]
+      });
+
+      const marker = leaflet.marker({
+        lat: item.location.latitude,
+        lng: item.location.longitude
+      }, {
+        icon: customIcon
+      })
+      .addTo(mapRef.current)
+      .bindPopup(title);
+
+      markers.push(marker);
+    });
+
+    return () => {
+      markers.forEach((marker) => {
+        mapRef.current.removeLayer(marker);
+      });
+    };
+
+  }, [offers, activeCardId]);
 
   return (
     <div id="map" style={{height: `100%`}}></div>
