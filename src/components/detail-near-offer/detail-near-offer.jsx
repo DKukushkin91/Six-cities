@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Offer from '../offer/offer';
@@ -16,6 +16,9 @@ const DetailNearOffer = ({offer}) => {
     }
   }, [activeCardId]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeCardId]);
 
   return (
     <article onClick={changeOffer} className="near-places__card place-card">
