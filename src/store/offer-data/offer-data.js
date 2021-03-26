@@ -72,4 +72,7 @@ const offerData = createReducer(initialState, (builder) => {
   });
 });
 
-export {offerData};
+export {
+  offerData,
+  initialState
+};

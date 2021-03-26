@@ -89,6 +89,4 @@ export const FavoriteButtonSize = {
   }
 };
 
-export const MAX_REVIEWS = {
-  LENGTH: 10
-};
+export const MAX_REVIEWS_LENGTH = 10;

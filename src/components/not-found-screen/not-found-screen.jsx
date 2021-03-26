@@ -16,7 +16,7 @@ const NotFoundScreen = () => {
   return (
     <>
       <div style={errorStyle} className="error">
-        <h1 className="error__title">404 Not Found</h1>
+        <h1 className="error__title">404. Page not found</h1>
         <Link style={linkStyle} className="error__link" to={Paths.MAIN}>Go Home</Link>
       </div>
     </>

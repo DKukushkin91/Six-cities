@@ -2,8 +2,8 @@ import React, {useEffect, useRef, memo} from 'react';
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import OfferProp from '../offer/offer.prop';
-import "leaflet/dist/leaflet.css";
-import {useSelector} from "react-redux";
+import {useSelector} from 'react-redux';
+import 'leaflet/dist/leaflet.css';
 
 const Map = ({offers}) => {
   const currentLocation = useSelector((state) => state.DATA.currentLocation);
