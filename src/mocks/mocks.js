@@ -23,7 +23,7 @@ export const Offers = [
     previewImage: `img/apartment-01.jpg`,
     price: 120,
     isFavorite: false,
-    rating: 4,
+    rating: 1,
     title: `Beautiful & luxurious apartment at great location`,
     location: {
       latitude: 52.35514938496378,
@@ -140,11 +140,11 @@ export const Offers = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
-        zoom: 10,
+        latitude: 48.856220,
+        longitude: 2.352478,
+        zoom: 10
       },
-      name: `Amsterdam`,
+      name: `Paris`,
     },
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
