@@ -8,7 +8,7 @@ import {
 import {
   DEFAULT_CITY,
   DEFAULT_LOCATION,
-  CURRENT_SORTING
+  CURRENT_SORTING,
 } from '../../constants';
 import {
   getCityLocation,
@@ -36,50 +36,51 @@ const mockState = {
 
 describe(`Reducer 'offerData' should work correctly`, () => {
 
-  // /////Не работает 2 теста
-  // it(`Reducer should update city by change city`, () => {
-  //   const testCity = `Amsterdam`;
-  //   const mockOption = `Top rated first`;
-  //   const state = mockState;
+  it(`Reducer should update city by change city`, () => {
+    const mockCity = `Amsterdam`;
+    const state = {
+      ...mockState,
+      offers: Offers,
+      currentOption: `Top rated first`
+    };
 
-  //   const changeCurrentCity = {
-  //     type: ActionType.CHANGE_CURRENT_CITY,
-  //     payload: testCity
-  //   };
+    const changeCurrentCity = {
+      type: ActionType.CHANGE_CURRENT_CITY,
+      payload: mockCity
+    };
 
-  //   expect(offerData(state, changeCurrentCity))
-  //     .toEqual({
-  //       ...state,
-  //       currentCity: testCity,
-  //       currentOffers: getSorting(Offers, testCity),
-  //       currentLocation: getCityLocation(Offers, testCity),
-  //       currentOption: mockOption,
-  //     });
-  // });
+    expect(offerData(state, changeCurrentCity))
+      .toEqual({
+        ...state,
+        currentCity: mockCity,
+        currentOffers: getSorting(Offers, mockCity),
+        currentLocation: getCityLocation(Offers, mockCity),
+        currentOption: CURRENT_SORTING,
+      });
+  });
 
-  // it(`Reducer should update option by change options`, () => {
-  //   const mockOption = `Top rated first`;
-  //   const mockCity = `Amsterdam`;
-  //   const state = {
-  //     ...mockState,
-  //     currentOption: mockOption,
-  //     currentOffers: getSorting(Offers, mockCity, mockOption)
-  //   };
+  it(`Reducer should update option by change options`, () => {
+    const mockOption = `Price: low to hight`;
+    const mockCity = `Amsterdam`;
+    const state = {
+      ...mockState,
+      offers: Offers,
+      currentCity: mockCity
+    };
 
-  //   const changeOption = {
-  //     type: ActionType.CHANGE_OPTION,
-  //     payload: mockOption
-  //   };
+    const changeOption = {
+      type: ActionType.CHANGE_OPTION,
+      payload: mockOption
+    };
 
-  //   expect(offerData(state, changeOption))
-  //     .toEqual({
-  //       ...state,
-  //       currentOption: mockOption,
-  //       currentOffers: getSorting(Offers, mockCity, mockOption)
-  //     });
-  // });
+    expect(offerData(state, changeOption))
+      .toEqual({
+        ...state,
+        currentOption: mockOption,
+        currentOffers: getSorting(Offers, mockCity, mockOption)
+      });
+  });
 
-  // /////////// Всё ОК
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(offerData(undefined, {}))
       .toEqual(mockState);
