@@ -23,9 +23,7 @@ const MainPage = () => {
   }, [isDataLoaded]);
 
   if (!isDataLoaded) {
-    return (
-      <LoadingScreen />
-    );
+    return <LoadingScreen />;
   }
 
   return (

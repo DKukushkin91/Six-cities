@@ -1,4 +1,4 @@
-import {Condition, Rating, Sorting} from './constants';
+import {Condition, Rating, Sorting, MAX_REVIEWS_LENGTH} from './constants';
 
 export const getSorting = (offers, city, option) => {
   const defaultState = offers.filter((item) => item.city.name === city);
@@ -22,7 +22,11 @@ export const getRatingPercent = (rating) => Number(rating / Rating.MAX) * Rating
 
 export const getUpperCase = (str) => !str ? str : `${str[0].toUpperCase()}${str.slice(1)}`;
 
-export const sortReviews = (a, b) => {
+export const getReviews = (comments) => {
+  return [...comments].sort(getSortReviews).slice(0, MAX_REVIEWS_LENGTH);
+};
+
+export const getSortReviews = (a, b) => {
   return new Date(b.date) - new Date(a.date);
 };
 
