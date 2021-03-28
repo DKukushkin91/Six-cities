@@ -44,7 +44,7 @@ describe(`Action creators work correctly`, () => {
 
   it(`Action creators for change active offer returns correct action`, () => {
     const id = {
-      id: Number
+      id: Number()
     };
     const expectedAction = {
       type: ActionType.CHANGE_ACTIVE_OFFER,

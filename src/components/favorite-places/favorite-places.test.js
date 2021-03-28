@@ -1,0 +1,28 @@
+import React from 'react';
+import {render} from '@testing-library/react';
+import {Router} from 'react-router-dom';
+import {createMemoryHistory} from 'history';
+import configureStore from 'redux-mock-store';
+import * as redux from 'react-redux';
+import FavoritePlaces from './favorite-places';
+import {AuthorizationStatus, Paths} from '../../constants';
+import {Offers} from '../../mocks/mocks';
+
+const mockStore = configureStore({});
+
+it(`Render Favorite`, () => {
+  const store = mockStore({
+    USER: {authorizationStatus: AuthorizationStatus.AUTH}
+  });
+  const history = createMemoryHistory();
+
+  history.push(Paths.FAVORITES);
+
+  render(
+      <redux.Provider store={store}>
+        <Router history={history}>
+          <FavoritePlaces favorites={Offers}/>
+        </Router>
+      </redux.Provider>
+  );
+});

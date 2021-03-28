@@ -40,6 +40,7 @@ const state = {
 };
 
 const mockDispatch = jest.fn();
+let history;
 jest.mock(`react-redux`, () => ({
   ...jest.requireActual(`react-redux`),
   useDispatch: () => mockDispatch,
@@ -50,9 +51,11 @@ const mockStore = configureStore({});
 describe(`Test routing`, () => {
   jest.spyOn(redux, `useSelector`);
   jest.spyOn(redux, `useDispatch`);
+  beforeEach(() => {
+    history = createMemoryHistory();
+  });
 
   it(`Render 'MainPage' when user navigate to '/' url`, () => {
-    const history = createMemoryHistory();
     const mockState = {
       ...state,
       DATA: {
@@ -79,7 +82,6 @@ describe(`Test routing`, () => {
   });
 
   it(`Render 'FavoriteScreen' when user navigate to '/favorite' url`, () => {
-    const history = createMemoryHistory();
     const mockState = {
       ...state,
       USER: {
@@ -107,7 +109,6 @@ describe(`Test routing`, () => {
   });
 
   it(`Render 'LoginScreen' when user navigate to '/login' url`, () => {
-    const history = createMemoryHistory();
 
     history.push(Paths.LOGIN);
 
@@ -125,7 +126,6 @@ describe(`Test routing`, () => {
   });
 
   it(`Render 'DetailOfferScreen' when user navigate to '/offer/:id' url`, () => {
-    const history = createMemoryHistory();
     window.scrollTo = jest.fn();
     const mockState = {
       ...state,
@@ -161,7 +161,6 @@ describe(`Test routing`, () => {
   });
 
   it(`Render 'NotFoundScreen' when user navigate to non-existent route`, () => {
-    const history = createMemoryHistory();
     history.push(Paths.NOT_FOUND);
 
     render(

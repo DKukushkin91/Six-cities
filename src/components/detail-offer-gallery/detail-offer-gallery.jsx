@@ -8,7 +8,11 @@ const DetailOfferGallery = ({images}) => {
       <div className="property__gallery">
         {images.slice(0, MAX_GALLERY_IMG).map((item)=> (
           <div key={item} className="property__image-wrapper">
-            <img className="property__image" src={`${item}`} alt="Photo studio" />
+            <img
+              className="property__image"
+              src={`${item}`}
+              alt="Photo studio"
+            />
           </div>)
         )}
       </div>

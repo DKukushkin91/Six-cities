@@ -21,7 +21,11 @@ const DetailNearOffer = ({offer}) => {
   }, [activeCardId]);
 
   return (
-    <article onClick={changeOffer} className="near-places__card place-card">
+    <article
+      onClick={changeOffer}
+      className="near-places__card place-card"
+      data-testid="nearby-offer"
+    >
       <div className="near-places__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={`${previewImage}`} width={260} height={200} alt="Place image" />

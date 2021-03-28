@@ -45,4 +45,5 @@ DetailOfferScreen.propTypes = {
   }).isRequired,
 };
 
+export {DetailOfferScreen};
 export default withRouter(DetailOfferScreen);
