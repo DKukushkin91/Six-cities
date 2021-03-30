@@ -1,18 +1,14 @@
 import React from 'react';
-import {render} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
 import DetailOfferScreen from './detail-offer-screen';
 import {Offers} from '../../mocks/mocks';
+import {AuthorizationStatus, DEFAULT_LOCATION} from '../../constants';
 
 const mockStore = configureStore({});
-const store = mockStore({
-  DATA: {
-    offerDetails: Offers[0],
-  }
-});
 
 const match = {
   params: {
@@ -30,6 +26,12 @@ jest.mock(`react-redux`, () => ({
 
 describe(`Test DetailOfferScreen`, () => {
   it(`Should call useDispatch 3 times`, () => {
+    const store = mockStore({
+      DATA: {
+        offerDetails: Offers[0],
+      }
+    });
+
     render(
         <redux.Provider store={store}>
           <Router history={history}>
@@ -41,19 +43,30 @@ describe(`Test DetailOfferScreen`, () => {
     expect(mockDispatch).toBeCalledTimes(3);
   });
 
-  //   it(`Render DetailOfferScreen`, () => {
-  //     const route = `/offer/1`;
+  it(`DetailOfferScreen should render correctly`, () => {
+    const route = `/offer/1`;
+    const store = mockStore({
+      DATA: {
+        offerDetails: Offers[0],
+        isLoaded: true,
+        nearbyOffers: [],
+        comments: [],
+        currentLocation: DEFAULT_LOCATION,
+      },
+      PROCESS: {activeCardId: Offers[0].id},
+      USER: {authorizationStatus: AuthorizationStatus.NO_AUTH}
+    });
 
-  //     history.push(route);
+    history.push(route);
 
-//     render(
-//         <redux.Provider store={store}>
-//           <Router history={history}>
-//             <DetailOfferScreen.WrappedComponent match={match}/>
-//           </Router>
-//         </redux.Provider>
-//     );
-//     expect(screen.getByText(/Bedrooms/i)).toBeInTheDocument();
-//     expect(screen.getByText(/adults/i)).toBeInTheDocument();
-//   });
+    render(
+        <redux.Provider store={store}>
+          <Router history={history}>
+            <DetailOfferScreen.WrappedComponent match={match}/>
+          </Router>
+        </redux.Provider>
+    );
+    expect(screen.getByText(/Bedrooms/i)).toBeInTheDocument();
+    expect(screen.getByText(/adults/i)).toBeInTheDocument();
+  });
 });

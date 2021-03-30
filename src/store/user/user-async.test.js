@@ -5,11 +5,16 @@ import {AuthorizationStatus, Inquiry, Paths} from '../../constants';
 import {ActionType} from '../action';
 
 const api = createAPI(() => {});
+let dispatch;
+let apiMock;
 
 describe(`Async operation work correctly`, () => {
+  beforeEach(()=>{
+    apiMock = new MockAdapter(api);
+    dispatch = jest.fn();
+  });
+
   it(`Should make a correct API call to /login`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
     const checkAuthLoader = checkAuth();
     const data = {
       email: `value`,
@@ -37,8 +42,6 @@ describe(`Async operation work correctly`, () => {
   });
 
   it(`Should make a correct API call to /login`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
     const fakeUser = {email: `test@test.ru`, password: `123456`};
     const loginLoader = login(fakeUser);
 
@@ -63,8 +66,6 @@ describe(`Async operation work correctly`, () => {
   });
 
   it(`Should make a correct API call to /logout`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
     const logoutLoader = logout();
     const data = {
       status: AuthorizationStatus.NO_AUTH,
@@ -90,5 +91,4 @@ describe(`Async operation work correctly`, () => {
         });
       });
   });
-
 });

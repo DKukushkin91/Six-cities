@@ -2,7 +2,7 @@ import {offerData} from './offer-data';
 import {ActionType} from '../action';
 import {
   Offers,
-  FavoritesList,
+  inFavoriteList,
   Comments
 } from '../../mocks/mocks';
 import {
@@ -172,13 +172,13 @@ describe(`Reducer 'offerData' should work correctly`, () => {
     const state = mockState;
     const loadFavoritesList = {
       type: ActionType.LOAD_FAVORITES,
-      payload: FavoritesList
+      payload: inFavoriteList
     };
 
     expect(offerData(state, loadFavoritesList))
       .toEqual({
         ...state,
-        favorites: FavoritesList,
+        favorites: inFavoriteList,
         isFavoritesLoad: true
       });
   });

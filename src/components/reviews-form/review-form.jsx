@@ -48,7 +48,7 @@ const ReviewForm = ({comments, offerId}) => {
       <div className="reviews__rating-form form__rating">
         {RatingStar.map(({stars, title}) =>
           <React.Fragment key={stars}>
-            <input onClick={handleFieldChange} className="form__rating-input visually-hidden" name="rating" id={`${stars}-stars`}
+            <input data-testid={`${stars}-stars`} onClick={handleFieldChange} className="form__rating-input visually-hidden" name="rating" id={`${stars}-stars`}
               defaultValue={`${stars}`} type="radio" disabled={fieldDisabled}/>
             <label htmlFor={`${stars}-stars`} className="reviews__rating-label form__rating-label" title={`${title}`}>
               <svg className="form__star-image" width={37} height={33}>
@@ -58,9 +58,9 @@ const ReviewForm = ({comments, offerId}) => {
           </React.Fragment>
         )}
       </div>
-      <textarea onChange={handleFieldChange} className="reviews__textarea form__textarea" id="review" name="review"
+      <textarea data-testid="review" onChange={handleFieldChange} className="reviews__textarea form__textarea" id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={``} disabled={fieldDisabled}/>
+        disabled={fieldDisabled} defaultValue={``}/>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span>

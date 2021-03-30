@@ -4,48 +4,50 @@ import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
+import OfferCard from './offer-card';
 import userEvent from '@testing-library/user-event';
-import DetailNearOffer from './detail-near-offer';
 import {Offers} from '../../mocks/mocks';
-import {AuthorizationStatus, Paths} from '../../constants';
+import {AuthorizationStatus} from '../../constants';
 
 const mockStore = configureStore({});
+const history = createMemoryHistory();
 const mockDispatch = jest.fn();
-window.scrollTo = jest.fn();
+let activeOffer;
 
 jest.mock(`react-redux`, () => ({
   ...jest.requireActual(`react-redux`),
   useDispatch: () => mockDispatch,
 }));
 
-it(`Dispatch id`, () => {
-  const store = mockStore({
-    PROCESS: {activeId: 2},
-    USER: {authorizationStatus: AuthorizationStatus.AUTH}
-  });
+jest.mock(`../../store/action`, () => ({
+  ...jest.requireActual(`../../store/action`),
+  changeActiveOffer: (data) => {
+    activeOffer = data;
+  },
+}));
 
-  const history = createMemoryHistory();
-  history.push(Paths.OFFER);
+it(`Should set an active offer`, () => {
+  const store = mockStore({
+    PROCESS: {
+      activeCardId: null
+    },
+    USER: {
+      authorizationStatus: AuthorizationStatus.AUTH
+    }
+  });
+  const offer = Offers[0];
 
   render(
       <redux.Provider store={store}>
         <Router history={history}>
-          <DetailNearOffer offer={Offers[0]}/>
+          <OfferCard offer={offer}/>
         </Router>
       </redux.Provider>
   );
 
-  userEvent.click(screen.getByTestId(`nearby-offer`));
+  const article = screen.getByRole(`article`);
 
-  const expectedData = {
-    id: 2
-  };
-
-  const testValue = {
-    id: 2
-  };
-
+  userEvent.hover(article);
   expect(mockDispatch).toBeCalled();
-  expect(testValue).toMatchObject(expectedData);
+  expect(activeOffer).toStrictEqual(offer.id);
 });
-

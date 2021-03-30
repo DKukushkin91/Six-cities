@@ -10,7 +10,7 @@ import {Comments, Offers} from '../../mocks/mocks';
 
 const mockStore = configureStore({});
 
-it(`Render DetailOfferReview`, () => {
+it(`DetailOfferReview should render correctly`, () => {
   const store = mockStore({
     USER: {authorizationStatus: AuthorizationStatus.AUTH}
   });

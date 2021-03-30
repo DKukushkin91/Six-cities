@@ -17,7 +17,7 @@ const LocationsList = ({cities, currentCity}) => {
     <ul className="locations__list tabs__list">
       {cities.map((item) => (
         <li key={item} className="locations__item">
-          <a onClick={()=> changeLocation(item)}
+          <a data-testid={`city-${item}`} onClick={()=> changeLocation(item)}
             className={`locations__item-link tabs__item ${activeLocation(item)}`} href="#">
             <span>{item}</span>
           </a>

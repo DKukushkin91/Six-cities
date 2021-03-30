@@ -4,26 +4,23 @@ import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
-import {Paths} from '../../constants';
-import DetailOfferGallery from './detail-offer-gallery';
-import {Offers} from '../../mocks/mocks';
+import Rating from "./rating";
+import {Offers} from "../../mocks/mocks";
 
 const mockStore = configureStore({});
+const history = createMemoryHistory();
 
-it(`DetailOfferGallery should render correctly`, () => {
+it(`Rating should render correctly`, () => {
   const store = mockStore({});
-  const {images} = Offers[0];
-  const history = createMemoryHistory();
-
-  history.push(Paths.OFFER);
+  const {rating} = Offers[0];
 
   render(
       <redux.Provider store={store}>
         <Router history={history}>
-          <DetailOfferGallery images={images}/>
+          <Rating rating={rating}/>
         </Router>
       </redux.Provider>
   );
 
-  expect(screen.getAllByAltText(`Photo studio`));
+  expect(screen.getByText(`Rating`)).toBeInTheDocument();
 });

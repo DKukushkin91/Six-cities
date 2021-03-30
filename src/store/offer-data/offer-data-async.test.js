@@ -15,11 +15,18 @@ import {
 } from '../api-actions';
 
 const api = createAPI(() => {});
+let apiMock;
+let dispatch;
+let offer;
 
 describe(`Async operation work correctly`, () => {
+  beforeEach(()=>{
+    apiMock = new MockAdapter(api);
+    dispatch = jest.fn();
+    offer = Offers[1];
+  });
+
   it(`Should make a correct API call to /hotels`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
     const offersLoader = fetchOfferList();
     const offers = Offers;
     const data = adaptOffers(offers);
@@ -39,9 +46,6 @@ describe(`Async operation work correctly`, () => {
   });
 
   it(`Should make a correct API call to /hotels/id`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const offer = Offers[1];
     const data = offerAdapter(offer);
     const {id} = data;
     const detailOfferLoader = fetchDetailOffer(id);
@@ -61,9 +65,6 @@ describe(`Async operation work correctly`, () => {
   });
 
   it(`Should make a correct API call to /hotels/id/nearby`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const offer = Offers[1];
     const {id} = offer;
     const offers = Offers;
     const data = adaptOffers(offers);
@@ -84,8 +85,6 @@ describe(`Async operation work correctly`, () => {
   });
 
   it(`Should make a correct API call to /comments/id`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
     const comment = Comments[1];
     const {id} = comment;
     const comments = Comments;
@@ -107,8 +106,6 @@ describe(`Async operation work correctly`, () => {
   });
 
   it(`Should make a correct API post to /comments/id`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
     const userComment = Comments[1];
     const {id, comment, rating} = userComment;
     const comments = Comments;
@@ -130,8 +127,6 @@ describe(`Async operation work correctly`, () => {
   });
 
   it(`Should make a correct API call to /favorite`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
     const offers = Offers;
     const data = adaptOffers(offers);
     const favoritesListLoader = favoriteList();
@@ -151,9 +146,6 @@ describe(`Async operation work correctly`, () => {
   });
 
   it(`Should make a correct API call to /favorite/id/status`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const offer = Offers[1];
     const {id} = offer;
     const favorite = offer.isFavorite = 1;
     const data = offerAdapter(offer);

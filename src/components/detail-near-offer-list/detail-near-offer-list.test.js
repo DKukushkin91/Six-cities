@@ -11,7 +11,7 @@ import {AuthorizationStatus, Paths} from '../../constants';
 const mockStore = configureStore({});
 window.scrollTo = jest.fn();
 
-it(`Render DetailNearOfferList`, () => {
+it(`DetailNearOfferList should render correctly`, () => {
   const store = mockStore({
     PROCESS: {activeCardId: 1},
     USER: {authorizationStatus: AuthorizationStatus.AUTH}

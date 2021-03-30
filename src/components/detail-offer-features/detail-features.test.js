@@ -10,7 +10,7 @@ import {Offers} from '../../mocks/mocks';
 
 const mockStore = configureStore({});
 
-it(`Render DetailFeatures`, () => {
+it(`DetailFeatures should render correctly`, () => {
   const store = mockStore({});
   const detailOffer = Offers[0];
   const history = createMemoryHistory();

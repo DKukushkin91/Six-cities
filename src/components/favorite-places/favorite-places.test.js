@@ -10,7 +10,7 @@ import {Offers} from '../../mocks/mocks';
 
 const mockStore = configureStore({});
 
-it(`Render Favorite`, () => {
+it(`FavoritePlaces should render correctly`, () => {
   const store = mockStore({
     USER: {authorizationStatus: AuthorizationStatus.AUTH}
   });
