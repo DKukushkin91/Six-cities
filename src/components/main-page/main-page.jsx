@@ -9,11 +9,13 @@ import OfferSorting from '../offer-sorting/offer-sorting';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchOfferList} from '../../store/api-actions';
 import OffersListEmpty from '../offers-list-empty/offers-list-empty';
+import NotFoundScreen from "../not-found-screen/not-found-screen";
 
 const MainPage = () => {
   const currentOffers = useSelector((state) => state.DATA.currentOffers);
   const currentCity = useSelector((state) => state.DATA.currentCity);
   const isDataLoaded = useSelector((state) => state.DATA.isDataLoaded);
+  const error = useSelector((state) => state.DATA.error);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,6 +23,10 @@ const MainPage = () => {
       dispatch(fetchOfferList());
     }
   }, [isDataLoaded]);
+
+  if (error) {
+    return <NotFoundScreen/>;
+  }
 
   if (!isDataLoaded) {
     return <LoadingScreen />;
