@@ -9,7 +9,6 @@ import {Paths} from '../../constants';
 import PrivateRoute from '../private-route/private-route';
 import AuthRoute from '../auth-route/auth-route';
 
-
 const App = () => {
   return (
     <Switch>

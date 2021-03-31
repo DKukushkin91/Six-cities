@@ -1,4 +1,4 @@
-import {Offers, DetailOffer, Comments, FavoritesList} from '../mocks/mocks';
+import {Offers, DetailOffer, Comments, inFavoriteList} from '../mocks/mocks';
 import {DEFAULT_CITY, CURRENT_SORTING, AuthorizationStatus} from '../constants';
 import {
   changeCity,
@@ -156,7 +156,7 @@ describe(`Action creators work correctly`, () => {
 
   it(`Action creators for change favorite status returns correct action`, () => {
     const favorite = {
-      favorite: FavoritesList
+      favorite: inFavoriteList
     };
 
     const expectedAction = {
@@ -169,7 +169,7 @@ describe(`Action creators work correctly`, () => {
 
   it(`Action creators for load favorites list returns correct action`, () => {
     const favorites = {
-      favorites: FavoritesList
+      favorites: inFavoriteList
     };
 
     const expectedAction = {

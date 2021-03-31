@@ -3,7 +3,6 @@ import {redirectToRoute} from './action';
 
 const mockRedux = () => {
   const store = {
-    getState: jest.fn(() => ({})),
     dispatch: jest.fn(),
   };
 
