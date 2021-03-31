@@ -12,6 +12,9 @@ const mockStore = configureStore({});
 const history = createMemoryHistory();
 const mockDispatch = jest.fn();
 let selectedCity;
+let currentCity;
+let citiesList;
+let store;
 
 jest.mock(`react-redux`, () => ({
   ...jest.requireActual(`react-redux`),
@@ -26,15 +29,16 @@ jest.mock(`../../store/action`, () => ({
 }));
 
 describe(`LocationsList test`, () => {
+  beforeEach(() => {
+    currentCity = DEFAULT_CITY;
+    citiesList = CITIES_LIST;
+    store = mockStore({});
+  });
   it(`LocationsList should render correctly`, () => {
-    const store = mockStore({});
-    const cities = CITIES_LIST;
-    const currentCity = DEFAULT_CITY;
-
     const {container} = render(
         <redux.Provider store = {store}>
           <Router history = {history}>
-            <LocationsList cities = {cities} currentCity = {currentCity}/>
+            <LocationsList cities = {citiesList} currentCity = {currentCity}/>
           </Router>
         </redux.Provider>
     );
@@ -44,10 +48,6 @@ describe(`LocationsList test`, () => {
   });
 
   it(`Should call dispatch with chosen city`, () => {
-    const store = mockStore({});
-    const citiesList = CITIES_LIST;
-    const currentCity = DEFAULT_CITY;
-
     render(
         <redux.Provider store = {store}>
           <Router history = {history}>

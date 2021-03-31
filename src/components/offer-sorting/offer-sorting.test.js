@@ -11,6 +11,7 @@ import userEvent from '@testing-library/user-event';
 const mockStore = configureStore({});
 const history = createMemoryHistory();
 const mockDispatch = jest.fn();
+let options;
 
 jest.mock(`react-redux`, () => ({
   ...jest.requireActual(`react-redux`),
@@ -18,13 +19,15 @@ jest.mock(`react-redux`, () => ({
 }));
 
 describe(`Test Offers Sorting`, () => {
+  beforeEach(() => {
+    options = SORTING_LIST;
+  });
   it(`OfferSorting should render correctly`, () => {
     const store = mockStore({
       DATA: {
         currentOption: CURRENT_SORTING
       }
     });
-    const options = SORTING_LIST;
 
     const {container} = render(
         <redux.Provider store={store}>
@@ -44,7 +47,6 @@ describe(`Test Offers Sorting`, () => {
         currentOption: CURRENT_SORTING
       }
     });
-    const options = SORTING_LIST;
 
     const {container} = render(
         <redux.Provider store={store}>
@@ -71,7 +73,6 @@ describe(`Test Offers Sorting`, () => {
         currentOption: `Price: high to low`
       }
     });
-    const options = SORTING_LIST;
 
     const {container} = render(
         <redux.Provider store={store}>

@@ -20,12 +20,11 @@ it(`OffersList should render correctly`, () => {
       authorizationStatus: AuthorizationStatus.NO_AUTH
     }
   });
-  const offers = Offers;
 
   render(
       <redux.Provider store={store}>
         <Router history={history}>
-          <OffersList offers={offers}/>
+          <OffersList offers={Offers}/>
         </Router>
       </redux.Provider>
   );
