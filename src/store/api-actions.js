@@ -6,6 +6,7 @@ import {adaptComments, adaptOffers, offerAdapter} from '../services/adapter';
 export const fetchOfferList = () => (dispatch, _getState, api) => (
   api.get(Inquiry.HOTELS)
     .then(({data}) => dispatch(loadOffers(adaptOffers(data))))
+    .catch((error) => dispatch(setError(error.message)))
 );
 
 export const fetchDetailOffer = (id) => (dispatch, _getState, api) => (

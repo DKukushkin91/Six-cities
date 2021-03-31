@@ -13,7 +13,7 @@ it(`NotFoundScreen should render correctly`, () => {
   );
 
   const headerElement = getByText(`404. Page not found`);
-  const linkElement = getByText(`Go Home`);
+  const linkElement = getByText(`Try again`);
 
   expect(headerElement).toBeInTheDocument();
   expect(linkElement).toBeInTheDocument();

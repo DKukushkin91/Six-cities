@@ -145,7 +145,7 @@ describe(`Test routing`, () => {
     const {comments} = mockState.DATA;
     const reviews = getReviews(comments);
 
-    history.push(Paths.OFFER);
+    history.push(`/offer/${Offers[0].id}`);
 
     render(
         <redux.Provider store={mockStore(mockState)}>
@@ -172,6 +172,6 @@ describe(`Test routing`, () => {
     );
 
     expect(screen.getByText(`404. Page not found`)).toBeInTheDocument();
-    expect(screen.getByText(`Go Home`)).toBeInTheDocument();
+    expect(screen.getByText(`Try again`)).toBeInTheDocument();
   });
 });
