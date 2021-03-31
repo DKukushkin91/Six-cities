@@ -1,17 +1,32 @@
 import React, {useState, useEffect} from 'react';
 import {RatingStar} from '../../constants';
 import PropTypes from 'prop-types';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {isSubmitDisabled} from '../../util';
 import {commentsPost} from '../../store/api-actions';
 import ReviewsProp from "../reviews/review.prop";
+import swal from 'sweetalert';
+
+import './reviews-form.css';
 
 const initState = {
   rating: ``,
   review: ``
 };
 
+const errorMessage = (error) => {
+  swal({
+    title: error,
+    icon: `error`,
+    closeOnEsc: true,
+    button: `Restart page`
+  }).then(function () {
+    location.reload();
+  });
+};
+
 const ReviewForm = ({comments, offerId}) => {
+  const error = useSelector((state)=> state.DATA.error);
   const dispatch = useDispatch();
   const [fieldDisabled, setFieldDisabled] = useState(false);
   const [data, changeData] = useState(initState);
@@ -20,6 +35,10 @@ const ReviewForm = ({comments, offerId}) => {
     setFieldDisabled(false);
     changeData(initState);
   }, [comments]);
+
+  useEffect(() => {
+    setFieldDisabled(false);
+  }, [error]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -43,7 +62,15 @@ const ReviewForm = ({comments, offerId}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="reviews__form form" action="#" method="post">
+    <form
+      onSubmit={handleSubmit}
+      className="reviews__form form"
+      action="#"
+      method="post"
+    >
+      {
+        error && errorMessage(error)
+      }
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RatingStar.map(({stars, title}) =>

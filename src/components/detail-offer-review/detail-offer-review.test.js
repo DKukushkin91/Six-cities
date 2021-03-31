@@ -12,7 +12,8 @@ const mockStore = configureStore({});
 
 it(`DetailOfferReview should render correctly`, () => {
   const store = mockStore({
-    USER: {authorizationStatus: AuthorizationStatus.AUTH}
+    USER: {authorizationStatus: AuthorizationStatus.AUTH},
+    DATA: {error: null}
   });
   const {id} = Offers[0];
   const comments = Comments;

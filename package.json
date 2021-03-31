@@ -47,6 +47,7 @@
     "react-redux": "7.2.2",
     "react-router-dom": "5.2.0",
     "reselect": "4.0.0",
+    "sweetalert": "2.1.2",
     "uniqid": "5.2.0"
   },
   "jest": {

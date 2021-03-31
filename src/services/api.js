@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {ErrorMessageType} from '../constants';
 
 const HttpCode = {
   UNAUTHORIZED: 401
@@ -19,10 +20,18 @@ export const createAPI = (onUnauthorized) => {
   const onFail = (err) => {
     const {response} = err;
 
-    if (response.status === HttpCode.UNAUTHORIZED) {
-      onUnauthorized();
+    if (!response) {
+      throw new Error(ErrorMessageType.NETWORK_ERROR);
     }
-    throw err;
+
+    if (response.status === HttpCode.BAD_REQUEST) {
+      throw new Error(ErrorMessageType.BAD_REQUEST);
+
+    } else if (response.status === HttpCode.UNAUTHORIZED) {
+      onUnauthorized();
+
+      throw err;
+    }
   };
 
   api.interceptors.response.use(onSuccess, onFail);

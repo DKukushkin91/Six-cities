@@ -14,7 +14,8 @@ import {
   addedComment,
   changeStatus,
   loadFavorites,
-  ActionType
+  ActionType,
+  setError
 } from './action';
 
 describe(`Action creators work correctly`, () => {
@@ -177,6 +178,15 @@ describe(`Action creators work correctly`, () => {
     };
 
     expect(loadFavorites(favorites)).toEqual(expectedAction);
+  });
+
+  it(`Action creator for set error return correct action with "Network Error" payload`, () => {
+    const expectedAction = {
+      type: ActionType.SET_ERROR,
+      payload: `Network Error`,
+    };
+
+    expect(setError(`Network Error`)).toEqual(expectedAction);
   });
 
 });

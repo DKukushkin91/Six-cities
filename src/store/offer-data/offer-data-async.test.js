@@ -1,5 +1,5 @@
 import {adaptComments, adaptOffers, offerAdapter} from '../../services/adapter';
-import {ActionType} from '../action';
+import {ActionType, setError} from '../action';
 import {Offers, Comments} from '../../mocks/mocks';
 import {Inquiry} from '../../constants';
 import MockAdapter from 'axios-mock-adapter';
@@ -11,7 +11,7 @@ import {
   fetchCommentList,
   favoriteList,
   commentsPost,
-  favoriteStatus
+  favoriteStatus,
 } from '../api-actions';
 
 const api = createAPI(() => {});
@@ -124,6 +124,22 @@ describe(`Async operation work correctly`, () => {
         payload: comments,
       });
     });
+  });
+
+  it(`Should handle the error call to post /comments/:id`, () => {
+    const userComment = Comments[1];
+    const {id, comment, rating} = userComment;
+    const postComment = commentsPost(id, {comment, rating});
+
+    apiMock
+      .onPost(`${Inquiry.COMMENTS}/${id}`, {comment, rating})
+      .reply(400, []);
+
+    return postComment(dispatch, () => {}, api)
+      .catch((err) => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, setError(err.message));
+      });
   });
 
   it(`Should make a correct API call to /favorite`, () => {

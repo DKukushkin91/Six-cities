@@ -32,6 +32,7 @@ const mockState = {
   isDataLoaded: false,
   isLoaded: false,
   isFavoritesLoad: false,
+  error: null
 };
 
 describe(`Reducer 'offerData' should work correctly`, () => {

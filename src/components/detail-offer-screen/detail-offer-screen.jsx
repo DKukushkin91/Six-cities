@@ -21,7 +21,7 @@ const DetailOfferScreen = ({match}) => {
 
   if (!isLoaded) {
     return (
-      <LoadingScreen />
+      <LoadingScreen/>
     );
   }
 

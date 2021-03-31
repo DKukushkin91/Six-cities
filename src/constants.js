@@ -90,3 +90,8 @@ export const FavoriteButtonSize = {
 };
 
 export const MAX_REVIEWS_LENGTH = 10;
+
+export const ErrorMessageType = {
+  NETWORK_ERROR: `Network unavailable`,
+  BAD_REQUEST: `Invalid data format`,
+};

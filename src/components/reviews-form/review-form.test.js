@@ -30,7 +30,9 @@ jest.mock(`../../store/api-actions`, () => ({
 
 describe(`Test ReviewForm`, () => {
   beforeEach(() => {
-    store = mockStore({});
+    store = mockStore({
+      DATA: {error: null}
+    });
   });
 
   it(`Should correctly render empty form`, () => {
