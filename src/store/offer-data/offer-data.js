@@ -3,7 +3,7 @@ import {CURRENT_SORTING, DEFAULT_CITY, DEFAULT_LOCATION} from '../../constants';
 import {getCityLocation, getSorting, changeFavorites, changeCurrentOffer, changeNearbyOffers, changeFavoriteOffer} from '../../util';
 import {
   changeCity, changeOption, loadOffers, loadDetailOffer,
-  loadComments, loadFavorites, loadNearby, addedComment, changeStatus,
+  loadComments, loadFavorites, loadNearby, addedComment, changeStatus, setError
 } from '../action';
 
 const initialState = {
@@ -19,9 +19,15 @@ const initialState = {
   isDataLoaded: false,
   isLoaded: false,
   isFavoritesLoad: false,
+  error: null,
 };
 
 const offerData = createReducer(initialState, (builder) => {
+
+  builder.addCase(setError, (state, action) => {
+    state.error = action.payload;
+  });
+
   builder.addCase(changeCity, (state, action) => {
     state.currentCity = action.payload;
     state.currentOffers = getSorting(state.offers, action.payload);
@@ -64,6 +70,7 @@ const offerData = createReducer(initialState, (builder) => {
   builder.addCase(addedComment, (state, action) => {
     state.comments = action.payload;
     state.onSendComments = true;
+    state.error = null;
   });
 
   builder.addCase(loadFavorites, (state, action) => {

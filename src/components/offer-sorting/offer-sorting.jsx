@@ -18,15 +18,25 @@ const OfferSorting = ({options}) => {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span onClick={() => setIsOpenedSorting(!isOpenedSorting)} className="places__sorting-type" tabIndex={0}>
+      <span data-testid="open-options"
+        onClick={() => setIsOpenedSorting(!isOpenedSorting)}
+        className="places__sorting-type"
+        tabIndex={0}>
         {currentOption}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul onMouseLeave={()=>setIsOpenedSorting(!isOpenedSorting)} className={`places__options places__options--custom ${isOpenedSorting ? `places__options--opened` : ``}`}>
+      <ul
+        data-testid="options-list"
+        onMouseLeave={()=> setIsOpenedSorting(!isOpenedSorting)}
+        className={`places__options places__options--custom ${isOpenedSorting ? `places__options--opened` : ``}`}>
         {options.map((option) => (
-          <li onClick={()=> changeSorting(option)} className={`places__option ${active(option)}`} key={option} tabIndex={0}>
+          <li data-testid={`options-item-${option}`}
+            onClick={()=> changeSorting(option)}
+            className={`places__option ${active(option)}`}
+            key={option}
+            tabIndex={0}>
             {option}
           </li>)
         )}

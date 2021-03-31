@@ -2,14 +2,14 @@ import React, {memo} from 'react';
 import FavoritesPlaces from '../favorite-places/favorite-places';
 import {Link} from 'react-router-dom';
 import {Paths} from '../../constants';
-import OfferProp from "../offer/offer.prop";
-import PropTypes from "prop-types";
+import OfferProp from '../offer/offer.prop';
+import PropTypes from 'prop-types';
 
 const FavoritesList = ({favorites}) => {
   const cities = [...new Set(favorites.map((item) => item.city.name))];
 
   return (
-    <ul className="favorites__list">
+    <ul data-testid="favorites__list-test" className="favorites__list">
 
       {cities.map((city) => (
         <li key={city} className="favorites__locations-items">

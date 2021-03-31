@@ -26,7 +26,9 @@ const FavoriteButton = ({isFavorite, id, componentName, buttonSize}) => {
     <button
       className={`${componentName}__bookmark-button ${isFavorite ? `${componentName}__bookmark-button--active` : ``} button`}
       onClick={handleClick}
-      type="button">
+      type="button"
+      data-testid="favorite-button"
+    >
       <svg className={`${componentName}__bookmark-icon`} width={buttonSize.WIDTH} height={buttonSize.HEIGHT}>
         <use xlinkHref="#icon-bookmark"/>
       </svg>

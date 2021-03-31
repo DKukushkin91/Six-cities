@@ -1,4 +1,4 @@
-import {Offers, DetailOffer, Comments, FavoritesList} from '../mocks/mocks';
+import {Offers, DetailOffer, Comments, inFavoriteList} from '../mocks/mocks';
 import {DEFAULT_CITY, CURRENT_SORTING, AuthorizationStatus} from '../constants';
 import {
   changeCity,
@@ -14,7 +14,8 @@ import {
   addedComment,
   changeStatus,
   loadFavorites,
-  ActionType
+  ActionType,
+  setError
 } from './action';
 
 describe(`Action creators work correctly`, () => {
@@ -44,7 +45,7 @@ describe(`Action creators work correctly`, () => {
 
   it(`Action creators for change active offer returns correct action`, () => {
     const id = {
-      id: Number
+      id: Number()
     };
     const expectedAction = {
       type: ActionType.CHANGE_ACTIVE_OFFER,
@@ -155,7 +156,7 @@ describe(`Action creators work correctly`, () => {
 
   it(`Action creators for change favorite status returns correct action`, () => {
     const favorite = {
-      favorite: FavoritesList
+      favorite: inFavoriteList
     };
 
     const expectedAction = {
@@ -168,7 +169,7 @@ describe(`Action creators work correctly`, () => {
 
   it(`Action creators for load favorites list returns correct action`, () => {
     const favorites = {
-      favorites: FavoritesList
+      favorites: inFavoriteList
     };
 
     const expectedAction = {
@@ -177,6 +178,15 @@ describe(`Action creators work correctly`, () => {
     };
 
     expect(loadFavorites(favorites)).toEqual(expectedAction);
+  });
+
+  it(`Action creator for set error return correct action with "Network Error" payload`, () => {
+    const expectedAction = {
+      type: ActionType.SET_ERROR,
+      payload: `Network Error`,
+    };
+
+    expect(setError(`Network Error`)).toEqual(expectedAction);
   });
 
 });

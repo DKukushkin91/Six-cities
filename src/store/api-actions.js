@@ -1,5 +1,5 @@
 import {loadOffers, loadDetailOffer, loadNearby, loadComments, requireAuthorization, changeValue,
-  redirectToRoute, loadFavorites, addedComment, changeStatus} from './action';
+  redirectToRoute, loadFavorites, addedComment, changeStatus, setError} from './action';
 import {AuthorizationStatus, Inquiry, Paths} from '../constants';
 import {adaptComments, adaptOffers, offerAdapter} from '../services/adapter';
 
@@ -52,6 +52,7 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
 export const commentsPost = (id, {comment, rating}) => (dispatch, _getState, api) => (
   api.post(`${Inquiry.COMMENTS}/${id}`, {comment, rating})
     .then(({data}) => dispatch(addedComment(adaptComments(data))))
+    .catch((error) => dispatch(setError(error.message)))
 );
 
 export const favoriteStatus = ({id, favorite}) => (dispatch, _getState, api) => (

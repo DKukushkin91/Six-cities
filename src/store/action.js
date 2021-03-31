@@ -14,7 +14,8 @@ export const ActionType = {
   OPEN_PROPERTY: `offerDetails/openProperty`,
   LOAD_DETAILS: `data/loadDetails`,
   CHANGE_STATUS: `offer/changeStatus`,
-  LOAD_FAVORITES: `data/loadFavorites`
+  LOAD_FAVORITES: `data/loadFavorites`,
+  SET_ERROR: `data/setError`
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CURRENT_CITY, (city) => {
@@ -92,6 +93,12 @@ export const changeStatus = createAction(ActionType.CHANGE_STATUS, (favorite) =>
 export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (favorites) => {
   return {
     payload: favorites
+  };
+});
+
+export const setError = createAction(ActionType.SET_ERROR, (error) => {
+  return {
+    payload: error
   };
 });
 

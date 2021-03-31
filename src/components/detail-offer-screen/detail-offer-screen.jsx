@@ -21,7 +21,7 @@ const DetailOfferScreen = ({match}) => {
 
   if (!isLoaded) {
     return (
-      <LoadingScreen />
+      <LoadingScreen/>
     );
   }
 
@@ -45,4 +45,5 @@ DetailOfferScreen.propTypes = {
   }).isRequired,
 };
 
+export {DetailOfferScreen};
 export default withRouter(DetailOfferScreen);
