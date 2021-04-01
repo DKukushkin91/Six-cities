@@ -12,7 +12,7 @@ const FavoritesList = ({favorites}) => {
     <ul data-testid="favorites__list-test" className="favorites__list">
 
       {cities.map((city) => (
-        <li key={city} className="favorites__locations-items">
+        <li key={`favorites-${city}`} className="favorites__locations-items">
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
               <Link to={Path.MAIN} className="locations__item-link">
