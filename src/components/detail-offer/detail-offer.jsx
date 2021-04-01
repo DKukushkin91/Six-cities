@@ -16,7 +16,21 @@ import Rating from '../rating/rating';
 const DetailOffer = ({offerDetails}) => {
   const comments = useSelector((state) => state.DATA.comments);
   const nearbyOffers = useSelector((state) => state.DATA.nearbyOffers);
-  const {id, title, price, images, goods, rating, isFavorite, isPremium, type, bedrooms, maxAdults, description, host} = offerDetails;
+  const {
+    id,
+    title,
+    price,
+    images,
+    goods,
+    rating,
+    isFavorite,
+    isPremium,
+    type,
+    bedrooms,
+    maxAdults,
+    description,
+    host
+  } = offerDetails;
   const detailsNearbyOffers = [...nearbyOffers, offerDetails];
 
   return (
