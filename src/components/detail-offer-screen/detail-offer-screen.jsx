@@ -35,7 +35,7 @@ const DetailOfferScreen = ({match}) => {
   return (
     <>
       <div className="page">
-        {<Header/>}
+        <Header/>
         <main className="page__main page__main--property">
           <DetailOffer offerDetails={offerDetails}/>
         </main>

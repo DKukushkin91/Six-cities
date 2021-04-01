@@ -22,7 +22,7 @@ const DetailOffer = ({offerDetails}) => {
   return (
     <>
       <section className="property">
-        {<DetailOfferGallery images={images}/>}
+        <DetailOfferGallery images={images}/>
         <div className="property__container container">
           <div className="property__wrapper">
             <PremiumMark isPremium={isPremium} componentName={ComponentName.PROPERTY}/>
@@ -47,18 +47,18 @@ const DetailOffer = ({offerDetails}) => {
               <span className="property__price-text">&nbsp;night</span>
             </div>
             <div className="property__inside">
-              {<DetailOfferGoods goods={goods}/>}
+              <DetailOfferGoods goods={goods}/>
             </div>
-            {<DetailOfferHost offer={offerDetails}/>}
-            {<DetailOfferReview offerId={id} comments={comments}/>}
+            <DetailOfferHost offer={offerDetails}/>
+            <DetailOfferReview offerId={id} comments={comments}/>
           </div>
         </div>
         <section className="property__map map">
-          {<Map offers={detailsNearbyOffers} offerDetails={offerDetails}/>}
+          <Map offers={detailsNearbyOffers} offerDetails={offerDetails}/>
         </section>
       </section>
       <div className="container">
-        {<DetailNearOfferList offer={nearbyOffers}/>}
+        <DetailNearOfferList offer={nearbyOffers}/>
       </div>
     </>
   );

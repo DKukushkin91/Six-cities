@@ -31,7 +31,7 @@ const DetailNearOffer = ({offer}) => {
           <img className="place-card__image" src={`${previewImage}`} width={260} height={200} alt="Place image" />
         </Link>
       </div>
-      {<Offer offer={offer}/>}
+      <Offer offer={offer}/>
     </article>
   );
 };

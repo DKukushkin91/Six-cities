@@ -13,7 +13,7 @@ const DetailOfferReview = ({comments, offerId}) => {
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
-      {<ReviewList comments={reviews}/>}
+      <ReviewList comments={reviews}/>
       {authorizationStatus && <ReviewsForm comments={comments} offerId={offerId}/>}
     </section>
   );

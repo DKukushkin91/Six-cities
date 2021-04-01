@@ -34,12 +34,12 @@ const MainPage = () => {
 
   return (
     <div className="page page--gray page--main">
-      {<Header/>}
+      <Header/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            {<LocationsList cities={CITIES_LIST} currentCity={currentCity}/>}
+            <LocationsList cities={CITIES_LIST} currentCity={currentCity}/>
           </section>
         </div>
         <div className="cities">
@@ -48,14 +48,14 @@ const MainPage = () => {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
-                {<OfferSorting options={SORTING_LIST}/>}
+                <OfferSorting options={SORTING_LIST}/>
                 <div className="cities__places-list places__list tabs__content">
-                  {<OffersList offers={currentOffers}/>}
+                  <OffersList offers={currentOffers}/>
                 </div>
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  {<Map offers={currentOffers}/>}
+                  <Map offers={currentOffers}/>
                 </section>
               </div>
             </div>

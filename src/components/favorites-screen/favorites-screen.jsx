@@ -28,7 +28,7 @@ const FavoritesScreen = () => {
   return (
     <>
       <div className="page">
-        {<Header/>}
+        <Header/>
         <main className={`page__main page__main--favorites${favorites.length > 0 ? `` : `-empty`}`}>
           <div className="page__favorites-container container">
             {favorites.length > 0 ?
