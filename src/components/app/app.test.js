@@ -88,6 +88,7 @@ describe(`Test routing`, () => {
       },
       DATA: {
         favorites: [],
+        isFavoritesLoaded: true
       }
     };
 

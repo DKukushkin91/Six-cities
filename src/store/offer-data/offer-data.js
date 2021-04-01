@@ -18,6 +18,7 @@ const initialState = {
   offerDetails: null,
   error: null,
   isDataLoaded: false,
+  isFavoritesLoaded: false
 };
 
 const offerData = createReducer(initialState, (builder) => {
@@ -34,7 +35,8 @@ const offerData = createReducer(initialState, (builder) => {
   });
 
   builder.addCase(changeStatus, (state, action) => {
-    state.currentOffers = changeFavoriteOffer(state.currentOffers, action.payload);
+    state.offers = changeFavoriteOffer(state.offers, action.payload);
+    state.currentOffers = getSorting(state.offers, state.currentCity, state.currentOption);
     state.favorites = changeFavorites(state.favorites, action.payload);
     state.nearbyOffers = changeNearbyOffers(state.nearbyOffers, action.payload);
     state.offerDetails = changeCurrentOffer(state.offerDetails, action.payload);
@@ -71,6 +73,7 @@ const offerData = createReducer(initialState, (builder) => {
 
   builder.addCase(loadFavorites, (state, action) => {
     state.favorites = action.payload;
+    state.isFavoritesLoaded = true;
   });
 });
 

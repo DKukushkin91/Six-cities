@@ -15,6 +15,7 @@ describe(`Test FavoritesScreen`, () => {
   it(`FavoritesScreen should render correctly`, () => {
     const store = mockStore({
       DATA: {
+        isFavoritesLoaded: true,
         favorites: Offers.map((item) => ({...item, isFavorite: true})),
       },
       USER: {
@@ -40,6 +41,7 @@ describe(`Test FavoritesScreen`, () => {
   it(`FavoritesScreen empty render`, () => {
     const store = mockStore({
       DATA: {
+        isFavoritesLoaded: true,
         favorites: [],
       },
       USER: {

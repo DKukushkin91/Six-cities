@@ -31,6 +31,7 @@ const mockState = {
   offerDetails: null,
   error: null,
   isDataLoaded: false,
+  isFavoritesLoaded: false
 };
 
 describe(`Reducer 'offerData' should work correctly`, () => {
@@ -86,9 +87,10 @@ describe(`Reducer 'offerData' should work correctly`, () => {
   });
 
   it(`Reducer should update favorite status`, () => {
-    const offer = Offers[1];
+    const offer = Offers[0];
     const state = {
       ...mockState,
+      offers: Offers,
       currentOffers: Offers,
       favorites: Offers,
       nearbyOffers: Offers,
@@ -102,7 +104,8 @@ describe(`Reducer 'offerData' should work correctly`, () => {
     expect(offerData(state, changeStatus))
       .toEqual({
         ...state,
-        currentOffers: changeFavoriteOffer(Offers, offer),
+        offers: changeFavoriteOffer(Offers, offer),
+        currentOffers: getSorting(Offers, DEFAULT_CITY, CURRENT_SORTING),
         favorites: changeFavorites(Offers, offer),
         nearbyOffers: changeNearbyOffers(Offers, offer),
         offerDetails: changeCurrentOffer(offer, offer),
@@ -176,6 +179,7 @@ describe(`Reducer 'offerData' should work correctly`, () => {
       .toEqual({
         ...state,
         favorites: inFavoriteList,
+        isFavoritesLoaded: true
       });
   });
 

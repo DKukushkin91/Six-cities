@@ -9,16 +9,17 @@ import {useDispatch, useSelector} from 'react-redux';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 const FavoritesScreen = () => {
+  const isFavoritesLoaded = useSelector((state) => state.DATA.isFavoritesLoaded);
   const favorites = useSelector((state) => state.DATA.favorites);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!favorites) {
-      dispatch(favoriteList(favorites));
+    if (!isFavoritesLoaded) {
+      dispatch(favoriteList());
     }
-  }, [favorites]);
+  }, [isFavoritesLoaded, favorites]);
 
-  if (!favorites) {
+  if (!isFavoritesLoaded) {
     return (
       <LoadingScreen />
     );

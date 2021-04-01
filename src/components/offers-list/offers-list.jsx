@@ -19,6 +19,6 @@ OffersList.propTypes = {
   offers: PropTypes.arrayOf(OfferProp).isRequired,
 };
 
-export default memo(OffersList, (prevProps, nextProps) =>
-  prevProps.offers === nextProps.offers
+export default memo(OffersList, (prevProp, nextProp) =>
+  prevProp.offers === nextProp.offers
 );

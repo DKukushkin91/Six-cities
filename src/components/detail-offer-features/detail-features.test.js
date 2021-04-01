@@ -12,14 +12,14 @@ const mockStore = configureStore({});
 
 it(`DetailFeatures should render correctly`, () => {
   const store = mockStore({});
-  const detailOffer = Offers[0];
+  const {type, bedrooms, maxAdults} = Offers[0];
   const history = createMemoryHistory();
   history.push(Path.OFFER);
 
   render(
       <redux.Provider store={store}>
         <Router history={history}>
-          <DetailFeatures offers={detailOffer}/>
+          <DetailFeatures type={type} bedrooms={bedrooms} maxAdults={maxAdults}/>
         </Router>
       </redux.Provider>
   );

@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {changeCity} from '../../store/action';
 import {useDispatch} from 'react-redux';
@@ -6,11 +6,11 @@ import {useDispatch} from 'react-redux';
 const LocationsList = ({cities, currentCity}) => {
   const dispatch = useDispatch();
 
-  const changeLocation = (item) => {
+  const changeLocation = useCallback((item) => {
     if (item !== currentCity) {
       dispatch(changeCity(item));
     }
-  };
+  }, [cities, currentCity]);
 
   const activeLocation = (item) => item === currentCity ? `tabs__item--active` : ``;
 
