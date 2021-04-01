@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
 import {isSubmitDisabled} from '../../util';
 import {commentsPost} from '../../store/api-actions';
-import ReviewsProp from "../reviews/review.prop";
+import ReviewsProp from "../review/review.prop";
 import swal from 'sweetalert';
 
 import './reviews-form.css';
@@ -75,9 +75,19 @@ const ReviewForm = ({comments, offerId}) => {
       <div className="reviews__rating-form form__rating">
         {RatingStar.map(({stars, title}) =>
           <React.Fragment key={stars}>
-            <input data-testid={`${stars}-stars`} onClick={handleFieldChange} className="form__rating-input visually-hidden" name="rating" id={`${stars}-stars`}
-              defaultValue={`${stars}`} type="radio" disabled={fieldDisabled}/>
-            <label htmlFor={`${stars}-stars`} className="reviews__rating-label form__rating-label" title={`${title}`}>
+            <input data-testid={`${stars}-stars`}
+              onClick={handleFieldChange}
+              className="form__rating-input visually-hidden"
+              name="rating"
+              id={`${stars}-stars`}
+              defaultValue={`${stars}`}
+              type="radio"
+              disabled={fieldDisabled}
+            />
+            <label htmlFor={`${stars}-stars`}
+              className="reviews__rating-label form__rating-label"
+              title={`${title}`}
+            >
               <svg className="form__star-image" width={37} height={33}>
                 <use xlinkHref="#icon-star"/>
               </svg>
@@ -85,7 +95,12 @@ const ReviewForm = ({comments, offerId}) => {
           </React.Fragment>
         )}
       </div>
-      <textarea data-testid="review" onChange={handleFieldChange} className="reviews__textarea form__textarea" id="review" name="review"
+      <textarea
+        data-testid="review"
+        onChange={handleFieldChange}
+        className="reviews__textarea form__textarea"
+        id="review"
+        name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         disabled={fieldDisabled} defaultValue={``}/>
       <div className="reviews__button-wrapper">
@@ -93,7 +108,12 @@ const ReviewForm = ({comments, offerId}) => {
             To submit review please make sure to set <span className="reviews__star">rating</span>
             and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={isSubmitDisabled(data, fieldDisabled)}>Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={isSubmitDisabled(data, fieldDisabled)}>
+          Submit
+        </button>
       </div>
     </form>
   );

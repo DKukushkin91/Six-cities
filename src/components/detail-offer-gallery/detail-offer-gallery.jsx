@@ -20,7 +20,6 @@ const DetailOfferGallery = ({images}) => {
   );
 };
 
-
 DetailOfferGallery.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };

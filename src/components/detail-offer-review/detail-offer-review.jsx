@@ -1,9 +1,9 @@
-import React, {memo} from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import ReviewList from '../reviews-list/review-list';
 import ReviewsForm from '../reviews-form/review-form';
-import ReviewsProp from '../reviews/review.prop';
+import ReviewsProp from '../review/review.prop';
 import {getReviews} from "../../util";
 
 const DetailOfferReview = ({comments, offerId}) => {
@@ -24,6 +24,4 @@ DetailOfferReview.propTypes = {
   comments: PropTypes.arrayOf(ReviewsProp).isRequired,
 };
 
-export default memo(DetailOfferReview, (prevProps, nextProps) =>
-  prevProps.comments === nextProps.comments
-);
+export default DetailOfferReview;
