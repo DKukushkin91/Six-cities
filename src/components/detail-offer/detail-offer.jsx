@@ -16,7 +16,7 @@ import Rating from '../rating/rating';
 const DetailOffer = ({offerDetails}) => {
   const comments = useSelector((state) => state.DATA.comments);
   const nearbyOffers = useSelector((state) => state.DATA.nearbyOffers);
-  const {id, title, price, images, goods, rating, isFavorite, isPremium} = offerDetails;
+  const {id, title, price, images, goods, rating, isFavorite, isPremium, type, bedrooms, maxAdults, description, host} = offerDetails;
   const detailsNearbyOffers = [...nearbyOffers, offerDetails];
 
   return (
@@ -41,7 +41,7 @@ const DetailOffer = ({offerDetails}) => {
               rating={rating}
               componentName={ComponentName.PROPERTY}
             />
-            <DetailFeatures offers={offerDetails}/>
+            <DetailFeatures type={type} bedrooms={bedrooms} maxAdults={maxAdults}/>
             <div className="property__price">
               <b className="property__price-value">€{price}</b>
               <span className="property__price-text">&nbsp;night</span>
@@ -49,7 +49,7 @@ const DetailOffer = ({offerDetails}) => {
             <div className="property__inside">
               <DetailOfferGoods goods={goods}/>
             </div>
-            <DetailOfferHost offer={offerDetails}/>
+            <DetailOfferHost description={description} host={host}/>
             <DetailOfferReview offerId={id} comments={comments}/>
           </div>
         </div>

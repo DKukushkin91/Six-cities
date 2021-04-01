@@ -7,7 +7,7 @@ import * as redux from 'react-redux';
 import userEvent from '@testing-library/user-event';
 import DetailNearOffer from './detail-near-offer';
 import {Offers} from '../../mocks/mocks';
-import {AuthorizationStatus, Paths} from '../../constants';
+import {AuthorizationStatus, Path} from '../../constants';
 
 const mockStore = configureStore({});
 const mockDispatch = jest.fn();
@@ -25,7 +25,7 @@ it(`Dispatch id`, () => {
   });
 
   const history = createMemoryHistory();
-  history.push(Paths.OFFER);
+  history.push(Path.OFFER);
 
   render(
       <redux.Provider store={store}>

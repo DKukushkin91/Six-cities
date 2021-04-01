@@ -12,7 +12,7 @@ import {
   DEFAULT_CITY,
   DEFAULT_LOCATION,
   AuthorizationStatus,
-  Paths
+  Path
 } from '../../constants';
 
 const state = {
@@ -26,8 +26,6 @@ const state = {
     favorites: [],
     offerDetails: null,
     isDataLoaded: false,
-    isLoaded: false,
-    isFavoritesLoad: false,
     comments: []
   },
   USER: {
@@ -89,12 +87,11 @@ describe(`Test routing`, () => {
         userValue: `test@test.ru`,
       },
       DATA: {
-        isFavoritesLoad: true,
         favorites: [],
       }
     };
 
-    history.push(Paths.FAVORITES);
+    history.push(Path.FAVORITES);
 
     render(
         <redux.Provider store={mockStore(mockState)}>
@@ -110,7 +107,7 @@ describe(`Test routing`, () => {
 
   it(`Render 'LoginScreen' when user navigate to '/login' url`, () => {
 
-    history.push(Paths.LOGIN);
+    history.push(Path.LOGIN);
 
     render(
         <redux.Provider store={mockStore(state)}>
@@ -130,7 +127,6 @@ describe(`Test routing`, () => {
     const mockState = {
       ...state,
       DATA: {
-        isLoaded: true,
         offerDetails: Offers[0],
         nearbyOffers: Offers.slice(0, 3),
         comments: Comments,
@@ -161,7 +157,7 @@ describe(`Test routing`, () => {
   });
 
   it(`Render 'NotFoundScreen' when user navigate to non-existent route`, () => {
-    history.push(Paths.NOT_FOUND);
+    history.push(Path.NOT_FOUND);
 
     render(
         <redux.Provider store={mockStore(state)}>

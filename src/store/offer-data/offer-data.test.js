@@ -29,10 +29,8 @@ const mockState = {
   comments: [],
   favorites: [],
   offerDetails: null,
+  error: null,
   isDataLoaded: false,
-  isLoaded: false,
-  isFavoritesLoad: false,
-  error: null
 };
 
 describe(`Reducer 'offerData' should work correctly`, () => {
@@ -122,7 +120,6 @@ describe(`Reducer 'offerData' should work correctly`, () => {
       .toEqual({
         ...state,
         offerDetails: Offers,
-        isLoaded: true
       });
   });
 
@@ -165,7 +162,6 @@ describe(`Reducer 'offerData' should work correctly`, () => {
       .toEqual({
         ...state,
         comments: Comments,
-        onSendComments: true
       });
   });
 
@@ -180,7 +176,6 @@ describe(`Reducer 'offerData' should work correctly`, () => {
       .toEqual({
         ...state,
         favorites: inFavoriteList,
-        isFavoritesLoad: true
       });
   });
 

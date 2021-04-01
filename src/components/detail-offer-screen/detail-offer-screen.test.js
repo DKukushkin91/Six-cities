@@ -19,19 +19,28 @@ const match = {
 const history = createMemoryHistory();
 const mockDispatch = jest.fn();
 
+let store;
+
 jest.mock(`react-redux`, () => ({
   ...jest.requireActual(`react-redux`),
   useDispatch: () => mockDispatch,
 }));
 
 describe(`Test DetailOfferScreen`, () => {
-  it(`Should call useDispatch 3 times`, () => {
-    const store = mockStore({
+  beforeEach(() => {
+    store = mockStore({
       DATA: {
         offerDetails: Offers[0],
-      }
+        nearbyOffers: [],
+        comments: [],
+        currentLocation: DEFAULT_LOCATION,
+      },
+      PROCESS: {activeCardId: Offers[0].id},
+      USER: {authorizationStatus: AuthorizationStatus.NO_AUTH}
     });
+  });
 
+  it(`Should call useDispatch 3 times`, () => {
     render(
         <redux.Provider store={store}>
           <Router history={history}>
@@ -45,17 +54,6 @@ describe(`Test DetailOfferScreen`, () => {
 
   it(`DetailOfferScreen should render correctly`, () => {
     const route = `/offer/1`;
-    const store = mockStore({
-      DATA: {
-        offerDetails: Offers[0],
-        isLoaded: true,
-        nearbyOffers: [],
-        comments: [],
-        currentLocation: DEFAULT_LOCATION,
-      },
-      PROCESS: {activeCardId: Offers[0].id},
-      USER: {authorizationStatus: AuthorizationStatus.NO_AUTH}
-    });
 
     history.push(route);
 

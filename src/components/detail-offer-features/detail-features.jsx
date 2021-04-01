@@ -1,9 +1,8 @@
 import React, {memo} from 'react';
 import {getUpperCase} from "../../util";
-import OfferProp from '../offer/offer.prop';
+import PropTypes from 'prop-types';
 
-const DetailFeatures = ({offers}) => {
-  const {type, bedrooms, maxAdults} = offers;
+const DetailFeatures = ({type, bedrooms, maxAdults}) => {
   return (
     <ul className="property__features">
       <li className="property__feature property__feature--entire">
@@ -20,7 +19,9 @@ const DetailFeatures = ({offers}) => {
 };
 
 DetailFeatures.propTypes = {
-  offers: OfferProp.isRequired
+  type: PropTypes.string.isRequired,
+  bedrooms: PropTypes.number.isRequired,
+  maxAdults: PropTypes.number.isRequired
 };
 
 export default memo(DetailFeatures, (prevProps, nextProps) =>

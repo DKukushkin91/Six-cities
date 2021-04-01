@@ -1,6 +1,6 @@
 import {loadOffers, loadDetailOffer, loadNearby, loadComments, requireAuthorization, changeValue,
   redirectToRoute, loadFavorites, addedComment, changeStatus, setError} from './action';
-import {AuthorizationStatus, Inquiry, Paths} from '../constants';
+import {AuthorizationStatus, Inquiry, Path} from '../constants';
 import {adaptComments, adaptOffers, offerAdapter} from '../services/adapter';
 
 export const fetchOfferList = () => (dispatch, _getState, api) => (
@@ -36,7 +36,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 export const logout = () => (dispatch, _getState, api) => (
   api.get(Inquiry.LOGOUT)
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)))
-    .then(() => dispatch(redirectToRoute(Paths.MAIN)))
+    .then(() => dispatch(redirectToRoute(Path.MAIN)))
 );
 
 export const favoriteList = () => (dispatch, _getState, api) => (
@@ -47,7 +47,7 @@ export const favoriteList = () => (dispatch, _getState, api) => (
 export const login = ({email, password}) => (dispatch, _getState, api) => (
   api.post(Inquiry.LOGIN, {email, password})
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(redirectToRoute(Paths.MAIN)))
+    .then(() => dispatch(redirectToRoute(Path.MAIN)))
 );
 
 export const commentsPost = (id, {comment, rating}) => (dispatch, _getState, api) => (

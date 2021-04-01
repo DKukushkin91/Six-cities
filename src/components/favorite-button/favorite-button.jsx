@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {favoriteStatus} from '../../store/api-actions';
 import {useDispatch, useSelector} from "react-redux";
-import {componentNameProp} from '../component-name/component-name.prop';
 import {favoriteNameProp} from './favorite-button.prop';
 import {redirectToRoute} from '../../store/action';
-import {Paths} from '../../constants';
+import {Path} from '../../constants';
 
 const FavoriteButton = ({isFavorite, id, componentName, buttonSize}) => {
   const authorizationStatus = useSelector((state) => state.USER.authorizationStatus);
@@ -13,7 +12,7 @@ const FavoriteButton = ({isFavorite, id, componentName, buttonSize}) => {
 
   const handleClick = () => {
     if (!authorizationStatus) {
-      dispatch(redirectToRoute(Paths.LOGIN));
+      dispatch(redirectToRoute(Path.LOGIN));
     } else {
       dispatch(favoriteStatus({
         id,
@@ -40,7 +39,7 @@ const FavoriteButton = ({isFavorite, id, componentName, buttonSize}) => {
 FavoriteButton.propTypes = {
   isFavorite: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
-  componentName: componentNameProp,
+  componentName: PropTypes.string.isRequired,
   buttonSize: favoriteNameProp
 };
 

@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../store/api-actions';
-import {Paths} from '../../constants';
+import {Path} from '../../constants';
 import Header from '../header/header';
 import {changeValue} from '../../store/action';
 
@@ -68,7 +68,7 @@ const LoginScreen = () => {
             </section>
             <section className="locations locations--login locations--current">
               <div className="locations__item">
-                <Link className="locations__item-link" to={Paths.MAIN}>
+                <Link className="locations__item-link" to={Path.MAIN}>
                   <span>{currentCity}</span>
                 </Link>
               </div>

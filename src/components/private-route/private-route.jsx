@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
-import {Paths, AuthorizationStatus} from '../../constants';
+import {Path, AuthorizationStatus} from '../../constants';
 import PropTypes from 'prop-types';
 import {useSelector} from 'react-redux';
 
@@ -14,7 +14,7 @@ const PrivateRoute = ({exact, path, render}) => {
         return (
           authorizationStatus === AuthorizationStatus.AUTH
             ? render(routeProps)
-            : <Redirect to={Paths.LOGIN}/>
+            : <Redirect to={Path.LOGIN}/>
         );
       }}
     />

@@ -12,7 +12,9 @@ const OffersListEmpty = ({currentCity}) => {
           </p>
         </div>
       </section>
-      <div className="cities__right-section"></div>
+      <div className="cities__right-section">
+        <section className="cities__map map"></section>
+      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
 import PremiumMark from "./premium-mark";
 import {Offers} from "../../mocks/mocks";
+import {ComponentName} from "../../constants";
 
 const mockStore = configureStore({});
 const history = createMemoryHistory();
@@ -13,11 +14,12 @@ const history = createMemoryHistory();
 it(`PremiumMark should render correctly`, () => {
   const store = mockStore({});
   const {isPremium} = Offers[0];
+  const componentName = ComponentName.PROPERTY;
 
   render(
       <redux.Provider store={store}>
         <Router history={history}>
-          <PremiumMark isPremium={isPremium}/>
+          <PremiumMark componentName={componentName} isPremium={isPremium}/>
         </Router>
       </redux.Provider>
   );

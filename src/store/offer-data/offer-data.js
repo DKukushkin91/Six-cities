@@ -16,10 +16,8 @@ const initialState = {
   comments: [],
   favorites: [],
   offerDetails: null,
-  isDataLoaded: false,
-  isLoaded: false,
-  isFavoritesLoad: false,
   error: null,
+  isDataLoaded: false,
 };
 
 const offerData = createReducer(initialState, (builder) => {
@@ -56,7 +54,6 @@ const offerData = createReducer(initialState, (builder) => {
 
   builder.addCase(loadDetailOffer, (state, action) => {
     state.offerDetails = action.payload;
-    state.isLoaded = true;
   });
 
   builder.addCase(loadComments, (state, action) => {
@@ -69,13 +66,11 @@ const offerData = createReducer(initialState, (builder) => {
 
   builder.addCase(addedComment, (state, action) => {
     state.comments = action.payload;
-    state.onSendComments = true;
     state.error = null;
   });
 
   builder.addCase(loadFavorites, (state, action) => {
     state.favorites = action.payload;
-    state.isFavoritesLoad = true;
   });
 });
 

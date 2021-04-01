@@ -6,7 +6,7 @@ import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
 import DetailNearOfferList from './detail-near-offer-list';
 import {Offers} from '../../mocks/mocks';
-import {AuthorizationStatus, Paths} from '../../constants';
+import {AuthorizationStatus, Path} from '../../constants';
 
 const mockStore = configureStore({});
 window.scrollTo = jest.fn();
@@ -17,7 +17,7 @@ it(`DetailNearOfferList should render correctly`, () => {
     USER: {authorizationStatus: AuthorizationStatus.AUTH}
   });
   const history = createMemoryHistory();
-  history.push(Paths.OFFER);
+  history.push(Path.OFFER);
 
   render(
       <redux.Provider store={store}>

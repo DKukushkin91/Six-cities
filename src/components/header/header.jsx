@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
-import {Paths} from '../../constants';
+import {Path} from '../../constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../store/api-actions';
 
@@ -39,7 +39,7 @@ const Header = () => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link className="header__logo-link header__logo-link--active" to={Paths.MAIN}>
+              <Link className="header__logo-link header__logo-link--active" to={Path.MAIN}>
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
               </Link>
             </div>
@@ -48,7 +48,7 @@ const Header = () => {
                 <li className="header__nav-item user">
                   <Link
                     className="header__nav-link header__nav-link--profile"
-                    to={`${authorizationStatus && Paths.FAVORITES || Paths.LOGIN}`}>
+                    to={`${authorizationStatus && Path.FAVORITES || Path.LOGIN}`}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     {authorizationStatus &&

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import FavoritesList from '../favorites-list/favorites-list';
-import {Paths} from '../../constants';
+import {Path} from '../../constants';
 import Header from '../header/header';
 import LoadingScreen from "../loading-screen/loading-screen";
 import {favoriteList} from '../../store/api-actions';
@@ -9,17 +9,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 const FavoritesScreen = () => {
-  const isFavoritesLoad = useSelector((state) => state.DATA.isFavoritesLoad);
   const favorites = useSelector((state) => state.DATA.favorites);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isFavoritesLoad) {
+    if (!favorites) {
       dispatch(favoriteList(favorites));
     }
-  }, [isFavoritesLoad]);
+  }, [favorites]);
 
-  if (!isFavoritesLoad) {
+  if (!favorites) {
     return (
       <LoadingScreen />
     );
@@ -42,7 +41,7 @@ const FavoritesScreen = () => {
           </div>
         </main>
         <footer className="footer container">
-          <Link className="footer__logo-link" to={Paths.MAIN}>
+          <Link className="footer__logo-link" to={Path.MAIN}>
             <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width={64} height={33} />
           </Link>
         </footer>

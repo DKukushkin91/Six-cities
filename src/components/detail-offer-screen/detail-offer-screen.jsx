@@ -10,7 +10,6 @@ import NotFoundScreen from "../not-found-screen/not-found-screen";
 
 const DetailOfferScreen = ({match}) => {
   const offerDetails = useSelector((state) => state.DATA.offerDetails);
-  const isLoaded = useSelector((state) => state.DATA.isLoaded);
   const offerId = Number(match.params.id);
   const dispatch = useDispatch();
 
@@ -26,7 +25,7 @@ const DetailOfferScreen = ({match}) => {
     );
   }
 
-  if (!isLoaded) {
+  if (!offerDetails) {
     return (
       <LoadingScreen/>
     );

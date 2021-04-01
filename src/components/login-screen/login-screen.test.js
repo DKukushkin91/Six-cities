@@ -6,7 +6,7 @@ import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
 import userEvent from '@testing-library/user-event';
 import LoginScreen from './login-screen';
-import {AuthorizationStatus, DEFAULT_CITY, Paths} from '../../constants';
+import {AuthorizationStatus, DEFAULT_CITY, Path} from '../../constants';
 
 const mockStore = configureStore({});
 const mockDispatch = jest.fn();
@@ -35,7 +35,7 @@ describe(`Test LoginScreen`, () => {
       DATA: {currentCity: DEFAULT_CITY},
       USER: {authorizationStatus: AuthorizationStatus.NO_AUTH}
     });
-    history.push(Paths.LOGIN);
+    history.push(Path.LOGIN);
 
     render(
         <redux.Provider store={store}>
@@ -51,7 +51,7 @@ describe(`Test LoginScreen`, () => {
   });
 
   it(`LoginScreen send correct data`, () => {
-    history.push(Paths.LOGIN);
+    history.push(Path.LOGIN);
     const store = mockStore({
       DATA: {currentCity: DEFAULT_CITY},
       USER: {authorizationStatus: AuthorizationStatus.NO_AUTH}

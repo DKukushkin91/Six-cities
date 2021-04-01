@@ -1,8 +1,8 @@
-import React, {memo} from 'react';
-import OfferProp from '../offer/offer.prop';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const DetailOfferHost = ({offer}) => {
-  const {description, host: {name, avatarUrl, isPro}} = offer;
+const DetailOfferHost = ({description, host}) => {
+  const {name, avatarUrl, isPro} = host;
   const onProHost = isPro ? `--pro` : ``;
   return (
     <div className="property__host">
@@ -25,9 +25,13 @@ const DetailOfferHost = ({offer}) => {
 };
 
 DetailOfferHost.propTypes = {
-  offer: OfferProp.isRequired
+  description: PropTypes.string.isRequired,
+  host: PropTypes.exact({
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+    isPro: PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired
+  }).isRequired
 };
 
-export default memo(DetailOfferHost, (prevProps, nextProps) =>
-  prevProps.offer === nextProps.offer
-);
+export default DetailOfferHost;

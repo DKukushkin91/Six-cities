@@ -11,6 +11,7 @@ const LocationsList = ({cities, currentCity}) => {
       dispatch(changeCity(item));
     }
   };
+
   const activeLocation = (item) => item === currentCity ? `tabs__item--active` : ``;
 
   return (

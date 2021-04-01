@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Paths} from '../../constants';
+import {Path} from '../../constants';
 
 const NotFoundScreen = () => {
   const errorStyle = {
@@ -17,7 +17,7 @@ const NotFoundScreen = () => {
     <>
       <div style={errorStyle} className="error">
         <h1 className="error__title">404. Page not found</h1>
-        <Link style={linkStyle} className="error__link" to={Paths.MAIN}>Try again</Link>
+        <Link style={linkStyle} className="error__link" to={Path.MAIN}>Try again</Link>
       </div>
     </>
   );

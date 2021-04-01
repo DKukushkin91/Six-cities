@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../../services/api';
 import {checkAuth, login, logout} from '../api-actions';
-import {AuthorizationStatus, Inquiry, Paths} from '../../constants';
+import {AuthorizationStatus, Inquiry, Path} from '../../constants';
 import {ActionType} from '../action';
 
 const api = createAPI(() => {});
@@ -60,7 +60,7 @@ describe(`Async operation work correctly`, () => {
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.REDIRECT_TO_ROUTE,
-          payload: Paths.MAIN,
+          payload: Path.MAIN,
         });
       });
   });
@@ -69,7 +69,7 @@ describe(`Async operation work correctly`, () => {
     const logoutLoader = logout();
     const data = {
       status: AuthorizationStatus.NO_AUTH,
-      route: Paths.MAIN
+      route: Path.MAIN
     };
 
     apiMock

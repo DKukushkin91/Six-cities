@@ -5,7 +5,7 @@ import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
 import FavoritesScreen from './favorites-screen';
-import {AuthorizationStatus, Paths} from '../../constants';
+import {AuthorizationStatus, Path} from '../../constants';
 import {Offers} from '../../mocks/mocks';
 
 const mockStore = configureStore({});
@@ -15,7 +15,6 @@ describe(`Test FavoritesScreen`, () => {
   it(`FavoritesScreen should render correctly`, () => {
     const store = mockStore({
       DATA: {
-        isFavoritesLoad: true,
         favorites: Offers.map((item) => ({...item, isFavorite: true})),
       },
       USER: {
@@ -23,7 +22,7 @@ describe(`Test FavoritesScreen`, () => {
       }
     });
 
-    history.push(Paths.FAVORITES);
+    history.push(Path.FAVORITES);
 
     const {container} = render(
         <redux.Provider store={store}>
@@ -41,7 +40,6 @@ describe(`Test FavoritesScreen`, () => {
   it(`FavoritesScreen empty render`, () => {
     const store = mockStore({
       DATA: {
-        isFavoritesLoad: true,
         favorites: [],
       },
       USER: {
@@ -49,7 +47,7 @@ describe(`Test FavoritesScreen`, () => {
       }
     });
 
-    history.push(Paths.FAVORITES);
+    history.push(Path.FAVORITES);
 
     const {container} = render(
         <redux.Provider store={store}>

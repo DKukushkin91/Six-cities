@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import FavoritesPlaces from '../favorite-places/favorite-places';
 import {Link} from 'react-router-dom';
-import {Paths} from '../../constants';
+import {Path} from '../../constants';
 import OfferProp from '../offer/offer.prop';
 import PropTypes from 'prop-types';
 
@@ -15,7 +15,7 @@ const FavoritesList = ({favorites}) => {
         <li key={city} className="favorites__locations-items">
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
-              <Link to={Paths.MAIN} className="locations__item-link">
+              <Link to={Path.MAIN} className="locations__item-link">
                 <span>{city}</span>
               </Link>
             </div>

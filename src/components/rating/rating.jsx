@@ -1,6 +1,5 @@
 import React, {memo} from 'react';
 import {getRatingPercent} from "../../util";
-import {componentNameProp} from "../component-name/component-name.prop";
 import PropTypes from 'prop-types';
 import {ComponentName} from '../../constants';
 
@@ -22,7 +21,7 @@ const Rating = ({rating, componentName}) => {
 
 Rating.propTypes = {
   rating: PropTypes.number.isRequired,
-  componentName: componentNameProp
+  componentName: PropTypes.string.isRequired,
 };
 
 export default memo(Rating, (prevProps, nextProps) =>

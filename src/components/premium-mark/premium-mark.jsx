@@ -1,6 +1,5 @@
-import React, {memo} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {componentNameProp} from '../component-name/component-name.prop';
 
 const PremiumMark = ({isPremium, componentName}) => {
 
@@ -18,9 +17,7 @@ const PremiumMark = ({isPremium, componentName}) => {
 
 PremiumMark.propTypes = {
   isPremium: PropTypes.bool.isRequired,
-  componentName: componentNameProp,
+  componentName: PropTypes.string.isRequired,
 };
 
-export default memo(PremiumMark, (prevProps, nextProps) =>
-  prevProps.componentName === nextProps.componentName
-);
+export default PremiumMark;

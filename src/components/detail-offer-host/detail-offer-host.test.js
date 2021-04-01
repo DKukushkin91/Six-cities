@@ -5,22 +5,22 @@ import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
 import DetailOfferHost from './detail-offer-host';
-import {Paths} from '../../constants';
+import {Path} from '../../constants';
 import {Offers} from '../../mocks/mocks';
 
 const mockStore = configureStore({});
 
 it(`DetailOfferHost should render correctly`, () => {
   const store = mockStore({});
-  const offer = Offers[0];
+  const {description, host} = Offers[0];
   const history = createMemoryHistory();
 
-  history.push(Paths.OFFER);
+  history.push(Path.OFFER);
 
   render(
       <redux.Provider store={store}>
         <Router history={history}>
-          <DetailOfferHost offer={offer}/>
+          <DetailOfferHost description={description} host={host}/>
         </Router>
       </redux.Provider>
   );

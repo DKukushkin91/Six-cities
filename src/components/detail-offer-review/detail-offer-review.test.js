@@ -5,7 +5,7 @@ import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
 import DetailOfferReview from './detail-offer-review';
-import {AuthorizationStatus, Paths} from '../../constants';
+import {AuthorizationStatus, Path} from '../../constants';
 import {Comments, Offers} from '../../mocks/mocks';
 
 const mockStore = configureStore({});
@@ -19,7 +19,7 @@ it(`DetailOfferReview should render correctly`, () => {
   const comments = Comments;
   const history = createMemoryHistory();
 
-  history.push(Paths.OFFER);
+  history.push(Path.OFFER);
 
   render(
       <redux.Provider store={store}>

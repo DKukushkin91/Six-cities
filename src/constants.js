@@ -1,4 +1,4 @@
-export const Paths = {
+export const Path = {
   MAIN: `/`,
   FAVORITES: `/favorites`,
   LOGIN: `/login`,

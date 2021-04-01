@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {RatingStar} from '../../constants';
+import {Condition, RatingStar} from '../../constants';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
-import {isSubmitDisabled} from '../../util';
 import {commentsPost} from '../../store/api-actions';
 import ReviewsProp from "../review/review.prop";
 import swal from 'sweetalert';
@@ -12,6 +11,17 @@ import './reviews-form.css';
 const initState = {
   rating: ``,
   review: ``
+};
+
+const isSubmitDisabled = (reviewData, fieldDisabled) => {
+  const {rating, review} = reviewData;
+
+  return !(
+    rating >= Condition.MIN_RATING &&
+    review.length > Condition.MIN_DESCRIPTION &&
+    review.length < Condition.MAX_DESCRIPTION &&
+    !fieldDisabled
+  );
 };
 
 const errorMessage = (error) => {

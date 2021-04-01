@@ -5,7 +5,7 @@ import {createMemoryHistory} from 'history';
 import FavoritesList from './favorites-list';
 import * as redux from 'react-redux';
 import configureStore from 'redux-mock-store';
-import {AuthorizationStatus, Paths} from '../../constants';
+import {AuthorizationStatus, Path} from '../../constants';
 import {inFavoriteList} from '../../mocks/mocks';
 
 const mockStore = configureStore({});
@@ -16,7 +16,7 @@ it(`FavoritesList should render correctly`, () => {
     USER: {authorizationStatus: AuthorizationStatus.AUTH}
   });
 
-  history.push(Paths.FAVORITES);
+  history.push(Path.FAVORITES);
 
   render(
       <redux.Provider store = {store}>

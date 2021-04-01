@@ -1,4 +1,4 @@
-import {Condition, Rating, Sorting, MAX_REVIEWS_LENGTH} from './constants';
+import {Rating, Sorting, MAX_REVIEWS_LENGTH} from './constants';
 
 export const getSorting = (offers, city, option) => {
   const defaultState = offers.filter((item) => item.city.name === city);
@@ -71,15 +71,4 @@ export const changeCurrentOffer = (currentOffer, changedOffer) => {
   return currentOffer !== null && currentOffer.id === changedOffer.id
     ? changedOffer
     : currentOffer;
-};
-
-export const isSubmitDisabled = (reviewData, fieldDisabled) => {
-  const {rating, review} = reviewData;
-
-  return !(
-    rating >= Condition.MIN_RATING &&
-    review.length > Condition.MIN_DESCRIPTION &&
-    review.length < Condition.MAX_DESCRIPTION &&
-    !fieldDisabled
-  );
 };
