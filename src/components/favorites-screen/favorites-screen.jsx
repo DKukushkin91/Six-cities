@@ -7,9 +7,11 @@ import LoadingScreen from "../loading-screen/loading-screen";
 import {favoriteList} from '../../store/api-actions';
 import {useDispatch, useSelector} from 'react-redux';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
+import {removeDetailOffer} from "../../store/action";
 
 const FavoritesScreen = () => {
   const isFavoritesLoaded = useSelector((state) => state.DATA.isFavoritesLoaded);
+  const offerDetails = useSelector((state) => state.DATA.offerDetails);
   const favorites = useSelector((state) => state.DATA.favorites);
   const dispatch = useDispatch();
 
@@ -18,6 +20,12 @@ const FavoritesScreen = () => {
       dispatch(favoriteList());
     }
   }, [isFavoritesLoaded, favorites]);
+
+  useEffect(() => {
+    if (offerDetails !== null) {
+      dispatch(removeDetailOffer(null));
+    }
+  }, [offerDetails]);
 
   if (!isFavoritesLoaded) {
     return (

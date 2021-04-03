@@ -9,12 +9,14 @@ import OfferSorting from '../offer-sorting/offer-sorting';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchOfferList} from '../../store/api-actions';
 import OffersListEmpty from '../offers-list-empty/offers-list-empty';
-import NotFoundScreen from "../not-found-screen/not-found-screen";
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import {removeDetailOffer} from '../../store/action';
 
 const MainPage = () => {
   const currentOffers = useSelector((state) => state.DATA.currentOffers);
   const currentCity = useSelector((state) => state.DATA.currentCity);
   const isDataLoaded = useSelector((state) => state.DATA.isDataLoaded);
+  const offerDetails = useSelector((state) => state.DATA.offerDetails);
   const error = useSelector((state) => state.DATA.error);
   const dispatch = useDispatch();
 
@@ -23,6 +25,12 @@ const MainPage = () => {
       dispatch(fetchOfferList());
     }
   }, [isDataLoaded]);
+
+  useEffect(() => {
+    if (offerDetails !== null) {
+      dispatch(removeDetailOffer(null));
+    }
+  }, [offerDetails]);
 
   if (error) {
     return <NotFoundScreen/>;

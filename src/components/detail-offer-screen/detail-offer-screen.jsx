@@ -6,7 +6,7 @@ import Header from '../header/header';
 import {fetchCommentList, fetchNearbyList, fetchDetailOffer} from '../../store/api-actions';
 import DetailOffer from '../detail-offer/detail-offer';
 import LoadingScreen from '../loading-screen/loading-screen';
-import NotFoundScreen from "../not-found-screen/not-found-screen";
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 const DetailOfferScreen = ({match}) => {
   const offerDetails = useSelector((state) => state.DATA.offerDetails);

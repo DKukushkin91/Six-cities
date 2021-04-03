@@ -14,7 +14,8 @@ export const ActionType = {
   LOAD_DETAILS: `data/loadDetails`,
   CHANGE_STATUS: `offer/changeStatus`,
   LOAD_FAVORITES: `data/loadFavorites`,
-  SET_ERROR: `data/setError`
+  SET_ERROR: `data/setError`,
+  REMOVE_DETAIL_OFFER: `data/removeDetailOffer`
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CURRENT_CITY, (payload) => ({payload}));
@@ -45,4 +46,4 @@ export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (payload) =
 
 export const setError = createAction(ActionType.SET_ERROR, (payload) => ({payload}));
 
-
+export const removeDetailOffer = createAction(ActionType.REMOVE_DETAIL_OFFER, (payload) => ({payload}));

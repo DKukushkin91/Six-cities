@@ -3,7 +3,7 @@ import {CURRENT_SORTING, DEFAULT_CITY, DEFAULT_LOCATION} from '../../constants';
 import {getCityLocation, getSorting, changeFavorites, changeCurrentOffer, changeNearbyOffers, changeFavoriteOffer} from '../../util';
 import {
   changeCity, changeOption, loadOffers, loadDetailOffer,
-  loadComments, loadFavorites, loadNearby, addedComment, changeStatus, setError
+  loadComments, loadFavorites, loadNearby, addedComment, changeStatus, setError, removeDetailOffer,
 } from '../action';
 
 const initialState = {
@@ -75,9 +75,12 @@ const offerData = createReducer(initialState, (builder) => {
     state.favorites = action.payload;
     state.isFavoritesLoaded = true;
   });
+
+  builder.addCase(removeDetailOffer, (state, action) => {
+    state.offerDetails = action.payload;
+  });
 });
 
 export {
-  offerData,
-  initialState
+  offerData
 };
