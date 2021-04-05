@@ -7,6 +7,7 @@
   <li>Redux</li>
   <li>Redux-Thunk</li>
   <li>Axios</li>
+  <li>JSX</li>
 </ul>
 <p>Запуск проекта командой npm start</p>
 Проект на <a href="https://sixcities.vercel.app/">vercel</a>
