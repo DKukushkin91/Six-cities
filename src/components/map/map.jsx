@@ -20,8 +20,8 @@ const Map = ({offers}) => {
     });
 
     leaflet
-      .tileLayer(`https:{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https:www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https:carto.com/attributions">CARTO</a>`
+      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(mapRef.current);
 
@@ -62,7 +62,7 @@ const Map = ({offers}) => {
   }, [offers, activeCardId]);
 
   return (
-    <div id="map" style={{height: `100%`}}></div>
+    <div id="map" style={{height: `100%`}}/>
   );
 };
 
