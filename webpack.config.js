@@ -6,12 +6,14 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'public')
     },
+  
     devServer: {
         contentBase: path.resolve(__dirname, 'public'),
         open: true,
         port: 1337,
         historyApiFallback: true,
     },
+  
     module: {
         rules: [
         {
@@ -31,8 +33,10 @@ module.exports = {
           }
         ],
     },
+  
     resolve: {
         extensions: ['.js', '.jsx']
     },
+  
     devtool: 'source-map',
 };
