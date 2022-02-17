@@ -10,5 +10,6 @@
   <li>JSX</li>
   <li>Jest</li>
 </ul>
+<p>Установка зависимостей npm i</p>
 <p>Запуск проекта командой npm start</p>
 Проект на <a href="https://sixcities.vercel.app/">vercel</a>
